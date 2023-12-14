@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
+
+    public function courses(): BelongsToMany
+    {
+        return $this->belongsToMany(Courses::class, 'application_course', 'application_id', 'course_id');
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
+
+    public function internships(): HasMany
+    {
+        return $this->hasMany(Internship::class);
+    }
+
+    public function studentCollections(): BelongsToMany
+    {
+        return $this->belongsToMany(StudentCollection::class, 'student_student_collection', 'student_id', 'student_collection_id');
+    }
 }
