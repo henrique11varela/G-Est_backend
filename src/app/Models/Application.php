@@ -14,7 +14,7 @@ class Application extends Model
 
     public function courses(): BelongsToMany
     {
-        return $this->belongsToMany(Courses::class, 'application_course', 'application_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'application_course', 'application_id', 'course_id');
     }
 
     public function company(): BelongsTo
