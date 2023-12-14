@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('student_collections', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+
+            //IS START_DATE NECESSARY? ASK CARLA
+            $table->timestamp('start_date');
+
+            $table->foreignId('course_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

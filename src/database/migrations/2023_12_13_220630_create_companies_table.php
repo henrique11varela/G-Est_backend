@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ended_internships', function (Blueprint $table) {
-            $table->foreignId('internship_id')->constrained();
-            $table->primary('internship_id');
-            $table->integer('reason_of_end');
-            $table->timestamp('end_date');
-            $table->boolean('is_working_there');
+        Schema::create('companies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->string('postcode');
+            $table->string('niss');
+            $table->string('nipc');
             $table->timestamps();
             $table->softDeletes();
-            //*****OTHERSTUFF*****
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ended_internships');
+        Schema::dropIfExists('companies');
     }
 };

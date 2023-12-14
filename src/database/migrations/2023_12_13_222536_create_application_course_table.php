@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('application_course', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('application_id')->constrained();
+            $table->foreignId('course_id')->constrained();
+            $table->primary(['application_id', 'course_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

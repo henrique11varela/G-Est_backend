@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_student_collection', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('student_id')->constrained();
+            $table->foreignId('student_collection_id')->constrained();
+            $table->primary(['student_id', 'student_collection_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

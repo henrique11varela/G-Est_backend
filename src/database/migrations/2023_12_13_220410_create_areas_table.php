@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
+            $table->integer('votes');
+            $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
