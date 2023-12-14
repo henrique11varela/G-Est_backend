@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class EndStateSeeder extends Seeder
 {
@@ -14,22 +15,22 @@ class EndStateSeeder extends Seeder
     {
         DB::table('end_states')->insert([
             [
-                'name' => 'completo',
+                'name' => 'Completo',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'desistência',
+                'name' => 'Desistência',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'expulsão',
+                'name' => 'Expulsão',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'troca',
+                'name' => 'Troca',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
