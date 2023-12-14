@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class EndState extends Model
 {
     use HasFactory;
+
+    public function endedInternships(): HasMany
+    {
+        return $this->hasMany(EndedInternship::class);
+    }
 }
