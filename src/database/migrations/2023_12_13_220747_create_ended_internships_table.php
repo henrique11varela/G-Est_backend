@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ended_internships', function (Blueprint $table) {
             $table->foreignId('internship_id')->constrained();
             $table->primary('internship_id');
-            $table->integer('reason_of_end');
+            $table->foreignId('end_state_id')->constrained();
             $table->timestamp('end_date');
             $table->boolean('is_working_there');
             $table->timestamps();
