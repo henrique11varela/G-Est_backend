@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
+use Illuminate\Support\Facades\Validator;
+use Exception;
 
 class StudentController extends Controller
 {
@@ -13,15 +15,14 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $students = Student::all();
+            return response()->json($students, 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -29,7 +30,23 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), Student::$validations);
+            if ($validator->fails()) {
+                throw new Exception("Error Processing Request", 1);
+            }
+            $student = new Student();
+            $student->name = $request->name;
+            $student->personal_email = $request->personal_email;
+            $student->atec_email = $request->atec_email;
+            $student->phone_number = $request->phone_number;
+            $student->save();
+            return response()->json($student, 201);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -37,15 +54,13 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Student $student)
-    {
-        //
+        try {
+            return response()->json($student, 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -53,7 +68,22 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), Student::$validations);
+            if ($validator->fails()) {
+                throw new Exception("Error Processing Request", 1);
+            }
+            $student->name = $request->name;
+            $student->personal_email = $request->personal_email;
+            $student->atec_email = $request->atec_email;
+            $student->phone_number = $request->phone_number;
+            $student->save();
+            return response()->json($student, 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -61,6 +91,15 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        try {
+            $student->delete();
+            return response()->json([
+                'message' => 'deleted',
+                ], 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+                ], 500);
+        }
     }
 }

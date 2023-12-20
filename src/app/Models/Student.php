@@ -12,6 +12,13 @@ class Student extends Model
 
     use SoftDeletes;
 
+    public static $validations = [
+        'name' => 'required',
+        'personal_email' => 'required',
+        'atec_email' => 'required',
+        'phone_number' => 'required',
+    ];
+
     public function internships(): HasMany
     {
         return $this->hasMany(Internship::class);
