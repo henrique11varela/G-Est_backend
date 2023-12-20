@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -23,13 +24,13 @@ Route::prefix('v1')->group(function () {
     //Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::prefix('empresas')->group(function(){
-        Route::get('', [Controller::class, 'index'])->name('empresas.index');
+        Route::get('', [CompanyController::class, 'index'])->name('empresas.index');
         // Route::get('create', [Controller::class, 'create'])->name('empresas.create');
-        Route::post('', [Controller::class, 'store'])->name('empresas.store');
-        Route::get('{id}', [Controller::class, 'show'])->name('empresas.show');
+        Route::post('', [CompanyController::class, 'store'])->name('empresas.store');
+        Route::get('{id}', [CompanyController::class, 'show'])->name('empresas.show');
         // Route::get('{id}/edit', [Controller::class, 'edit'])->name('empresas.edit');
-        Route::put('{id}', [Controller::class, 'update'])->name('empresas.update');
-        Route::delete('{id}', [Controller::class, 'destroy'])->name('empresas.destroy');
+        Route::put('{id}', [CompanyController::class, 'update'])->name('empresas.update');
+        Route::delete('{id}', [CompanyController::class, 'destroy'])->name('empresas.destroy');
     });
 
     Route::prefix('estagios')->group(function(){

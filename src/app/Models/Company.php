@@ -19,13 +19,6 @@ class Company extends Model
         "nipc"
     ];
 
-    public static $rules = [
-        "name" => "required",
-        "address" => "required",
-        "postcode" => "required",
-        "niss" => "required",
-        "nipc" => "required",
-    ];
     public function internships(): HasMany
     {
         return $this->hasMany(Internship::class);

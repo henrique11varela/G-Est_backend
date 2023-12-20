@@ -13,9 +13,13 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        try {
+            $companies = Company::all();
 
-        return response()->json($companies, 200);
+            return response()->json($companies, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -30,11 +34,19 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        $this->validate($request, Company::$rules);
+        try {
+            $company = new Company();
+            $company->name = $request->name;
+            $company->address = $request->address;
+            $company->postcode = $request->postcode;
+            $company->niss = $request->niss;
+            $company->nipc = $request->nipc;
 
-        $company = Company::create($request->all());
-
-        return response()->json($company, 200);
+            $company->save();
+            return response()->json($company, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -42,7 +54,11 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        try {
+            return response()->json($company, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -58,11 +74,17 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        $this->validate($request, Company::$rules);
-
-        $company->update($request);
-
-        return response()->json($company, 200);
+        try {
+            $company->name = $request->name;
+            $company->address = $request->address;
+            $company->postcode = $request->postcode;
+            $company->niss = $request->niss;
+            $company->nipc = $request->nipc;
+            $company->update();
+            return response()->json($company, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -70,7 +92,11 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company->delete();
-        return response()->json(200);
+        try {
+            $company->delete();
+            return response()->json(array('success' => 'Delete success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 }
