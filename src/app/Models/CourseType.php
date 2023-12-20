@@ -12,6 +12,10 @@ class CourseType extends Model
 
     use SoftDeletes;
 
+    public $validations = [
+        'name' => 'required',
+    ];
+
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);

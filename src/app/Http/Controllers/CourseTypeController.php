@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourseTypeRequest;
 use App\Http\Requests\UpdateCourseTypeRequest;
 use App\Models\CourseType;
+use Illuminate\Support\Facades\Validator;
+use Exception;
 
 class CourseTypeController extends Controller
 {
@@ -13,15 +15,14 @@ class CourseTypeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $courseTypes = CourseType::all();
+            return response()->json($courseTypes, 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -29,7 +30,20 @@ class CourseTypeController extends Controller
      */
     public function store(StoreCourseTypeRequest $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), CourseType::validations());
+            if ($validator->fails()) {
+                throw new Exception("Error Processing Request", 1);
+            }
+            $courseType = new CourseType();
+            $courseType->name = $request->name;
+            $courseType->save();
+            return response()->json($courseType, 201);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -37,15 +51,13 @@ class CourseTypeController extends Controller
      */
     public function show(CourseType $courseType)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CourseType $courseType)
-    {
-        //
+        try {
+            return response()->json($courseType, 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -53,7 +65,19 @@ class CourseTypeController extends Controller
      */
     public function update(UpdateCourseTypeRequest $request, CourseType $courseType)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), CourseType::validations());
+            if ($validator->fails()) {
+                throw new Exception("Error Processing Request", 1);
+            }
+            $courseType->name = $request->name;
+            $courseType->save();
+            return response()->json($courseType, 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -61,6 +85,15 @@ class CourseTypeController extends Controller
      */
     public function destroy(CourseType $courseType)
     {
-        //
+        try {
+            $courseType->delete();
+            return response()->json([
+                'message' => 'deleted',
+                ], 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+                ], 500);
+        }
     }
 }
