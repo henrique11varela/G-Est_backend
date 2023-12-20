@@ -12,6 +12,22 @@ class Application extends Model
 
     use SoftDeletes;
 
+    public $validations = [
+        'company_name' => 'required',
+        'activity_sector' => 'required',
+        'locality' => 'required',
+        'website' => 'required',
+        'contact_name' => 'required',
+        'contact_telephone' => 'required',
+        'contact_email' => 'required',
+        'number_students' => 'required',
+        'student_profile' => 'required',
+        'student_tasks' => 'required',
+        'company_id' => 'required',
+        'is_partner' => 'required',
+        'is_valid' => 'required',
+    ];
+
     public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class, 'application_course', 'application_id', 'course_id');
@@ -22,3 +38,6 @@ class Application extends Model
         return $this->belongsTo(Company::class);
     }
 }
+
+
+
