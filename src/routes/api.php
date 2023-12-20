@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -70,6 +71,17 @@ Route::prefix('v1')->group(function () {
         // Route::get('{id}/edit', [Controller::class, 'edit'])->name('solicitacoes.edit');
         Route::put('{id}', [Controller::class, 'update'])->name('solicitacoes.update');
         Route::delete('{id}', [Controller::class, 'destroy'])->name('solicitacoes.destroy');
+    });
+
+
+    Route::prefix('cursos')->group(function(){
+        Route::get('', [CourseController::class, 'index'])->name('cursos.index');
+        // Route::get('create', [CourseController::class, 'create'])->name('cursos.create');
+        Route::post('', [CourseController::class, 'store'])->name('cursos.store');
+        Route::get('{id}', [CourseController::class, 'show'])->name('cursos.show');
+        // Route::get('{id}/edit', [CourseController::class, 'edit'])->name('cursos.edit');
+        Route::put('{id}', [CourseController::class, 'update'])->name('cursos.update');
+        Route::delete('{id}', [CourseController::class, 'destroy'])->name('cursos.destroy');
     });
 
     //});

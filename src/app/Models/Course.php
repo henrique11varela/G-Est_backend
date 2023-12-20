@@ -12,10 +12,8 @@ class Course extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['name'] ;
-    public static $rules = [
-        'name' => 'required',
-    ];
+    protected $fillable = ['name', 'course_type_id', 'area_id'] ;
+
     public function studentCollections(): HasMany
     {
         return $this->hasMany(StudentCollection::class);

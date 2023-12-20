@@ -30,8 +30,13 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        $this->validate($request, Course::$rules);
-        $course = Course::create($request->all());
+
+        $course = new Course();
+
+        $course->name = $request->name;
+        $course->area_id = $request->area_id;
+        $course->course_type_id = $request->course_type_id;
+        $course->save();
         return response()->json($course, 200);
     }
 
@@ -40,7 +45,8 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+
+        return response()->json($course, 200);
     }
 
     /**
@@ -55,7 +61,6 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        $this->validate($request, Course::$rules);
         $course->update($request->all());
         return response()->json($course, 200);
     }
@@ -67,5 +72,6 @@ class CourseController extends Controller
     {
         $course->delete();
 
+        return response()->json(array('success' => 'Delete success'), 200);
     }
 }
