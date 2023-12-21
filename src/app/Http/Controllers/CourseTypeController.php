@@ -7,13 +7,14 @@ use App\Http\Requests\UpdateCourseTypeRequest;
 use App\Models\CourseType;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Response;
 
 class CourseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         try {
             $courseTypes = CourseType::all();
@@ -28,7 +29,7 @@ class CourseTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCourseTypeRequest $request)
+    public function store(StoreCourseTypeRequest $request): Response
     {
         try {
             $validator = Validator::make($request->all(), CourseType::validations());
@@ -49,7 +50,7 @@ class CourseTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CourseType $courseType)
+    public function show(CourseType $courseType): Response
     {
         try {
             return response()->json($courseType, 200);
@@ -63,7 +64,7 @@ class CourseTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourseTypeRequest $request, CourseType $courseType)
+    public function update(UpdateCourseTypeRequest $request, CourseType $courseType): Response
     {
         try {
             $validator = Validator::make($request->all(), CourseType::validations());
@@ -83,7 +84,7 @@ class CourseTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CourseType $courseType)
+    public function destroy(CourseType $courseType): Response
     {
         try {
             $courseType->delete();
