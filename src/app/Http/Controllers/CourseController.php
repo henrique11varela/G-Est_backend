@@ -13,8 +13,12 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
-        return response()->json($courses, 200);
+        try {
+            $courses = Course::all();
+            return response()->json($courses, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -30,14 +34,18 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        try {
 
-        $course = new Course();
+            $course = new Course();
 
-        $course->name = $request->name;
-        $course->area_id = $request->area_id;
-        $course->course_type_id = $request->course_type_id;
-        $course->save();
-        return response()->json($course, 200);
+            $course->name = $request->name;
+            $course->area_id = $request->area_id;
+            $course->course_type_id = $request->course_type_id;
+            $course->save();
+            return response()->json($course, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -45,8 +53,11 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-
-        return response()->json($course, 200);
+        try {
+            return response()->json($course, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -61,8 +72,14 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        $course->update($request->all());
-        return response()->json($course, 200);
+        try {
+            $course->name = $request->name;
+            $course->area_id = $request->area_id;
+            $course->course_type_id = $request->course_type_id;
+            return response()->json($course, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -70,8 +87,11 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        $course->delete();
-
-        return response()->json(array('success' => 'Delete success'), 200);
+        try {
+            $course->delete();
+            return response()->json(array('success' => 'Delete success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 }
