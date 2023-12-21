@@ -11,7 +11,7 @@ class StoreApplicationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'company_name' => 'required',
+            'activity_sector' => 'required',
+            'locality' => 'required',
+            'website' => 'required',
+            'contact_name' => 'required',
+            'contact_telephone' => 'required',
+            'contact_email' => 'required',
+            'number_students' => 'required',
+            'student_profile' => 'required',
+            'student_tasks' => 'required',
+            'company_id' => 'required',
+            'is_partner' => 'required',
+            'is_valid' => 'required',
         ];
     }
 }

@@ -7,13 +7,14 @@ use App\Http\Requests\UpdateApplicationRequest;
 use App\Models\Application;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Response;
 
 class ApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         try {
             $applications = Application::all();
@@ -28,10 +29,10 @@ class ApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreApplicationRequest $request)
+    public function store(StoreApplicationRequest $request): Response
     {
         try {
-            $validator = Validator::make($request->all(), Application::validations());
+            $validator = $request->validate($request->rules());
             if ($validator->fails()) {
                 throw new Exception("Error Processing Request", 1);
             }
@@ -61,7 +62,7 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Application $application)
+    public function show(Application $application): Response
     {
         try {
             return response()->json($application, 200);
@@ -75,7 +76,7 @@ class ApplicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateApplicationRequest $request, Application $application)
+    public function update(UpdateApplicationRequest $request, Application $application): Response
     {
         try {
             $validator = Validator::make($request->all(), Application::validations());
@@ -107,7 +108,7 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Application $application)
+    public function destroy(Application $application): Response
     {
         try {
             $application->delete();
