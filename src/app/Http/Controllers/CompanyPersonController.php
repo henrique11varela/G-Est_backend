@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCompanyPersonRequest;
 use App\Http\Requests\UpdateCompanyPersonRequest;
 use App\Models\CompanyPerson;
-use Illuminate\Support\Facades\Validator;
 use Exception;
 
 class CompanyPersonController extends Controller
@@ -31,10 +30,6 @@ class CompanyPersonController extends Controller
     public function store(StoreCompanyPersonRequest $request)
     {
         try {
-            $validator = Validator::make($request->all(), CompanyPerson::$validations);
-            if ($validator->fails()) {
-                throw new Exception("Error Processing Request", 1);
-            }
             $companyPerson = new CompanyPerson();
             $companyPerson->name = $request->name;
             $companyPerson->phone_number = $request->phone_number;
@@ -71,10 +66,6 @@ class CompanyPersonController extends Controller
     public function update(UpdateCompanyPersonRequest $request, CompanyPerson $companyPerson)
     {
         try {
-            $validator = Validator::make($request->all(), CompanyPerson::$validations);
-            if ($validator->fails()) {
-                throw new Exception("Error Processing Request", 1);
-            }
             $companyPerson->name = $request->name;
             $companyPerson->phone_number = $request->phone_number;
             $companyPerson->email = $request->email;
