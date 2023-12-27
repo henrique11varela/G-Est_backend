@@ -7,14 +7,13 @@ use App\Http\Requests\UpdateApplicationRequest;
 use App\Models\Application;
 use Illuminate\Support\Facades\Validator;
 use Exception;
-use Illuminate\Support\Facades\Response;
 
 class ApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
         try {
             $applications = Application::all();
@@ -29,7 +28,7 @@ class ApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreApplicationRequest $request): Response
+    public function store(StoreApplicationRequest $request)
     {
         try {
             $application = new Application();
@@ -58,7 +57,7 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Application $application): Response
+    public function show(Application $application)
     {
         try {
             return response()->json($application, 200);
@@ -72,7 +71,7 @@ class ApplicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateApplicationRequest $request, Application $application): Response
+    public function update(UpdateApplicationRequest $request, Application $application)
     {
         try {
             $application->company_name = $request->company_name;
@@ -100,7 +99,7 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Application $application): Response
+    public function destroy(Application $application)
     {
         try {
             $application->delete();

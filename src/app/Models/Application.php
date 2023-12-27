@@ -14,6 +14,8 @@ class Application extends Model
 
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class, 'application_course', 'application_id', 'course_id');
