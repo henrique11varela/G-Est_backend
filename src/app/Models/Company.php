@@ -11,13 +11,7 @@ class Company extends Model
     use HasFactory;
 
     use SoftDeletes;
-    protected $fillable = [
-        "name",
-        "address",
-        "postcode",
-        "niss",
-        "nipc"
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function internships(): HasMany
     {
