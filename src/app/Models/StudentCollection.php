@@ -23,4 +23,7 @@ class StudentCollection extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    protected $guarded = ['id','created_at', 'updated_at', 'deleted_at'];
+    
 }
