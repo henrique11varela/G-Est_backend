@@ -16,4 +16,6 @@ class Area extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    protected $guarded = ['id','created_at', 'updated_at', 'deleted_at'];
 }
