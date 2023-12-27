@@ -13,16 +13,12 @@ class StudentCollectionController extends Controller
      */
     public function index()
     {
-        try
-        {
+        try {
             $studentCollections = StudentCollection::all();
             return response()->json($studentCollections, 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
-        catch (Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
-        }
-
     }
 
     /**
@@ -30,17 +26,14 @@ class StudentCollectionController extends Controller
      */
     public function store(StoreStudentCollectionRequest $request)
     {
-        try
-        {
-            $studentCollections = new StudentCollection();
-            $studentCollections->student_id = $request->student_id;
-            $studentCollections->student_collection_id = $request->student_collection_id;
-            $studentCollections->save();
-            return response()->json($studentCollections, 200);
-        }
-        catch (Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        try {
+            $studentCollection = new StudentCollection();
+            $studentCollection->student_id = $request->student_id;
+            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->save();
+            return response()->json($studentCollection, 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -49,13 +42,10 @@ class StudentCollectionController extends Controller
      */
     public function show(StudentCollection $studentCollection)
     {
-        try
-        {
+        try {
             return response()->json($studentCollection, 200);
-        }
-        catch (Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -64,16 +54,13 @@ class StudentCollectionController extends Controller
      */
     public function update(UpdateStudentCollectionRequest $request, StudentCollection $studentCollection)
     {
-        try
-        {
-            $studentCollections->student_id = $request->student_id;
-            $studentCollections->student_collection_id = $request->student_collection_id;
-            $studentCollections->save();
+        try {
+            $studentCollection->student_id = $request->student_id;
+            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->save();
             return response()->json($studentCollection, 200);
-        }
-        catch (Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -82,14 +69,11 @@ class StudentCollectionController extends Controller
      */
     public function destroy(StudentCollection $studentCollection)
     {
-        try
-        {
+        try {
             $studentCollection->delete();
             return response()->json(['message' => 'Student Collection deleted'], 200);
-        }
-        catch (Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 }
