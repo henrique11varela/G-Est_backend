@@ -14,7 +14,7 @@ class CompanyPersonController extends Controller
     public function index()
     {
         try {
-            $companyPeople = CompanyPerson::all();
+            $companyPeople = CompanyPerson::with(['company', 'internships'])->get();
             return response()->json($companyPeople, 200);
         } catch (\Exception $exception) {
             return response()->json([
@@ -51,6 +51,7 @@ class CompanyPersonController extends Controller
     public function show(CompanyPerson $companyPerson)
     {
         try {
+            $companyPerson->load('company', 'internships');
             return response()->json($companyPerson, 200);
         } catch (\Exception $exception) {
             return response()->json([
