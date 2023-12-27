@@ -16,20 +16,12 @@ class AreaController extends Controller
         try
         {
             $areas = Area::all();
-            return response()->json(['Message' => 'List of areas', 'Areas' => $areas], 200);
+            return response()->json($areas, 200);
         }
         catch(Exception $e)
         {
-            return response()->json(['Message' => 'Error while getting areas', $e, 500]);
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -37,7 +29,18 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
-        //
+        try
+        {
+            $area = new Area();
+            $area->area_code = $request->area_code;
+            $area->name = $request->name;
+            $area->save();
+            return response()->json($area, 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500);
+        }
     }
 
     /**
@@ -47,26 +50,11 @@ class AreaController extends Controller
     {
         try
         {
-            return response()->json(['Message' => 'Area found', 'Area' => $area], 200);
+            return response()->json($area, 200);
         }
         catch(Exception $e)
         {
-            return response()->json(['Message' => 'Error while getting area', $e, 500]);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Area $area)
-    {
-        try
-        {
-            //code...
-        }
-        catch (\Throwable $th)
-        {
-            //throw $th;
+            return response()->json(['message' => 'failed:'.$e], 500 );
         }
     }
 
@@ -77,18 +65,14 @@ class AreaController extends Controller
     {
         try
         {
-            $this->validate($request,['votes' => 'required']);
-            $this->validate($request,['name' => 'required']);
-
-            $area->votes = $request->votes;
+            $area->area_code = $request->area_code;
             $area->name = $request->name;
             $area->save();
-
-            return response()->json(['Message' => 'Area updated successfully', 'Area' => $area], 200);
+            return response()->json($area, 200);
         }
-        catch (Exception $e)
+        catch(Exception $e)
         {
-            return response()->json(['Message' => 'Error while updating area', $e, 500]);
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
     }
 
@@ -100,11 +84,11 @@ class AreaController extends Controller
         try
         {
             $area->delete();
-            return response()->json(['Message' => 'Area deleted successfully'], 200);
+            return response()->json(['message' => 'Area deleted successfully'], 200);
         }
         catch (Exception $e)
         {
-            return response()->json(['Message' => 'Error while deleting area', $e, 500]);
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
     }
 }

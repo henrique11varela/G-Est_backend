@@ -16,21 +16,13 @@ class StudentCollectionController extends Controller
         try
         {
             $studentCollections = StudentCollection::all();
-            return response()->json(['Message' => 'List of all Students Collections'], 200);
+            return response()->json($studentCollections, 200);
         }
         catch (Exception $e)
         {
-            return response()->json(['Message' => 'Error while getting Students Collections'], 500);
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -38,7 +30,18 @@ class StudentCollectionController extends Controller
      */
     public function store(StoreStudentCollectionRequest $request)
     {
-        //
+        try
+        {
+            $studentCollections = new StudentCollection();
+            $studentCollections->student_id = $request->student_id;
+            $studentCollections->student_collection_id = $request->student_collection_id;
+            $studentCollections->save();
+            return response()->json($studentCollections, 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500);
+        }
     }
 
     /**
@@ -48,23 +51,11 @@ class StudentCollectionController extends Controller
     {
         try
         {
-            return response()->json(['Message' => 'Student Collection found', 'Student Collection' => $studentCollection], 200);
+            return response()->json($studentCollection, 200);
         }
         catch (Exception $e)
         {
-            return response()->json(['Message' => 'Error while getting Student Collection', $e, 500]);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(StudentCollection $studentCollection)
-    {
-        try {
-            //code...
-        } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
     }
 
@@ -75,17 +66,14 @@ class StudentCollectionController extends Controller
     {
         try
         {
-            $this->validate($request, ['student_id' => 'required', 'student_collection_id' => 'required']);
-
-            $studentCollection->student_id = $request->student_id;
-            $studentCollection->student_collection_id = $request->student_collection_id;
-            $studentCollection->save();
-
-            return response()->json(['Message' => 'Student Collection updated', 'Student Collection' => $studentCollection], 200);
+            $studentCollections->student_id = $request->student_id;
+            $studentCollections->student_collection_id = $request->student_collection_id;
+            $studentCollections->save();
+            return response()->json($studentCollection, 200);
         }
         catch (Exception $e)
         {
-            return response()->json(['Message' => 'Error while updating Student Collection', $e, 500]);
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
     }
 
@@ -97,11 +85,11 @@ class StudentCollectionController extends Controller
         try
         {
             $studentCollection->delete();
-            return response()->json(['Message' => 'Student Collection deleted'], 200);
+            return response()->json(['message' => 'Student Collection deleted'], 200);
         }
         catch (Exception $e)
         {
-            return response()->json(['Message' => 'Error while deleting Student Collection', $e, 500]);
+            return response()->json(['message' => 'failed:'.$e], 500);
         }
     }
 }
