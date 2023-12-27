@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourseTypeRequest;
 use App\Http\Requests\UpdateCourseTypeRequest;
 use App\Models\CourseType;
-use Illuminate\Support\Facades\Validator;
 use Exception;
-use Illuminate\Support\Facades\Response;
 
 class CourseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
         try {
             $courseTypes = CourseType::all();
@@ -29,7 +27,7 @@ class CourseTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCourseTypeRequest $request): Response
+    public function store(StoreCourseTypeRequest $request)
     {
         try {
             $courseType = new CourseType();
@@ -46,7 +44,18 @@ class CourseTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CourseType $courseType): Response
+    // public function show(int $id)
+    // {
+    //     try {
+    //         $courseType = CourseType::find($id);
+    //         return response()->json($courseType, 200);
+    //     } catch (Exception $exception) {
+    //         return response()->json([
+    //             'message' => 'failed:' . $exception,
+    //         ], 500);
+    //     }
+    // }
+    public function show(CourseType $courseType)
     {
         try {
             return response()->json($courseType, 200);
@@ -60,7 +69,7 @@ class CourseTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourseTypeRequest $request, CourseType $courseType): Response
+    public function update(UpdateCourseTypeRequest $request, CourseType $courseType)
     {
         try {
             $courseType->name = $request->name;
@@ -76,7 +85,7 @@ class CourseTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CourseType $courseType): Response
+    public function destroy(CourseType $courseType)
     {
         try {
             $courseType->delete();
