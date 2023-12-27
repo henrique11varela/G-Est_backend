@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CourseTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -23,13 +25,13 @@ Route::prefix('v1')->group(function () {
     //Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::prefix('empresas')->group(function(){
-        Route::get('', [Controller::class, 'index'])->name('empresas.index');
-        // Route::get('create', [Controller::class, 'create'])->name('empresas.create');
-        Route::post('', [Controller::class, 'store'])->name('empresas.store');
-        Route::get('{id}', [Controller::class, 'show'])->name('empresas.show');
-        // Route::get('{id}/edit', [Controller::class, 'edit'])->name('empresas.edit');
-        Route::put('{id}', [Controller::class, 'update'])->name('empresas.update');
-        Route::delete('{id}', [Controller::class, 'destroy'])->name('empresas.destroy');
+        Route::get('', [CompanyController::class, 'index'])->name('empresas.index');
+        // Route::get('create', [CompanyController::class, 'create'])->name('empresas.create');
+        Route::post('', [CompanyController::class, 'store'])->name('empresas.store');
+        Route::get('{id}', [CompanyController::class, 'show'])->name('empresas.show');
+        // Route::get('{id}/edit', [CompanyController::class, 'edit'])->name('empresas.edit');
+        Route::put('{id}', [CompanyController::class, 'update'])->name('empresas.update');
+        Route::delete('{id}', [CompanyController::class, 'destroy'])->name('empresas.destroy');
     });
 
     Route::prefix('estagios')->group(function(){
@@ -70,6 +72,16 @@ Route::prefix('v1')->group(function () {
         // Route::get('{id}/edit', [Controller::class, 'edit'])->name('solicitacoes.edit');
         Route::put('{id}', [Controller::class, 'update'])->name('solicitacoes.update');
         Route::delete('{id}', [Controller::class, 'destroy'])->name('solicitacoes.destroy');
+    });
+
+    Route::prefix('coursetype')->group(function(){
+        Route::get('', [CourseTypeController::class, 'index'])->name('solicitacoes.index');
+        // Route::get('create', [CourseTypeController::class, 'create'])->name('solicitacoes.create');
+        Route::post('', [CourseTypeController::class, 'store'])->name('solicitacoes.store');
+        Route::get('{courseType}', [CourseTypeController::class, 'show'])->name('solicitacoes.show');
+        // Route::get('{id}/edit', [CourseTypeController::class, 'edit'])->name('solicitacoes.edit');
+        Route::put('{courseType}', [CourseTypeController::class, 'update'])->name('solicitacoes.update');
+        Route::delete('{courseType}', [CourseTypeController::class, 'destroy'])->name('solicitacoes.destroy');
     });
 
     //});
