@@ -14,7 +14,7 @@ class StudentController extends Controller
     public function index()
     {
         try {
-            $students = Student::all();
+            $students = Student::with(['internships', 'studentCollections'])->get();
             return response()->json($students, 200);
         } catch (\Exception $exception) {
             return response()->json([
@@ -49,6 +49,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         try {
+            $student->load('internships', 'studentCollections');
             return response()->json($student, 200);
         } catch (\Exception $exception) {
             return response()->json([
