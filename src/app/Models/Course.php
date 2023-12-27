@@ -12,7 +12,7 @@ class Course extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['name', 'course_type_id', 'area_id'] ;
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function studentCollections(): HasMany
     {
