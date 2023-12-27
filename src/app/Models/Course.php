@@ -15,6 +15,8 @@ class Course extends Model
 
     use SoftDeletes;
 
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
+
     public function studentCollections(): HasMany
     {
         return $this->hasMany(StudentCollection::class);
