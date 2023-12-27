@@ -32,10 +32,6 @@ class ApplicationController extends Controller
     public function store(StoreApplicationRequest $request): Response
     {
         try {
-            $validator = $request->validate($request->rules());
-            if ($validator->fails()) {
-                throw new Exception("Error Processing Request", 1);
-            }
             $application = new Application();
             $application->company_name = $request->company_name;
             $application->activity_sector = $request->activity_sector;
@@ -79,10 +75,6 @@ class ApplicationController extends Controller
     public function update(UpdateApplicationRequest $request, Application $application): Response
     {
         try {
-            $validator = Validator::make($request->all(), Application::validations());
-            if ($validator->fails()) {
-                throw new Exception("Error Processing Request", 1);
-            }
             $application->company_name = $request->company_name;
             $application->activity_sector = $request->activity_sector;
             $application->locality = $request->locality;
