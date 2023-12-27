@@ -32,10 +32,6 @@ class CourseTypeController extends Controller
     public function store(StoreCourseTypeRequest $request): Response
     {
         try {
-            $validator = Validator::make($request->all(), CourseType::validations());
-            if ($validator->fails()) {
-                throw new Exception("Error Processing Request", 1);
-            }
             $courseType = new CourseType();
             $courseType->name = $request->name;
             $courseType->save();
@@ -67,10 +63,6 @@ class CourseTypeController extends Controller
     public function update(UpdateCourseTypeRequest $request, CourseType $courseType): Response
     {
         try {
-            $validator = Validator::make($request->all(), CourseType::validations());
-            if ($validator->fails()) {
-                throw new Exception("Error Processing Request", 1);
-            }
             $courseType->name = $request->name;
             $courseType->save();
             return response()->json($courseType, 200);
