@@ -11,7 +11,7 @@ class UpdateCompanyPersonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateCompanyPersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required'],
+            'phone_number' => ['required'],
+            'email' => ['required', 'email'],
+            'company_id' => ['required'],
+            'is_tutor' => ['required', 'boolean'],
+            'is_contact' => ['required', 'boolean'],
         ];
     }
 }
