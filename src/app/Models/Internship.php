@@ -11,15 +11,7 @@ class Internship extends Model
     use HasFactory;
 
     use SoftDeletes;
-    protected $fillable = [
-        'student_id',
-        'meal_allowance',
-        'start_date',
-        'address',
-        'postcode',
-        'tutor_id',
-        'company_id',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
     public function endedInternship(): HasOne
     {
         return $this->hasOne(EndedInternship::class);
