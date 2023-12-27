@@ -22,12 +22,12 @@ class StoreCompanyPersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required',
-            'company_id' => 'required',
-            'is_tutor' => 'required',
-            'is_contact' => 'required',
+            'name' => ['required'],
+            'phone_number' => ['required'],
+            'email' => ['required', 'email'],
+            'company_id' => ['required'],
+            'is_tutor' => ['required'],
+            'is_contact' => ['required'],
         ];
     }
 }

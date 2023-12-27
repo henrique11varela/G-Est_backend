@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCompanyPersonRequest;
 use App\Http\Requests\UpdateCompanyPersonRequest;
 use App\Models\CompanyPerson;
-use Exception;
 
 class CompanyPersonController extends Controller
 {
@@ -17,7 +16,7 @@ class CompanyPersonController extends Controller
         try {
             $companyPeople = CompanyPerson::all();
             return response()->json($companyPeople, 200);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
             ], 500);
@@ -39,7 +38,7 @@ class CompanyPersonController extends Controller
             $companyPerson->is_contact = $request->is_contact;
             $companyPerson->save();
             return response()->json($companyPerson, 201);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
             ], 500);
@@ -53,7 +52,7 @@ class CompanyPersonController extends Controller
     {
         try {
             return response()->json($companyPerson, 200);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
             ], 500);
@@ -74,7 +73,7 @@ class CompanyPersonController extends Controller
             $companyPerson->is_contact = $request->is_contact;
             $companyPerson->save();
             return response()->json($companyPerson, 200);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
             ], 500);
@@ -91,7 +90,7 @@ class CompanyPersonController extends Controller
             return response()->json([
                 'message' => 'deleted',
                 ], 200);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
                 ], 500);
