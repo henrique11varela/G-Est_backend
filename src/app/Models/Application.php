@@ -14,7 +14,7 @@ class Application extends Model
 
     use SoftDeletes;
 
-    protected $guarded = [];
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function courses(): BelongsToMany
     {
