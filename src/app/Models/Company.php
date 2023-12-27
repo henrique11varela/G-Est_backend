@@ -12,6 +12,13 @@ class Company extends Model
     use HasFactory;
 
     use SoftDeletes;
+    protected $fillable = [
+        "name",
+        "address",
+        "postcode",
+        "niss",
+        "nipc"
+    ];
 
     public function internships(): HasMany
     {

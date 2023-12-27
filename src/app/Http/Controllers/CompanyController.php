@@ -13,7 +13,13 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $companies = Company::all();
+
+            return response()->json($companies, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -21,7 +27,6 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -29,7 +34,19 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        //
+        try {
+            $company = new Company();
+            $company->name = $request->name;
+            $company->address = $request->address;
+            $company->postcode = $request->postcode;
+            $company->niss = $request->niss;
+            $company->nipc = $request->nipc;
+
+            $company->save();
+            return response()->json($company, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -37,7 +54,11 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        try {
+            return response()->json($company, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -53,7 +74,17 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        try {
+            $company->name = $request->name;
+            $company->address = $request->address;
+            $company->postcode = $request->postcode;
+            $company->niss = $request->niss;
+            $company->nipc = $request->nipc;
+            $company->update();
+            return response()->json($company, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -61,6 +92,11 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        try {
+            $company->delete();
+            return response()->json(array('success' => 'Delete success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 }

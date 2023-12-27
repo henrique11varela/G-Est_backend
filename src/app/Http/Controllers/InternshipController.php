@@ -13,7 +13,12 @@ class InternshipController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $internships = Internships::all();
+            return response()->json($internships, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -29,7 +34,20 @@ class InternshipController extends Controller
      */
     public function store(StoreInternshipRequest $request)
     {
-        //
+        try {
+            $internship = new Internships();
+            $internship->student_id = $request->student_id;
+            $internship->meal_allowance = $request->meal_allowance;
+            $internship->start_date = $request->start_date;
+            $internship->address = $request->address;
+            $internship->postcode = $request->postcode;
+            $internship->tutor_id = $request->tutor_id;
+            $internship->company_id = $request->company_id;
+            $internship->save();
+            return response()->json($internship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -37,7 +55,11 @@ class InternshipController extends Controller
      */
     public function show(Internship $internship)
     {
-        //
+        try {
+            return response()->json($internship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -53,7 +75,19 @@ class InternshipController extends Controller
      */
     public function update(UpdateInternshipRequest $request, Internship $internship)
     {
-        //
+        try {
+            $internship->student_id = $request->student_id;
+            $internship->meal_allowance = $request->meal_allowance;
+            $internship->start_date = $request->start_date;
+            $internship->address = $request->address;
+            $internship->postcode = $request->postcode;
+            $internship->tutor_id = $request->tutor_id;
+            $internship->company_id = $request->company_id;
+            $internship->update();
+            return response()->json($internship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -61,6 +95,11 @@ class InternshipController extends Controller
      */
     public function destroy(Internship $internship)
     {
-        //
+        try {
+            $internship->delete();
+            return response()->json(array('success' => 'Delete success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 }
