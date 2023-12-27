@@ -33,8 +33,4 @@ class StoreInternshipRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
-    }
 }
