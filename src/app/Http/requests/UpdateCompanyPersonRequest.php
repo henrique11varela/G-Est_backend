@@ -26,8 +26,8 @@ class UpdateCompanyPersonRequest extends FormRequest
             'phone_number' => ['required'],
             'email' => ['required', 'email'],
             'company_id' => ['required'],
-            'is_tutor' => ['required'],
-            'is_contact' => ['required'],
+            'is_tutor' => ['required', 'boolean'],
+            'is_contact' => ['required', 'boolean'],
         ];
     }
 }
