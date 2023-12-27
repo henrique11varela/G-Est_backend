@@ -11,7 +11,7 @@ class StoreStudentCollectionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreStudentCollectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'student_id' => 'required',
+            'student_collection_id' => 'required',
         ];
     }
 }

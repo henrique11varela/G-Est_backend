@@ -13,15 +13,15 @@ class AreaController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try
+        {
+            $areas = Area::all();
+            return response()->json($areas, 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500);
+        }
     }
 
     /**
@@ -29,7 +29,18 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
-        //
+        try
+        {
+            $area = new Area();
+            $area->area_code = $request->area_code;
+            $area->name = $request->name;
+            $area->save();
+            return response()->json($area, 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500);
+        }
     }
 
     /**
@@ -37,15 +48,14 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Area $area)
-    {
-        //
+        try
+        {
+            return response()->json($area, 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500 );
+        }
     }
 
     /**
@@ -53,7 +63,17 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        //
+        try
+        {
+            $area->area_code = $request->area_code;
+            $area->name = $request->name;
+            $area->save();
+            return response()->json($area, 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500);
+        }
     }
 
     /**
@@ -61,6 +81,14 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        //
+        try
+        {
+            $area->delete();
+            return response()->json(['message' => 'Area deleted successfully'], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message' => 'failed:'.$e], 500);
+        }
     }
 }

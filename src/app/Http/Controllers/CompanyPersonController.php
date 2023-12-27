@@ -13,15 +13,14 @@ class CompanyPersonController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $companyPeople = CompanyPerson::with(['company', 'internships'])->get();
+            return response()->json($companyPeople, 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -29,7 +28,21 @@ class CompanyPersonController extends Controller
      */
     public function store(StoreCompanyPersonRequest $request)
     {
-        //
+        try {
+            $companyPerson = new CompanyPerson();
+            $companyPerson->name = $request->name;
+            $companyPerson->phone_number = $request->phone_number;
+            $companyPerson->email = $request->email;
+            $companyPerson->company_id = $request->company_id;
+            $companyPerson->is_tutor = $request->is_tutor;
+            $companyPerson->is_contact = $request->is_contact;
+            $companyPerson->save();
+            return response()->json($companyPerson, 201);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -37,15 +50,14 @@ class CompanyPersonController extends Controller
      */
     public function show(CompanyPerson $companyPerson)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CompanyPerson $companyPerson)
-    {
-        //
+        try {
+            $companyPerson->load('company', 'internships');
+            return response()->json($companyPerson, 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -53,7 +65,20 @@ class CompanyPersonController extends Controller
      */
     public function update(UpdateCompanyPersonRequest $request, CompanyPerson $companyPerson)
     {
-        //
+        try {
+            $companyPerson->name = $request->name;
+            $companyPerson->phone_number = $request->phone_number;
+            $companyPerson->email = $request->email;
+            $companyPerson->company_id = $request->company_id;
+            $companyPerson->is_tutor = $request->is_tutor;
+            $companyPerson->is_contact = $request->is_contact;
+            $companyPerson->save();
+            return response()->json($companyPerson, 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+            ], 500);
+        }
     }
 
     /**
@@ -61,6 +86,15 @@ class CompanyPersonController extends Controller
      */
     public function destroy(CompanyPerson $companyPerson)
     {
-        //
+        try {
+            $companyPerson->delete();
+            return response()->json([
+                'message' => 'deleted',
+                ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'failed:' . $exception,
+                ], 500);
+        }
     }
 }

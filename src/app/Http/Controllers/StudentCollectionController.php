@@ -13,15 +13,12 @@ class StudentCollectionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $studentCollections = StudentCollection::all();
+            return response()->json($studentCollections, 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
+        }
     }
 
     /**
@@ -29,7 +26,15 @@ class StudentCollectionController extends Controller
      */
     public function store(StoreStudentCollectionRequest $request)
     {
-        //
+        try {
+            $studentCollection = new StudentCollection();
+            $studentCollection->student_id = $request->student_id;
+            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->save();
+            return response()->json($studentCollection, 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
+        }
     }
 
     /**
@@ -37,15 +42,11 @@ class StudentCollectionController extends Controller
      */
     public function show(StudentCollection $studentCollection)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(StudentCollection $studentCollection)
-    {
-        //
+        try {
+            return response()->json($studentCollection, 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
+        }
     }
 
     /**
@@ -53,7 +54,14 @@ class StudentCollectionController extends Controller
      */
     public function update(UpdateStudentCollectionRequest $request, StudentCollection $studentCollection)
     {
-        //
+        try {
+            $studentCollection->student_id = $request->student_id;
+            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->save();
+            return response()->json($studentCollection, 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
+        }
     }
 
     /**
@@ -61,6 +69,11 @@ class StudentCollectionController extends Controller
      */
     public function destroy(StudentCollection $studentCollection)
     {
-        //
+        try {
+            $studentCollection->delete();
+            return response()->json(['message' => 'Student Collection deleted'], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
+        }
     }
 }

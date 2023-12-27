@@ -13,6 +13,8 @@ class CourseType extends Model
 
     use SoftDeletes;
 
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
+
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
