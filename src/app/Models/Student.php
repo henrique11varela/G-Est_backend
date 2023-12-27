@@ -12,11 +12,11 @@ class Student extends Model
 
     use SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'personal_email',
-        'atec_email',
-        'phone_number',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public function internships(): HasMany
