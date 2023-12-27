@@ -14,6 +14,13 @@ class Student extends Model
 
     use SoftDeletes;
 
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     public function internships(): HasMany
     {
         return $this->hasMany(Internship::class);
