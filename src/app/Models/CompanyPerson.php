@@ -12,13 +12,11 @@ class CompanyPerson extends Model
 
     use SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'phone_number',
-        'email',
-        'company_id',
-        'is_tutor',
-        'is_contact',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public function company(): BelongsTo
