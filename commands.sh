@@ -28,7 +28,7 @@ function confirm(){
 # ./commands.sh start
 function startProject(){
 	failed=1
-	docker-compose up -d --build app && echo docker app started && failed=0
+	docker-compose up -d --build app && echo docker app started && echo "app: http://localhost:8080" && echo "phpmyadmin: http://localhost:8081" && failed=0
 	if [ $failed -eq 1 ]
 	then
 		echo "docker app failed to start"
