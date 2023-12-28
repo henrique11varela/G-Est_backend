@@ -13,7 +13,7 @@ services:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
@@ -21,6 +21,7 @@ services:
       - redis
       - mysql
       - mailhog
+      - phpmyadmin
     networks:
       - laravel
 
@@ -112,5 +113,19 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+    networks:
+      - laravel
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: secret
     networks:
       - laravel
