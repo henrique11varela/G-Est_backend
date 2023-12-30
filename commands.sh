@@ -53,7 +53,7 @@ function createNewLaravelProject(){
 # ./commands.sh run setup
 function setupProject(){
 	docker-compose run --rm composer install
-	docker-compose run --rm npm run dev
+	docker-compose run --rm npmbackend run dev
 	docker-compose run --rm artisan migrate:fresh --seed
 	echo "docker app setup"
 }

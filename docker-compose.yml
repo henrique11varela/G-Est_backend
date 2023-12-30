@@ -80,7 +80,7 @@ services:
     networks:
       - laravel
 
-  npm:
+  npmbackend:
     image: node:current-alpine
     volumes:
       - ./src:/var/www/html
