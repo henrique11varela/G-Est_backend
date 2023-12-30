@@ -125,6 +125,7 @@ case $1 in
 				;;
 			# run setup
 			setup)
+				envDevFill
 				setupProject
 				;;
 			# run migrate
