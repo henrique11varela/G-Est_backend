@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,15 +15,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            //Other Seeders...
-            EndStateSeeder::class,
-        ]);
-        // \App\Models\User::factory(10)->create();
+            AreaSeeder::class,
+            CourseTypeSeeder::class,
+            CourseSeeder::class,
+            StudentSeeder::class,
+            StudentCollectionSeeder::class,
+            CompanySeeder::class,
+            CompanyPersonSeeder::class,
+            InternshipSeeder::class,
 
-         \App\Models\User::factory()->create([
-             'name' => 'Test User',
-             'email' => 'test@example.com',
-             'password'=> Hash::make('a'),
+            EndStateSeeder::class,
+            EndedInternshipSeeder::class,
+
+            ApplicationSeeder::class,
+            UserSeeder::class,
         ]);
+
     }
 }

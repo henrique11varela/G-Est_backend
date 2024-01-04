@@ -17,7 +17,9 @@ class StudentCollectionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'start_date' => $this->faker->date,
+            'course_id' => $this->faker->numberBetween(1,10),
         ];
     }
 }

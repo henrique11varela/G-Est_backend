@@ -12,6 +12,7 @@ class EndedInternshipSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\EndedInternship::factory(2)->create();
+
     }
 }

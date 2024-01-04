@@ -12,6 +12,7 @@ class StudentCollectionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\StudentCollection::factory(10)->create();
+
     }
 }
