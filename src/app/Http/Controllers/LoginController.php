@@ -22,7 +22,7 @@ class LoginController extends Controller
                 throw ValidationException::withMessages(["password" => "password invalid"]);
             }
             $user->tokens()->delete();
-            $token = $user->createToken($request->device_name)->plainTextToken;
+            $token = $user->createToken($request->password)->plainTextToken;
             return response()->json(['token' => $token], 200);
         } catch (ValidationException $e) {
             return response()->json($e, 500);

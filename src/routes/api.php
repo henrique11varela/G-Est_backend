@@ -34,8 +34,7 @@ Route::prefix('v1')->group(function () {
 
     Route::post('login', [LoginController::class, 'login']);
 
-    // Route::group(['middleware' => 'auth:sanctum'], function () {
-
+    Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::prefix('applications')->group(function () {
             Route::get('', [ApplicationController::class, 'index']);
@@ -118,5 +117,5 @@ Route::prefix('v1')->group(function () {
         });
 
 
-    // });
+    });
 });
