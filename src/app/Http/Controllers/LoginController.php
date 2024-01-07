@@ -25,7 +25,7 @@ class LoginController extends Controller
             $token = $user->createToken($request->password)->plainTextToken;
             return response()->json(['token' => $token], 200);
         } catch (\Exception $e) {
-            return response()->json(array('message' => $e->getMessage()), 401);
+            return response()->json(array('message' => $e->getMessage()), $e->status);
         }
     }
 
