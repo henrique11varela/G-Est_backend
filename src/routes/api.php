@@ -11,7 +11,7 @@ use App\Http\Controllers\EndedInternshipController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\StudentCollectionController;
 use App\Http\Controllers\StudentController;
-
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
