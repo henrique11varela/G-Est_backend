@@ -4,6 +4,7 @@ use App\Models\User;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+
 class UserController extends Controller
 {
     public function index()
@@ -26,7 +27,7 @@ class UserController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = $request->password;
+            $user->password = Hash::make($request->password);
             $user->save();
             return response()->json($user, 201);
         } catch (\Exception $exception) {
@@ -58,7 +59,9 @@ class UserController extends Controller
         try {
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = $request->password;
+            if ($request->password != '') {
+                $user->password = Hash::make($request->password);
+            }
             $user->update();
             return response()->json($user, 200);
         } catch (\Exception $exception) {
