@@ -36,7 +36,6 @@ Route::prefix('v1')->group(function () {
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
 
-
         Route::prefix('applications')->group(function () {
             Route::get('', [ApplicationController::class, 'index']);
             Route::post('', [ApplicationController::class, 'store']);
