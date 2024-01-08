@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::with()->get();
+            $users = User::paginate(15);
             return response()->json($users, 200);
         } catch (\Exception $exception) {
             return response()->json([
