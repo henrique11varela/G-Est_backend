@@ -17,7 +17,9 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'area_id' => $this->faker->numberBetween(1,4),
+            'course_type_id' => $this->faker->numberBetween(1,10),
         ];
     }
 }

@@ -17,7 +17,14 @@ class InternshipFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'student_id' => $this->faker->numberBetween(1,10),
+            'company_id' => $this->faker->numberBetween(1,10),
+            'tutor_id' => $this->faker->numberBetween(1,10),
+            'meal_allowance' => $this->faker->numberBetween(0,1),
+            'start_date' => $this->faker->date('Y_m_d'),
+            'address' => $this->faker->address,
+            'observations' => $this->faker->randomLetter,
+            'postcode' => $this->faker->postcode,
         ];
     }
 }

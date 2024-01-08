@@ -12,6 +12,7 @@ class AreaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+
+        \App\Models\Area::factory(10)->create();
     }
 }
