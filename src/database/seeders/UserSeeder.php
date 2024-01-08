@@ -14,5 +14,10 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('admin'),
+        ]);
     }
 }
