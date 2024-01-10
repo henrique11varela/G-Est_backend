@@ -14,7 +14,22 @@ class CourseController extends Controller
     public function index()
     {
         try {
-            $courses = Course::all();
+
+            $coursesQuery = Course::select("*");
+            // if (request()->has("id")) {
+            //     $coursesQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("name")) {
+                $coursesQuery->where("name", "like", "%" . request()->name . "%");
+            }
+            if (request()->has("course_type_id")) {
+                $coursesQuery->where("course_type_id", "like", "%" . request()->course_type_id . "%");
+            }
+            if (request()->has("area_id")) {
+                $coursesQuery->where("area_id", "like", "%" . request()->area_id . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $courses = $coursesQuery->paginate($quantity);
             return response()->json($courses, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

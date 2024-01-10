@@ -15,7 +15,16 @@ class CourseTypeController extends Controller
     public function index()
     {
         try {
-            $courseTypes = CourseType::all();
+
+            $courseTypesQuery = CourseType::select("*");
+            // if (request()->has("id")) {
+            //     $courseTypesQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("name")) {
+                $courseTypesQuery->where("name", "like", "%" . request()->name . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $courseTypes = $courseTypesQuery->paginate($quantity);
             return response()->json($courseTypes, 200);
         } catch (Exception $exception) {
             return response()->json([
@@ -91,11 +100,11 @@ class CourseTypeController extends Controller
             $courseType->delete();
             return response()->json([
                 'message' => 'deleted',
-                ], 200);
+            ], 200);
         } catch (Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
-                ], 500);
+            ], 500);
         }
     }
 }

@@ -14,7 +14,25 @@ class StudentController extends Controller
     public function index()
     {
         try {
-            $students = Student::with(['internships', 'studentCollections'])->get();
+            $studentsQuery = Student::select("*");
+            // if (request()->has("id")) {
+            //     $studentsQuery->where("id","=", request()->id);
+            // }
+            if (request()->has("name")) {
+                $studentsQuery->where("name","like","%". request()->name ."%");
+            }
+            if (request()->has("personal_email")) {
+                $studentsQuery->where("personal_email","like","%". request()->personal_email ."%");
+            }
+            if (request()->has("atec_email")) {
+                $studentsQuery->where("atec_email","like","%". request()->atec_email ."%");
+            }
+            if (request()->has("phone_number")) {
+                $studentsQuery->where("phone_number","like","%". request()->phone_number ."%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $students = $studentsQuery->with(['internships', 'studentCollections'])->paginate($quantity);
+
             return response()->json($students, 200);
         } catch (\Exception $exception) {
             return response()->json([

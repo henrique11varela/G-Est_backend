@@ -14,7 +14,21 @@ class StudentCollectionController extends Controller
     public function index()
     {
         try {
-            $studentCollections = StudentCollection::all();
+            $studentCollectionsQuery = StudentCollection::select("*");
+            // if (request()->has("id")) {
+            //     $studentCollectionsQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("name")) {
+                $studentCollectionsQuery->where("name", "like", "%" . request()->name . "%");
+            }
+            if (request()->has("start_date")) {
+                $studentCollectionsQuery->where("start_date", "like", "%" . request()->start_date . "%");
+            }
+            if (request()->has("course_id")) {
+                $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $studentCollections = $studentCollectionsQuery->paginate($quantity);
             return response()->json($studentCollections, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
