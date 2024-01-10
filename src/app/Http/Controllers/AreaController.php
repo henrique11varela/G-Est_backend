@@ -13,14 +13,23 @@ class AreaController extends Controller
      */
     public function index()
     {
-        try
-        {
-            $areas = Area::all();
+        try {
+
+            $areasQuery = Area::select("*");
+            // if (request()->has("id")) {
+            //     $areasQuery->where("id", "like", request()->id);
+            // }
+            if (request()->has("area_code")) {
+                $areasQuery->where("area_code", "like", "%" . request()->area_code . "%");
+            }
+            if (request()->has("name")) {
+                $areasQuery->where("name", "like", "%" . request()->name . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $areas = $areasQuery->paginate($quantity);
             return response()->json($areas, 200);
-        }
-        catch(Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -29,17 +38,14 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
-        try
-        {
+        try {
             $area = new Area();
             $area->area_code = $request->area_code;
             $area->name = $request->name;
             $area->save();
             return response()->json($area, 200);
-        }
-        catch(Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -48,13 +54,10 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        try
-        {
+        try {
             return response()->json($area, 200);
-        }
-        catch(Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500 );
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -63,16 +66,13 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        try
-        {
+        try {
             $area->area_code = $request->area_code;
             $area->name = $request->name;
             $area->save();
             return response()->json($area, 200);
-        }
-        catch(Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 
@@ -81,14 +81,11 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        try
-        {
+        try {
             $area->delete();
             return response()->json(['message' => 'Area deleted successfully'], 200);
-        }
-        catch (Exception $e)
-        {
-            return response()->json(['message' => 'failed:'.$e], 500);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'failed:' . $e], 500);
         }
     }
 }

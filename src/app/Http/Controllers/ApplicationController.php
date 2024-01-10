@@ -16,7 +16,52 @@ class ApplicationController extends Controller
     public function index()
     {
         try {
-            $applications = Application::all();
+
+            $applicationsQuery = Application::select("*");
+            // if (request()->has("id")) {
+            //     $applicationsQuery->where("id", "like", request()->id);
+            // }
+            if (request()->has("company_name")) {
+                $applicationsQuery->where("company_name", "like", "%" . request()->company_name . "%");
+            }
+            if (request()->has("activity_sector")) {
+                $applicationsQuery->where("activity_sector", "like", "%" . request()->activity_sector . "%");
+            }
+            if (request()->has("locality")) {
+                $applicationsQuery->where("locality", "like", "%" . request()->locality . "%");
+            }
+            if (request()->has("website")) {
+                $applicationsQuery->where("website", "like", "%" . request()->website . "%");
+            }
+            if (request()->has("contact_name")) {
+                $applicationsQuery->where("contact_name", "like", "%" . request()->contact_name . "%");
+            }
+            if (request()->has("contact_telephone")) {
+                $applicationsQuery->where("contact_telephone", "like", "%" . request()->contact_telephone . "%");
+            }
+            if (request()->has("contact_email")) {
+                $applicationsQuery->where("contact_email", "like", "%" . request()->contact_email . "%");
+            }
+            if (request()->has("number_students")) {
+                $applicationsQuery->where("number_students", "like", "%" . request()->number_students . "%");
+            }
+            if (request()->has("student_profile")) {
+                $applicationsQuery->where("student_profile", "like", "%" . request()->student_profile . "%");
+            }
+            if (request()->has("student_tasks")) {
+                $applicationsQuery->where("student_tasks", "like", "%" . request()->student_tasks . "%");
+            }
+            if (request()->has("company_id")) {
+                $applicationsQuery->where("company_id", "like", "%" . request()->company_id . "%");
+            }
+            if (request()->has("is_partner")) {
+                $applicationsQuery->where("is_partner", "like", "%" . request()->is_partner . "%");
+            }
+            if (request()->has("is_valid")) {
+                $applicationsQuery->where("is_valid", "like", "%" . request()->is_valid . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $applications = $applicationsQuery->paginate($quantity);
             return response()->json($applications, 200);
         } catch (Exception $exception) {
             return response()->json([
@@ -105,11 +150,11 @@ class ApplicationController extends Controller
             $application->delete();
             return response()->json([
                 'message' => 'deleted',
-                ], 200);
+            ], 200);
         } catch (Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
-                ], 500);
+            ], 500);
         }
     }
 }

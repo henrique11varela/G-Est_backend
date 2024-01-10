@@ -14,8 +14,28 @@ class CompanyController extends Controller
     public function index()
     {
         try {
-            $companies = Company::paginate(15);
 
+            $companiesQuery = Company::select("*");
+            // if (request()->has("id")) {
+            //     $companiesQuery->where("id", "like", request()->id);
+            // }
+            if (request()->has("name")) {
+                $companiesQuery->where("name", "like", "%" . request()->name . "%");
+            }
+            if (request()->has("address")) {
+                $companiesQuery->where("address", "like", "%" . request()->address . "%");
+            }
+            if (request()->has("postcode")) {
+                $companiesQuery->where("postcode", "like", "%" . request()->postcode . "%");
+            }
+            if (request()->has("niss")) {
+                $companiesQuery->where("niss", "like", "%" . request()->niss . "%");
+            }
+            if (request()->has("nipc")) {
+                $companiesQuery->where("nipc", "like", "%" . request()->nipc . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $companies = $companiesQuery->paginate($quantity);
             return response()->json($companies, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

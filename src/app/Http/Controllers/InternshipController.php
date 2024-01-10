@@ -14,7 +14,37 @@ class InternshipController extends Controller
     public function index()
     {
         try {
-            $internships = Internships::all();
+
+            $internshipsQuery = Internship::select("*");
+            // if (request()->has("id")) {
+            //     $internshipsQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("student_id")) {
+                $internshipsQuery->where("student_id", "like", "%" . request()->student_id . "%");
+            }
+            if (request()->has("meal_allowance")) {
+                $internshipsQuery->where("meal_allowance", "like", "%" . request()->meal_allowance . "%");
+            }
+            if (request()->has("start_date")) {
+                $internshipsQuery->where("start_date", "like", "%" . request()->start_date . "%");
+            }
+            if (request()->has("address")) {
+                $internshipsQuery->where("address", "like", "%" . request()->address . "%");
+            }
+            if (request()->has("postcode")) {
+                $internshipsQuery->where("postcode", "like", "%" . request()->postcode . "%");
+            }
+            if (request()->has("observations")) {
+                $internshipsQuery->where("observations", "like", "%" . request()->observations . "%");
+            }
+            if (request()->has("tutor_id")) {
+                $internshipsQuery->where("tutor_id", "like", "%" . request()->tutor_id . "%");
+            }
+            if (request()->has("company_id")) {
+                $internshipsQuery->where("company_id", "like", "%" . request()->company_id . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $internships = $internshipsQuery->paginate($quantity);
             return response()->json($internships, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

@@ -14,7 +14,31 @@ class CompanyPersonController extends Controller
     public function index()
     {
         try {
-            $companyPeople = CompanyPerson::with(['company', 'internships'])->get();
+
+            $companyPeopleQuery = CompanyPerson::select("*");
+            // if (request()->has("id")) {
+            //     $companyPeopleQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("name")) {
+                $companyPeopleQuery->where("name", "like", "%" . request()->name . "%");
+            }
+            if (request()->has("phone_number")) {
+                $companyPeopleQuery->where("phone_number", "like", "%" . request()->phone_number . "%");
+            }
+            if (request()->has("email")) {
+                $companyPeopleQuery->where("email", "like", "%" . request()->email . "%");
+            }
+            if (request()->has("company_id")) {
+                $companyPeopleQuery->where("company_id", "like", "%" . request()->company_id . "%");
+            }
+            if (request()->has("is_tutor")) {
+                $companyPeopleQuery->where("is_tutor", "like", "%" . request()->is_tutor . "%");
+            }
+            if (request()->has("is_contact")) {
+                $companyPeopleQuery->where("is_contact", "like", "%" . request()->is_contact . "%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $companyPeople = $companyPeopleQuery->paginate($quantity);
             return response()->json($companyPeople, 200);
         } catch (\Exception $exception) {
             return response()->json([
@@ -90,11 +114,11 @@ class CompanyPersonController extends Controller
             $companyPerson->delete();
             return response()->json([
                 'message' => 'deleted',
-                ], 200);
+            ], 200);
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'failed:' . $exception,
-                ], 500);
+            ], 500);
         }
     }
 }

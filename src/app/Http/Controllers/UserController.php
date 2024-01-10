@@ -11,7 +11,18 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::paginate(15);
+            $usersQuery = User::select("*");
+            // if (request()->has("id")) {
+            //     $usersQuery->where("id","=", request()->id);
+            // }
+            if (request()->has("name")) {
+                $usersQuery->where("name","like","%". request()->name ."%");
+            }
+            if (request()->has("email")) {
+                $usersQuery->where("email","like","%". request()->email ."%");
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $users = $usersQuery->paginate($quantity);
             return response()->json($users, 200);
         } catch (\Exception $exception) {
             return response()->json([
