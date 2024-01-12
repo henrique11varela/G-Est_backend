@@ -19,10 +19,10 @@ class AreaController extends Controller
             // if (request()->has("id")) {
             //     $areasQuery->where("id", "like", request()->id);
             // }
-            if (request()->has("area_code")) {
+            if (request()->has("area_code") && request()->area_code != "") {
                 $areasQuery->where("area_code", "like", "%" . request()->area_code . "%");
             }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $areasQuery->where("name", "like", "%" . request()->name . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;

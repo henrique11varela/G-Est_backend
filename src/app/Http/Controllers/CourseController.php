@@ -19,13 +19,13 @@ class CourseController extends Controller
             // if (request()->has("id")) {
             //     $coursesQuery->where("id", "=", request()->id);
             // }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $coursesQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("course_type_id")) {
+            if (request()->has("course_type_id") && request()->course_type_id != "") {
                 $coursesQuery->where("course_type_id", "like", "%" . request()->course_type_id . "%");
             }
-            if (request()->has("area_id")) {
+            if (request()->has("area_id") && request()->area_id != "") {
                 $coursesQuery->where("area_id", "like", "%" . request()->area_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;

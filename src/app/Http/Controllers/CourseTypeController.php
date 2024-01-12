@@ -20,7 +20,7 @@ class CourseTypeController extends Controller
             // if (request()->has("id")) {
             //     $courseTypesQuery->where("id", "=", request()->id);
             // }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $courseTypesQuery->where("name", "like", "%" . request()->name . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;

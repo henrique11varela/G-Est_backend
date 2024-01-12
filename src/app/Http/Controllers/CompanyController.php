@@ -19,19 +19,19 @@ class CompanyController extends Controller
             // if (request()->has("id")) {
             //     $companiesQuery->where("id", "like", request()->id);
             // }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $companiesQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("address")) {
+            if (request()->has("address") && request()->address != "") {
                 $companiesQuery->where("address", "like", "%" . request()->address . "%");
             }
-            if (request()->has("postcode")) {
+            if (request()->has("postcode") && request()->postcode != "") {
                 $companiesQuery->where("postcode", "like", "%" . request()->postcode . "%");
             }
-            if (request()->has("niss")) {
+            if (request()->has("niss") && request()->niss != "") {
                 $companiesQuery->where("niss", "like", "%" . request()->niss . "%");
             }
-            if (request()->has("nipc")) {
+            if (request()->has("nipc") && request()->nipc != "") {
                 $companiesQuery->where("nipc", "like", "%" . request()->nipc . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;

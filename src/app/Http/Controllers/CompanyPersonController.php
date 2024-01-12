@@ -19,22 +19,22 @@ class CompanyPersonController extends Controller
             // if (request()->has("id")) {
             //     $companyPeopleQuery->where("id", "=", request()->id);
             // }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $companyPeopleQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("phone_number")) {
+            if (request()->has("phone_number") && request()->phone_number != "") {
                 $companyPeopleQuery->where("phone_number", "like", "%" . request()->phone_number . "%");
             }
-            if (request()->has("email")) {
+            if (request()->has("email") && request()->email != "") {
                 $companyPeopleQuery->where("email", "like", "%" . request()->email . "%");
             }
-            if (request()->has("company_id")) {
+            if (request()->has("company_id") && request()->company_id != "") {
                 $companyPeopleQuery->where("company_id", "like", "%" . request()->company_id . "%");
             }
-            if (request()->has("is_tutor")) {
+            if (request()->has("is_tutor") && request()->is_tutor != "") {
                 $companyPeopleQuery->where("is_tutor", "like", "%" . request()->is_tutor . "%");
             }
-            if (request()->has("is_contact")) {
+            if (request()->has("is_contact") && request()->is_contact != "") {
                 $companyPeopleQuery->where("is_contact", "like", "%" . request()->is_contact . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;

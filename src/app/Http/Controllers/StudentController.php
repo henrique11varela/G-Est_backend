@@ -18,16 +18,16 @@ class StudentController extends Controller
             // if (request()->has("id")) {
             //     $studentsQuery->where("id","=", request()->id);
             // }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $studentsQuery->where("name","like","%". request()->name ."%");
             }
-            if (request()->has("personal_email")) {
+            if (request()->has("personal_email") && request()->__personal_email__ != "") {
                 $studentsQuery->where("personal_email","like","%". request()->personal_email ."%");
             }
-            if (request()->has("atec_email")) {
+            if (request()->has("atec_email") && request()->atec_email != "") {
                 $studentsQuery->where("atec_email","like","%". request()->atec_email ."%");
             }
-            if (request()->has("phone_number")) {
+            if (request()->has("phone_number") && request()->phone_number != "") {
                 $studentsQuery->where("phone_number","like","%". request()->phone_number ."%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;

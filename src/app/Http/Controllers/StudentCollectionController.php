@@ -18,13 +18,13 @@ class StudentCollectionController extends Controller
             // if (request()->has("id")) {
             //     $studentCollectionsQuery->where("id", "=", request()->id);
             // }
-            if (request()->has("name")) {
+            if (request()->has("name") && request()->name != "") {
                 $studentCollectionsQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("start_date")) {
+            if (request()->has("start_date") && request()->start_date != "") {
                 $studentCollectionsQuery->where("start_date", "like", "%" . request()->start_date . "%");
             }
-            if (request()->has("course_id")) {
+            if (request()->has("course_id") && request()->course_id != "") {
                 $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
