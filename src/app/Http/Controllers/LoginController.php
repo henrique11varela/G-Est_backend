@@ -41,4 +41,13 @@ class LoginController extends Controller
             return response()->json(array('message' => $e->getMessage()), $e->status || 500);
         }
     }
+
+    function checkRole(Request $request)
+    {
+        try {
+            return response()->json(['role' => $request->user()->role], 200);
+        } catch (\Exception $e) {
+            return response()->json(array('message' => $e->getMessage()), $e->status || 500);
+        }
+    }
 }

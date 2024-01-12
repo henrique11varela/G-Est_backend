@@ -36,6 +36,7 @@ Route::prefix('v1')->group(function () {
 
     Route::group(['middleware' => ['bearer.token', 'auth:sanctum']], function () {
         Route::post('logout', [LoginController::class, 'logout']);
+        Route::get('checkrole', [LoginController::class, 'checkRole']);
 
         Route::prefix('applications')->group(function () {
             Route::get('', [ApplicationController::class, 'index']);
