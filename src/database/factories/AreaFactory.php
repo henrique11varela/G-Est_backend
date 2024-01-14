@@ -17,7 +17,7 @@ class AreaFactory extends Factory
     public function definition(): array
     {
         return [
-            "name"=> $this->faker->name,
+            "name"=> $this->faker->colorName,
             "area_code" => $this->faker->randomDigit(4),
         ];
     }
