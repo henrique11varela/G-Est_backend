@@ -28,7 +28,7 @@ class StudentCollectionController extends Controller
                 $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $studentCollections = $studentCollectionsQuery->paginate($quantity);
+            $studentCollections = $studentCollectionsQuery->with(['course', 'students'])->paginate($quantity);
             return response()->json($studentCollections, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -42,9 +42,11 @@ class StudentCollectionController extends Controller
     {
         try {
             $studentCollection = new StudentCollection();
-            $studentCollection->student_id = $request->student_id;
-            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->name = $request->name;
+            $studentCollection->start_date = $request->start_date;
+            $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
+            $user->students()->sync($request->students);
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -57,6 +59,7 @@ class StudentCollectionController extends Controller
     public function show(StudentCollection $studentCollection)
     {
         try {
+            $studentCollection->load('course', 'students');
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -69,9 +72,11 @@ class StudentCollectionController extends Controller
     public function update(UpdateStudentCollectionRequest $request, StudentCollection $studentCollection)
     {
         try {
-            $studentCollection->student_id = $request->student_id;
-            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->name = $request->name;
+            $studentCollection->start_date = $request->start_date;
+            $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
+            $user->students()->sync($request->students);
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
