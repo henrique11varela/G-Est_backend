@@ -14,7 +14,7 @@ class StudentCollectionController extends Controller
     public function index()
     {
         try {
-            $studentCollectionsQuery = StudentCollection::select("*");
+            $studentCollectionsQuery = StudentCollection::with('students')->select("*");
             // if (request()->has("id")) {
             //     $studentCollectionsQuery->where("id", "=", request()->id);
             // }
@@ -42,9 +42,11 @@ class StudentCollectionController extends Controller
     {
         try {
             $studentCollection = new StudentCollection();
-            $studentCollection->student_id = $request->student_id;
-            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->name = $request->name;
+            $studentCollection->start_date = $request->start_date;
+            $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
+            $user->students()->sync($request->students);
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -57,6 +59,7 @@ class StudentCollectionController extends Controller
     public function show(StudentCollection $studentCollection)
     {
         try {
+            $studentCollection->load('students');
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -69,9 +72,11 @@ class StudentCollectionController extends Controller
     public function update(UpdateStudentCollectionRequest $request, StudentCollection $studentCollection)
     {
         try {
-            $studentCollection->student_id = $request->student_id;
-            $studentCollection->student_collection_id = $request->student_collection_id;
+            $studentCollection->name = $request->name;
+            $studentCollection->start_date = $request->start_date;
+            $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
+            $user->students()->sync($request->students);
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
