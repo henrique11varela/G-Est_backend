@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CourseTypeSeeder extends Seeder
 {
@@ -12,7 +13,23 @@ class CourseTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\CourseType::factory(10)->create();
+        DB::table('course_types')->insert([
+            [
+                'name' => 'Aprendizagem',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Educação formação adultos',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Especialização tecnológica',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
 
     }
 }
