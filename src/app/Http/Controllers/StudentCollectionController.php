@@ -14,7 +14,7 @@ class StudentCollectionController extends Controller
     public function index()
     {
         try {
-            $studentCollectionsQuery = StudentCollection::with('students')->select("*");
+            $studentCollectionsQuery = StudentCollection::select("*");
             // if (request()->has("id")) {
             //     $studentCollectionsQuery->where("id", "=", request()->id);
             // }
@@ -28,7 +28,7 @@ class StudentCollectionController extends Controller
                 $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $studentCollections = $studentCollectionsQuery->paginate($quantity);
+            $studentCollections = $studentCollectionsQuery->with(['course', 'students'])->paginate($quantity);
             return response()->json($studentCollections, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -59,7 +59,7 @@ class StudentCollectionController extends Controller
     public function show(StudentCollection $studentCollection)
     {
         try {
-            $studentCollection->load('students');
+            $studentCollection->load('course', 'students');
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
