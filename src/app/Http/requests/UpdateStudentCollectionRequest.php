@@ -22,8 +22,9 @@ class UpdateStudentCollectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'student_id' => 'required',
-            'student_collection_id' => 'required',
+            'name' => 'required',
+            'start_date' => 'required',
+            'course_id' => 'required',
         ];
     }
 }
