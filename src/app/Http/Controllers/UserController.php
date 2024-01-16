@@ -16,10 +16,10 @@ class UserController extends Controller
             // if (request()->has("id")) {
             //     $usersQuery->where("id","=", request()->id);
             // }
-            if (request()->has("name") && request()->name != "") {
+            if (request()->has("name")) {
                 $usersQuery->where("name","like","%". request()->name ."%");
             }
-            if (request()->has("email") && request()->email != "") {
+            if (request()->has("email")) {
                 $usersQuery->where("email","like","%". request()->email ."%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
