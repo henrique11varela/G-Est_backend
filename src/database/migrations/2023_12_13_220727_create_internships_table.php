@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('postcode');
             $table->string('observations');
-            $table->foreignId('tutor_id')->references('id')->on('company_people');
+            $table->foreignId('company_person_id')->constrained();
             $table->foreignId('company_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

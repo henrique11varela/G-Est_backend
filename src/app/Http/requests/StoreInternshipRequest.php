@@ -28,7 +28,7 @@ class StoreInternshipRequest extends FormRequest
             'start_date' => 'required',
             'address' => 'required',
             'postcode' => 'required',
-            'tutor_id' => 'required',
+            'company_person_id' => 'required',
             'company_id' => 'required',
         ];
     }
