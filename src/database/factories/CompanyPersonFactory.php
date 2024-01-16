@@ -21,8 +21,8 @@ class CompanyPersonFactory extends Factory
             'phone_number' => $this->faker->phoneNumber,
             'email' => $this->faker->email,
             'company_id' => $this->faker->numberBetween(1,10),
-            'is_tutor' => $this->faker->numberBetween(1,10),
-            'is_contact'=> $this->faker->numberBetween(1,10),
+            'is_tutor' => $this->faker->boolean(),
+            'is_contact'=> $this->faker->boolean(),
         ];
     }
 }

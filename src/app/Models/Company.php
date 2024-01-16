@@ -28,4 +28,13 @@ class Company extends Model
     {
         return $this->hasMany(Application::class);
     }
+    public function contactPeople()
+    {
+        return $this->companyPeople()->where('is_contact', '=', 1);
+    }
+    public function tutorPeople()
+    {
+
+        return $this->companyPeople()->where('is_tutor', '=', 1);
+    }
 }

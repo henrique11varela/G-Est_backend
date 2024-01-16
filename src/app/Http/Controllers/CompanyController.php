@@ -15,7 +15,7 @@ class CompanyController extends Controller
     {
         try {
 
-            $companiesQuery = Company::select("*");
+            $companiesQuery = Company::with('companyPeople', 'contactPeople', 'tutorPeople');
             // if (request()->has("id")) {
             //     $companiesQuery->where("id", "like", request()->id);
             // }
@@ -34,6 +34,7 @@ class CompanyController extends Controller
             if (request()->has("nipc") && request()->nipc != "") {
                 $companiesQuery->where("nipc", "like", "%" . request()->nipc . "%");
             }
+
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $companies = $companiesQuery->paginate($quantity);
             return response()->json($companies, 200);
@@ -74,6 +75,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
+        $company->with('companyPeople');
         try {
             return response()->json($company, 200);
         } catch (\Exception $e) {
