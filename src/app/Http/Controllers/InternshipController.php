@@ -15,7 +15,7 @@ class InternshipController extends Controller
     {
         try {
 
-            $internshipsQuery = Internship::select("*");
+            $internshipsQuery = Internship::with("student", "companyPerson", "company")->select("*");
             // if (request()->has("id")) {
             //     $internshipsQuery->where("id", "=", request()->id);
             // }
@@ -65,13 +65,14 @@ class InternshipController extends Controller
     public function store(StoreInternshipRequest $request)
     {
         try {
-            $internship = new Internships();
+            $internship = new Internship();
             $internship->student_id = $request->student_id;
             $internship->meal_allowance = $request->meal_allowance;
             $internship->start_date = $request->start_date;
             $internship->address = $request->address;
             $internship->postcode = $request->postcode;
-            $internship->tutor_id = $request->tutor_id;
+            $internship->observations = $request->observations;
+            $internship->company_person_id = $request->company_person_id;
             $internship->company_id = $request->company_id;
             $internship->save();
             return response()->json($internship, 200);
