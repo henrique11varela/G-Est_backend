@@ -52,14 +52,6 @@ class InternshipController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreInternshipRequest $request)
@@ -87,18 +79,11 @@ class InternshipController extends Controller
     public function show(Internship $internship)
     {
         try {
+            $internship = $internship->load("student", "companyPerson", "company.tutorPeople");
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Internship $internship)
-    {
-        //
     }
 
     /**
@@ -112,7 +97,8 @@ class InternshipController extends Controller
             $internship->start_date = $request->start_date;
             $internship->address = $request->address;
             $internship->postcode = $request->postcode;
-            $internship->tutor_id = $request->tutor_id;
+            $internship->observations = $request->observations;
+            $internship->company_person_id = $request->company_person_id;
             $internship->company_id = $request->company_id;
             $internship->update();
             return response()->json($internship, 200);
