@@ -76,7 +76,9 @@ class StudentCollectionController extends Controller
             $studentCollection->start_date = $request->start_date;
             $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
-            $studentCollection->students()->sync($request->students);
+            if($request->has('students')) {
+                $studentCollection->students()->sync($request->students);
+            }
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
