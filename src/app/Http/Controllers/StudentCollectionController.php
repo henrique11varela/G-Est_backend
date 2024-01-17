@@ -28,7 +28,7 @@ class StudentCollectionController extends Controller
                 $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $studentCollections = $studentCollectionsQuery->with(['course', 'students'])->paginate($quantity);
+            $studentCollections = $studentCollectionsQuery->paginate($quantity);
             return response()->json($studentCollections, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -76,7 +76,9 @@ class StudentCollectionController extends Controller
             $studentCollection->start_date = $request->start_date;
             $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
-            $studentCollection->students()->sync($request->students);
+            if (request()->has("students")) {
+                $studentCollection->students()->sync($request->students);
+            }
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
