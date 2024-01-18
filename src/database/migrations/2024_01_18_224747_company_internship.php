@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_collections', function (Blueprint $table) {
+
+        Schema::create('company_internship', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('course_id')->constrained();
+            $table->foreignId('company_id')->constrained();
+            $table->foreignId('internship_id')->constrained();
+            $table->enum('status', ['Aceite', 'Em Colocação', 'Não Aceite'])->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_collections');
+        //
     }
 };
