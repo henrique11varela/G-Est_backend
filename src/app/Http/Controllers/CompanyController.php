@@ -75,7 +75,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $company->with('companyPeople');
+        $company->load('companyPeople');
         try {
             return response()->json($company, 200);
         } catch (\Exception $e) {
