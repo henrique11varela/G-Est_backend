@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained();
             $table->string('description');
             $table->string('address');
+            $table->string('postal_code');
             $table->timestamps();
         });
     }
