@@ -23,7 +23,6 @@ class StoreStudentCollectionRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'start_date' => 'required',
             'course_id' => 'required',
         ];
     }
