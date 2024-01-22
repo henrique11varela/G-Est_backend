@@ -19,6 +19,7 @@ class EndedInternshipFactory extends Factory
         return [
             'internship_id' => $this->faker->unique()->numberBetween(1,10),
             'end_state_id' => $this->faker->unique()->numberBetween(1,2),
+            'end_date' => $this->faker->date('Y_m_d'),
             'reason' => $this->faker->randomElement(['Completo', 'Desistência', 'Expulsão', 'Troca']),
             'is_working_there' => $this->faker->numberBetween(0,1),
         ];
