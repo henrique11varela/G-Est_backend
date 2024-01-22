@@ -56,6 +56,8 @@ class StudentController extends Controller
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
             $student->address = $request->address;
+            $student->soft_skills = $request->soft_skills;
+            $student->hard_skills = $request->hard_skills;
             $student->save();
             return response()->json($student, 201);
         } catch (\Exception $exception) {
@@ -91,6 +93,8 @@ class StudentController extends Controller
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
             $student->address = $request->address;
+            $student->soft_skills = $request->soft_skills;
+            $student->hard_skills = $request->hard_skills;
             $student->save();
             return response()->json($student, 200);
         } catch (\Exception $exception) {
