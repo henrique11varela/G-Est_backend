@@ -22,8 +22,8 @@ class CourseController extends Controller
             if (request()->has("name") && request()->name != "") {
                 $coursesQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("course_type_id") && request()->course_type_id != "") {
-                $coursesQuery->where("course_type_id", "like", "%" . request()->course_type_id . "%");
+            if (request()->has("type") && request()->type != "") {
+                $coursesQuery->where("type", "like", "%" . request()->type . "%");
             }
             if (request()->has("area_id") && request()->area_id != "") {
                 $coursesQuery->where("area_id", "like", "%" . request()->area_id . "%");
@@ -37,14 +37,6 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCourseRequest $request)
@@ -55,7 +47,7 @@ class CourseController extends Controller
 
             $course->name = $request->name;
             $course->area_id = $request->area_id;
-            $course->course_type_id = $request->course_type_id;
+            $course->type = $request->type;
             $course->save();
             return response()->json($course, 200);
         } catch (\Exception $e) {
@@ -76,13 +68,6 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Course $course)
-    {
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateCourseRequest $request, Course $course)
@@ -90,7 +75,7 @@ class CourseController extends Controller
         try {
             $course->name = $request->name;
             $course->area_id = $request->area_id;
-            $course->course_type_id = $request->course_type_id;
+            $course->type = $request->type;
             return response()->json($course, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

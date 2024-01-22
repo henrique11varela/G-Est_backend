@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('course_type_id')->constrained();
+            $table->enum('type', ['CA', 'EFA', 'CET']);
             $table->foreignId('area_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

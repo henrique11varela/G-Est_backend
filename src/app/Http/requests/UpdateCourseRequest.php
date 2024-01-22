@@ -25,7 +25,7 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'course_type_id' => 'required',
+            'type' => 'required',
             'area_id' => 'required',
         ];
     }
