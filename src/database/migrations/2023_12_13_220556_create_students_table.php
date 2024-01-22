@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('personal_email')->nullable();
             $table->string('atec_email')->nullable();
             $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

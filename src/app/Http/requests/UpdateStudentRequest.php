@@ -26,6 +26,7 @@ class UpdateStudentRequest extends FormRequest
             'personal_email' => ['required', 'email'],
             'atec_email' => ['required', 'email'],
             'phone_number' => ['required'],
+            'address' => ['required'],
         ];
     }
 }

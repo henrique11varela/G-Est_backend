@@ -21,9 +21,6 @@ class StudentCollectionController extends Controller
             if (request()->has("name") && request()->name != "") {
                 $studentCollectionsQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("start_date") && request()->start_date != "") {
-                $studentCollectionsQuery->where("start_date", "like", "%" . request()->start_date . "%");
-            }
             if (request()->has("course_id") && request()->course_id != "") {
                 $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
             }
@@ -43,7 +40,6 @@ class StudentCollectionController extends Controller
         try {
             $studentCollection = new StudentCollection();
             $studentCollection->name = $request->name;
-            $studentCollection->start_date = $request->start_date;
             $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
             $studentCollection->students()->sync($request->students);
@@ -73,7 +69,6 @@ class StudentCollectionController extends Controller
     {
         try {
             $studentCollection->name = $request->name;
-            $studentCollection->start_date = $request->start_date;
             $studentCollection->course_id = $request->course_id;
             $studentCollection->save();
             if($request->has('students')) {

@@ -30,6 +30,9 @@ class StudentController extends Controller
             if (request()->has("phone_number") && request()->phone_number != "") {
                 $studentsQuery->where("phone_number","like","%". request()->phone_number ."%");
             }
+            if (request()->has("address") && request()->address != "") {
+                $studentsQuery->where("address","like","%". request()->address ."%");
+            }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $students = $studentsQuery->with(['internships', 'studentCollections'])->paginate($quantity);
 
@@ -52,6 +55,7 @@ class StudentController extends Controller
             $student->personal_email = $request->personal_email;
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
+            $student->address = $request->address;
             $student->save();
             return response()->json($student, 201);
         } catch (\Exception $exception) {
@@ -86,6 +90,7 @@ class StudentController extends Controller
             $student->personal_email = $request->personal_email;
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
+            $student->address = $request->address;
             $student->save();
             return response()->json($student, 200);
         } catch (\Exception $exception) {
