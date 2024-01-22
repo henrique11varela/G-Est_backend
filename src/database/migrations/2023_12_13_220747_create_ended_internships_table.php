@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('end_state_id')->constrained();
             $table->timestamp('end_date');
             $table->boolean('is_working_there');
+            $table->enum('reason', ['Completo', 'Desistência', 'Expulsão', 'Troca']);
             $table->timestamps();
             $table->softDeletes();
             //*****OTHERSTUFF*****
