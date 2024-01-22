@@ -11,7 +11,7 @@ class UpdateCompanyAddressRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateCompanyAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'company_id' => 'required',
+            'address' => 'required',
+            'name' => 'required',
         ];
     }
 }
