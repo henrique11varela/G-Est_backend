@@ -17,9 +17,4 @@ class EndedInternship extends Model
     {
         return $this->belongsTo(Internship::class);
     }
-
-    public function endState(): BelongsTo
-    {
-        return $this->belongsTo(EndState::class);
-    }
 }

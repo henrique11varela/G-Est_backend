@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AreaSeeder::class,
-            CourseTypeSeeder::class,
             CourseSeeder::class,
             StudentSeeder::class,
             StudentCollectionSeeder::class,
@@ -24,7 +23,6 @@ class DatabaseSeeder extends Seeder
             CompanyPersonSeeder::class,
             InternshipSeeder::class,
 
-            EndStateSeeder::class,
             EndedInternshipSeeder::class,
 
             ApplicationSeeder::class,
