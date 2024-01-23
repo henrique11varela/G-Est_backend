@@ -18,9 +18,9 @@ services:
       - ./src:/var/www/html:delegated
     depends_on:
       - php
-      - redis
+      # - redis
       - mysql
-      - mailhog
+      # - mailhog
       - phpmyadmin
     networks:
       - laravel
@@ -57,13 +57,13 @@ services:
     networks:
       - laravel
 
-  redis:
-    image: redis:alpine
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    networks:
-      - laravel
+  # redis:
+  #   image: redis:alpine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - laravel
 
   composer:
     build:
@@ -108,13 +108,13 @@ services:
     networks:
       - laravel
 
-  mailhog:
-    image: mailhog/mailhog:latest
-    ports:
-      - "1025:1025"
-      - "8025:8025"
-    networks:
-      - laravel
+  # mailhog:
+  #   image: mailhog/mailhog:latest
+  #   ports:
+  #     - "1025:1025"
+  #     - "8025:8025"
+  #   networks:
+  #     - laravel
 
   phpmyadmin:
     image: phpmyadmin
