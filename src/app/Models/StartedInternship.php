@@ -24,4 +24,9 @@ class StartedInternship extends Model
     {
         return $this->belongsTo(CompanyPerson::class);
     }
+
+    public function companyAddress(): BelongsTo
+    {
+        return $this->belongsTo(CompanyAddress::class);
+    }
 }

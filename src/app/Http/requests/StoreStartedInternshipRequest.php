@@ -22,7 +22,11 @@ class StoreStartedInternshipRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'internship_id' => 'required',
+            'start_date' => 'required',
+            // 'meal_allowance' => 'required',
+            // 'company_address_id' => 'required',
+            // 'company_person_id' => 'required',
         ];
     }
 }
