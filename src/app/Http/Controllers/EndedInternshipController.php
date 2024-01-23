@@ -13,15 +13,26 @@ class EndedInternshipController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $endedInternshipsQuery = EndedInternship::with("internship")->select("*");
+            // if (request()->has("id")) {
+            //     $internshipsQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("reason") && request()->reason != "") {
+                $endedInternshipsQuery->where("reason", "like", "%" . request()->reason . "%");
+            }
+            if (request()->has("end_date") && request()->end_date != "") {
+                $endedInternshipsQuery->where("end_date", "like", "%" . request()->end_date . "%");
+            }
+            if (request()->has("is_working_there") && request()->is_working_there != "") {
+                $endedInternshipsQuery->where("is_working_there", "=", request()->is_working_there);
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $endedInternships = $endedInternshipsQuery->paginate($quantity);
+            return response()->json($endedInternships, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -29,7 +40,19 @@ class EndedInternshipController extends Controller
      */
     public function store(StoreEndedInternshipRequest $request)
     {
-        //
+        try {
+            $endedInternship = new EndedInternship();
+            $endedInternship->internship_id = $request->internship_id;
+            $endedInternship->reason = $request->reason;
+            $endedInternship->end_date = $request->end_date;
+            if ($request->has('is_working_there') && $request->is_working_there != "") {
+                $endedInternship->is_working_there = $request->is_working_there;
+            }
+            $endedInternship->save();
+            return response()->json($endedInternship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -37,15 +60,12 @@ class EndedInternshipController extends Controller
      */
     public function show(EndedInternship $endedInternship)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(EndedInternship $endedInternship)
-    {
-        //
+        try {
+            $endedInternship = $endedInternship->load("internship");
+            return response()->json($endedInternship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -53,7 +73,18 @@ class EndedInternshipController extends Controller
      */
     public function update(UpdateEndedInternshipRequest $request, EndedInternship $endedInternship)
     {
-        //
+        try {
+            // $endedInternship->internship_id = $request->internship_id;
+            $endedInternship->reason = $request->reason;
+            $endedInternship->end_date = $request->end_date;
+            if ($request->has('is_working_there') && $request->is_working_there != "") {
+                $endedInternship->is_working_there = $request->is_working_there;
+            }
+            $endedInternship->save();
+            return response()->json($endedInternship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -61,6 +92,11 @@ class EndedInternshipController extends Controller
      */
     public function destroy(EndedInternship $endedInternship)
     {
-        //
+        try {
+            $endedInternship->delete();
+            return response()->json(array('success' => 'Delete success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 }
