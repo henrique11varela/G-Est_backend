@@ -24,11 +24,9 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required",
-            "address" => "required",
-            "postcode" => "required",
-            "niss" => "required",
-            "nipc" => "required",
+            "name" => ["required"],
+            "niss" => ["required"],
+            "nipc" => ["required"],
         ];
     }
 }

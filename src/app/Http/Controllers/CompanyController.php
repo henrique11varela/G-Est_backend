@@ -22,12 +22,6 @@ class CompanyController extends Controller
             if (request()->has("name") && request()->name != "") {
                 $companiesQuery->where("name", "like", "%" . request()->name . "%");
             }
-            if (request()->has("address") && request()->address != "") {
-                $companiesQuery->where("address", "like", "%" . request()->address . "%");
-            }
-            if (request()->has("postcode") && request()->postcode != "") {
-                $companiesQuery->where("postcode", "like", "%" . request()->postcode . "%");
-            }
             if (request()->has("niss") && request()->niss != "") {
                 $companiesQuery->where("niss", "like", "%" . request()->niss . "%");
             }
@@ -58,8 +52,6 @@ class CompanyController extends Controller
         try {
             $company = new Company();
             $company->name = $request->name;
-            $company->address = $request->address;
-            $company->postcode = $request->postcode;
             $company->niss = $request->niss;
             $company->nipc = $request->nipc;
 
@@ -98,8 +90,6 @@ class CompanyController extends Controller
     {
         try {
             $company->name = $request->name;
-            $company->address = $request->address;
-            $company->postcode = $request->postcode;
             $company->niss = $request->niss;
             $company->nipc = $request->nipc;
             $company->update();
