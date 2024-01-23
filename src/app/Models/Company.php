@@ -24,7 +24,8 @@ class Company extends Model
     {
         return $this->hasMany(CompanyPerson::class);
     }
-    public function companyAddress(): HasMany
+
+    public function companyAddresses(): HasMany
     {
         return $this->hasMany(CompanyAddress::class);
     }
@@ -33,13 +34,14 @@ class Company extends Model
     {
         return $this->hasMany(Application::class);
     }
+
     public function contactPeople()
     {
         return $this->companyPeople()->where('is_contact', '=', 1);
     }
+
     public function tutorPeople()
     {
-
         return $this->companyPeople()->where('is_tutor', '=', 1);
     }
 }

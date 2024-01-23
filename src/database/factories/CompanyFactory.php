@@ -18,8 +18,6 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'address' => $this->faker->address,
-            'postcode'=> $this->faker->postcode,
             'niss' => $this->faker->randomDigit,
             'nipc'=> $this->faker->randomDigit,
         ];

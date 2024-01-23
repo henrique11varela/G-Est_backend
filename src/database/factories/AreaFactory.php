@@ -18,7 +18,7 @@ class AreaFactory extends Factory
     {
         return [
             "name"=> $this->faker->colorName,
-            "area_code" => $this->faker->randomDigit(4),
+            "area_code" => $this->faker->numberBetween(1, 4),
         ];
     }
 }

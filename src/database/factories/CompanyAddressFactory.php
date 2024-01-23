@@ -17,7 +17,10 @@ class CompanyAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'company_id' => $this->faker->numberBetween(1, 10),
+            'description' => $this->faker->text,
+            'postal_code' => $this->faker->postcode,
+            'address' => $this->faker->address,
         ];
     }
 }
