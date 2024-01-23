@@ -15,7 +15,7 @@ class CompanyController extends Controller
     {
         try {
 
-            $companiesQuery = Company::with('companyPeople', 'contactPeople', 'tutorPeople', 'companyAddress');
+            $companiesQuery = Company::with('companyPeople', 'contactPeople', 'tutorPeople', 'companyAddresses');
             // if (request()->has("id")) {
             //     $companiesQuery->where("id", "like", request()->id);
             // }
@@ -75,7 +75,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $company->load('companyPeople', 'companyAddress');
+        $company->load('companyPeople', 'companyAddresses');
         try {
             return response()->json($company, 200);
         } catch (\Exception $e) {

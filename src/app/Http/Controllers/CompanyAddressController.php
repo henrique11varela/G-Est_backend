@@ -27,7 +27,7 @@ class CompanyController extends Controller
             }
 
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $companyAddresses = $companyAddressesQuery\->paginate($quantity);
+            $companyAddresses = $companyAddressesQuery->paginate($quantity);
             return response()->json($companyAddresses, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
