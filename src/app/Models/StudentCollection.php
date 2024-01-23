@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class StudentCollection extends Model
 {
@@ -24,6 +25,11 @@ class StudentCollection extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function internships(): hasMany
+    {
+        return $this->hasMany(Internship::class);
+    }
+
     protected $guarded = ['id','created_at', 'updated_at', 'deleted_at'];
-    
+
 }

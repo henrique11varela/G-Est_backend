@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ended_internships', function (Blueprint $table) {
+        Schema::create('started_internships', function (Blueprint $table) {
             $table->foreignId('internship_id')->constrained();
             $table->primary('internship_id');
-            $table->enum('reason', ['Completo', 'Desistência', 'Expulsão', 'Troca']);
-            $table->timestamp('end_date');
-            $table->boolean('is_working_there');
+            $table->boolean('meal_allowance');
+            $table->timestamp('start_date');
+            $table->foreignId('company_address_id')->constrained();
+            $table->foreignId('company_person_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
-            //*****OTHERSTUFF*****
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ended_internships');
+        Schema::dropIfExists('started_internships');
     }
 };

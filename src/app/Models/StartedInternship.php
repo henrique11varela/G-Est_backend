@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EndedInternship extends Model
+class StartedInternship extends Model
 {
     use HasFactory;
 
@@ -18,5 +18,10 @@ class EndedInternship extends Model
     public function internship(): BelongsTo
     {
         return $this->belongsTo(Internship::class);
+    }
+
+    public function companyPerson(): BelongsTo
+    {
+        return $this->belongsTo(CompanyPerson::class);
     }
 }

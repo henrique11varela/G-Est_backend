@@ -14,13 +14,8 @@ return new class extends Migration
         Schema::create('internships', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained();
-            $table->boolean('meal_allowance');
-            $table->timestamp('start_date');
-            $table->string('address');
-            $table->string('postcode');
+            $table->foreignId('student_collection_id')->constrained();
             $table->string('observations');
-            $table->foreignId('company_person_id')->constrained();
-            $table->foreignId('company_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -28,6 +28,6 @@ class CompanyPerson extends Model
 
     public function internships(): HasMany
     {
-        return $this->hasMany(Internship::class);
+        return $this->hasMany(StartedInternship::class);
     }
 }
