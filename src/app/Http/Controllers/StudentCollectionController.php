@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentCollectionRequest;
 use App\Http\Requests\UpdateStudentCollectionRequest;
 use App\Models\StudentCollection;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class StudentCollectionController extends Controller
 {
@@ -55,7 +56,9 @@ class StudentCollectionController extends Controller
     public function show(StudentCollection $studentCollection)
     {
         try {
-            $studentCollection->load('course', 'students');
+            $studentCollection->load(['course', 'students.internships' => function (Builder $query) use ($studentCollection) {
+                $query->where('student_collection_id', $studentCollection->id);
+            }, 'students.internships.endedInternship']);
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
