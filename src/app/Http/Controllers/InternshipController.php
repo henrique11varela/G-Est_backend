@@ -59,14 +59,14 @@ class InternshipController extends Controller
         try {
             $internship = new Internship();
             $internship->student_id = $request->student_id;
-            $internship->meal_allowance = $request->meal_allowance;
-            $internship->start_date = $request->start_date;
-            $internship->address = $request->address;
-            $internship->postcode = $request->postcode;
+            $internship->student_collection_id = $request->student_collection_id;
             $internship->observations = $request->observations;
-            $internship->company_person_id = $request->company_person_id;
-            $internship->company_id = $request->company_id;
+            $companiesArray = [];
+            foreach ($request->companies as $company) {
+                $companiesArray[$company['id']] = ['status' => $company['status']];
+            }
             $internship->save();
+            $internship->companies()->sync($companiesArray);
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -79,7 +79,7 @@ class InternshipController extends Controller
     public function show(Internship $internship)
     {
         try {
-            $internship = $internship->load("student", "companyPerson", "company.tutorPeople");
+            $internship = $internship->load("startedInternship", "endedInternship", "student", "companies");
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -93,14 +93,14 @@ class InternshipController extends Controller
     {
         try {
             $internship->student_id = $request->student_id;
-            $internship->meal_allowance = $request->meal_allowance;
-            $internship->start_date = $request->start_date;
-            $internship->address = $request->address;
-            $internship->postcode = $request->postcode;
+            $internship->student_collection_id = $request->student_collection_id;
             $internship->observations = $request->observations;
-            $internship->company_person_id = $request->company_person_id;
-            $internship->company_id = $request->company_id;
-            $internship->update();
+            $companiesArray = [];
+            foreach ($request->companies as $company) {
+                $companiesArray[$company['id']] = ['status' => $company['status']];
+            }
+            $internship->save();
+            $internship->companies()->sync($companiesArray);
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

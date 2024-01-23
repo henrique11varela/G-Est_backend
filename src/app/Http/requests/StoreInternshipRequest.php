@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
 class StoreInternshipRequest extends FormRequest
 {
     /**
@@ -24,12 +25,9 @@ class StoreInternshipRequest extends FormRequest
     {
         return [
             'student_id' => 'required',
-            'meal_allowance' => 'required',
-            'start_date' => 'required',
-            'address' => 'required',
-            'postcode' => 'required',
-            'company_person_id' => 'required',
-            'company_id' => 'required',
+            'student_collection_id' => 'required',
+            'observations' => 'required',
+            'companies' => 'required'
         ];
     }
 
