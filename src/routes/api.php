@@ -5,6 +5,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyPersonController;
+use App\Http\Controllers\CompanyAddressController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseTypeController;
 use App\Http\Controllers\EndedInternshipController;
@@ -61,7 +62,13 @@ Route::prefix('v1')->group(function () {
             Route::put('{company}', [CompanyController::class, 'update']);
             Route::delete('{company}', [CompanyController::class, 'destroy']);
         });
-
+        Route::prefix('companyaddresses')->group(function () {
+            Route::get('', [CompanyAddressController::class, 'index']);
+            Route::post('', [CompanyAddressController::class, 'store']);
+            Route::get('{companyAddress}', [CompanyAddressController::class, 'show']);
+            Route::put('{companyAddress}', [CompanyAddressController::class, 'update']);
+            Route::delete('{companyAddress}', [CompanyAddressController::class, 'destroy']);
+        });
         Route::prefix('companypeople')->group(function () {
             Route::get('', [CompanyPersonController::class, 'index']);
             Route::post('', [CompanyPersonController::class, 'store']);
