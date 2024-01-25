@@ -25,12 +25,9 @@ class UpdateInternshipRequest extends FormRequest
     {
         return [
             'student_id' => 'required',
-            'meal_allowance' => 'required',
-            'start_date' => 'required',
-            'address' => 'required',
-            'postcode' => 'required',
-            'company_person_id' => 'required',
-            'company_id' => 'required',
+            'student_collection_id' => 'required',
+            'observations' => 'required',
+            'companies' => 'required'
         ];
     }
 

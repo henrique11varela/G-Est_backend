@@ -13,15 +13,29 @@ class StartedInternshipController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $startedInternshipsQuery = StartedInternship::with("companyPerson", "companyAddress", "internship")->select("*");
+            // if (request()->has("id")) {
+            //     $internshipsQuery->where("id", "=", request()->id);
+            // }
+            if (request()->has("start_date") && request()->start_date != "") {
+                $startedInternshipsQuery->where("start_date", "like", "%" . request()->start_date . "%");
+            }
+            if (request()->has("meal_allowance") && request()->meal_allowance != "") {
+                $startedInternshipsQuery->where("meal_allowance", "=", request()->meal_allowance);
+            }
+            if (request()->has("company_address_id") && request()->company_address_id != "") {
+                $startedInternshipsQuery->where("company_address_id", "=", request()->company_address_id);
+            }
+            if (request()->has("company_person_id") && request()->company_person_id != "") {
+                $startedInternshipsQuery->where("company_person_id", "=", request()->company_person_id);
+            }
+            $quantity = isset(request()->quantity) ? request()->quantity : 15;
+            $startedInternships = $startedInternshipsQuery->paginate($quantity);
+            return response()->json($startedInternships, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -29,7 +43,24 @@ class StartedInternshipController extends Controller
      */
     public function store(StoreStartedInternshipRequest $request)
     {
-        //
+        try {
+            $startedInternship = new StartedInternship();
+            $startedInternship->internship_id = $request->internship_id;
+            $startedInternship->start_date = $request->start_date;
+            if ($request->has('meal_allowance')&& $request->meal_allowance != "") {
+                $startedInternship->meal_allowance = $request->meal_allowance;
+            }
+            if ($request->has('company_address_id')&& $request->company_address_id != "") {
+                $startedInternship->company_address_id = $request->company_address_id;
+            }
+            if ($request->has('company_person_id')&& $request->company_person_id != "") {
+                $startedInternship->company_person_id = $request->company_person_id;
+            }
+            $startedInternship->save();
+            return response()->json($startedInternship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -37,15 +68,12 @@ class StartedInternshipController extends Controller
      */
     public function show(StartedInternship $startedInternship)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(StartedInternship $startedInternship)
-    {
-        //
+        try {
+            $startedInternship = $startedInternship->load("companyPerson", "companyAddress", "internship");
+            return response()->json($startedInternship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -53,7 +81,23 @@ class StartedInternshipController extends Controller
      */
     public function update(UpdateStartedInternshipRequest $request, StartedInternship $startedInternship)
     {
-        //
+        try {
+            // $startedInternship->internship_id = $request->internship_id;
+            $startedInternship->start_date = $request->start_date;
+            if ($request->has('meal_allowance')&& $request->meal_allowance != "") {
+                $startedInternship->meal_allowance = $request->meal_allowance;
+            }
+            if ($request->has('company_address_id')&& $request->company_address_id != "") {
+                $startedInternship->company_address_id = $request->company_address_id;
+            }
+            if ($request->has('company_person_id')&& $request->company_person_id != "") {
+                $startedInternship->company_person_id = $request->company_person_id;
+            }
+            $startedInternship->save();
+            return response()->json($startedInternship, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 
     /**
@@ -61,6 +105,11 @@ class StartedInternshipController extends Controller
      */
     public function destroy(StartedInternship $startedInternship)
     {
-        //
+        try {
+            $startedInternship->delete();
+            return response()->json(array('success' => 'Delete success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => "failed:" . $e], 500);
+        }
     }
 }

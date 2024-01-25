@@ -22,7 +22,11 @@ class UpdateStartedInternshipRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'internship_id' => 'required',
+            // 'meal_allowance' => 'required',
+            // 'start_date' => 'required',
+            // 'company_address_id' => 'required',
+            // 'company_person_id' => 'required',
         ];
     }
 }

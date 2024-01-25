@@ -11,7 +11,7 @@ class StoreEndedInternshipRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreEndedInternshipRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'internship_id' => 'required',
+            'reason' => 'required',
+            'end_date' => 'required',
         ];
     }
 }

@@ -6,8 +6,9 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyPersonController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\CourseTypeController;
+// use App\Http\Controllers\CourseTypeController;
 use App\Http\Controllers\EndedInternshipController;
+use App\Http\Controllers\StartedInternshipController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\StudentCollectionController;
 use App\Http\Controllers\StudentController;
@@ -78,13 +79,13 @@ Route::prefix('v1')->group(function () {
             Route::delete('{course}', [CourseController::class, 'destroy']);
         });
 
-        Route::prefix('coursetypes')->group(function () {
-            Route::get('', [CourseTypeController::class, 'index']);
-            Route::post('', [CourseTypeController::class, 'store']);
-            Route::get('{courseType}', [CourseTypeController::class, 'show']);
-            Route::put('{courseType}', [CourseTypeController::class, 'update']);
-            Route::delete('{courseType}', [CourseTypeController::class, 'destroy']);
-        });
+        // Route::prefix('coursetypes')->group(function () {
+        //     Route::get('', [CourseTypeController::class, 'index']);
+        //     Route::post('', [CourseTypeController::class, 'store']);
+        //     Route::get('{courseType}', [CourseTypeController::class, 'show']);
+        //     Route::put('{courseType}', [CourseTypeController::class, 'update']);
+        //     Route::delete('{courseType}', [CourseTypeController::class, 'destroy']);
+        // });
 
         Route::prefix('endedinternships')->group(function () {
             Route::get('', [EndedInternshipController::class, 'index']);
@@ -92,6 +93,14 @@ Route::prefix('v1')->group(function () {
             Route::get('{endedInternship}', [EndedInternshipController::class, 'show']);
             Route::put('{endedInternship}', [EndedInternshipController::class, 'update']);
             Route::delete('{endedInternship}', [EndedInternshipController::class, 'destroy']);
+        });
+
+        Route::prefix('startedinternships')->group(function () {
+            Route::get('', [StartedInternshipController::class, 'index']);
+            Route::post('', [StartedInternshipController::class, 'store']);
+            Route::get('{startedInternship}', [StartedInternshipController::class, 'show']);
+            Route::put('{startedInternship}', [StartedInternshipController::class, 'update']);
+            Route::delete('{startedInternship}', [StartedInternshipController::class, 'destroy']);
         });
 
         Route::prefix('internships')->group(function () {

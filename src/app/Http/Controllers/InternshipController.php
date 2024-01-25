@@ -15,33 +15,18 @@ class InternshipController extends Controller
     {
         try {
 
-            $internshipsQuery = Internship::with("student", "companyPerson", "company")->select("*");
+            $internshipsQuery = Internship::with("startedInternship", "endedInternship", "student", "companies")->select("*");
             // if (request()->has("id")) {
             //     $internshipsQuery->where("id", "=", request()->id);
             // }
             if (request()->has("student_id") && request()->student_id != "") {
                 $internshipsQuery->where("student_id", "like", "%" . request()->student_id . "%");
             }
-            if (request()->has("meal_allowance") && request()->meal_allowance != "") {
-                $internshipsQuery->where("meal_allowance", "like", "%" . request()->meal_allowance . "%");
-            }
-            if (request()->has("start_date") && request()->start_date != "") {
-                $internshipsQuery->where("start_date", "like", "%" . request()->start_date . "%");
-            }
-            if (request()->has("address") && request()->address != "") {
-                $internshipsQuery->where("address", "like", "%" . request()->address . "%");
-            }
-            if (request()->has("postcode") && request()->postcode != "") {
-                $internshipsQuery->where("postcode", "like", "%" . request()->postcode . "%");
+            if (request()->has("student_collection_id") && request()->student_collection_id != "") {
+                $internshipsQuery->where("student_collection_id", "like", "%" . request()->student_collection_id . "%");
             }
             if (request()->has("observations") && request()->observations != "") {
                 $internshipsQuery->where("observations", "like", "%" . request()->observations . "%");
-            }
-            if (request()->has("tutor_id") && request()->tutor_id != "") {
-                $internshipsQuery->where("tutor_id", "like", "%" . request()->tutor_id . "%");
-            }
-            if (request()->has("company_id") && request()->company_id != "") {
-                $internshipsQuery->where("company_id", "like", "%" . request()->company_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $internships = $internshipsQuery->paginate($quantity);
@@ -59,14 +44,14 @@ class InternshipController extends Controller
         try {
             $internship = new Internship();
             $internship->student_id = $request->student_id;
-            $internship->meal_allowance = $request->meal_allowance;
-            $internship->start_date = $request->start_date;
-            $internship->address = $request->address;
-            $internship->postcode = $request->postcode;
+            $internship->student_collection_id = $request->student_collection_id;
             $internship->observations = $request->observations;
-            $internship->company_person_id = $request->company_person_id;
-            $internship->company_id = $request->company_id;
+            $companiesArray = [];
+            foreach ($request->companies as $company) {
+                $companiesArray[$company['id']] = ['status' => $company['status']];
+            }
             $internship->save();
+            $internship->companies()->sync($companiesArray);
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -79,7 +64,7 @@ class InternshipController extends Controller
     public function show(Internship $internship)
     {
         try {
-            $internship = $internship->load("student", "companyPerson", "company.tutorPeople");
+            $internship = $internship->load("startedInternship", "endedInternship", "student", "companies");
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -93,14 +78,14 @@ class InternshipController extends Controller
     {
         try {
             $internship->student_id = $request->student_id;
-            $internship->meal_allowance = $request->meal_allowance;
-            $internship->start_date = $request->start_date;
-            $internship->address = $request->address;
-            $internship->postcode = $request->postcode;
+            $internship->student_collection_id = $request->student_collection_id;
             $internship->observations = $request->observations;
-            $internship->company_person_id = $request->company_person_id;
-            $internship->company_id = $request->company_id;
-            $internship->update();
+            $companiesArray = [];
+            foreach ($request->companies as $company) {
+                $companiesArray[$company['id']] = ['status' => $company['status']];
+            }
+            $internship->save();
+            $internship->companies()->sync($companiesArray);
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

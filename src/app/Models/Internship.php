@@ -14,7 +14,14 @@ class Internship extends Model
     use HasFactory;
 
     use SoftDeletes;
+
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
+
+    public function startedInternship(): HasOne
+    {
+        return $this->hasOne(StartedInternship::class);
+    }
+
     public function endedInternship(): HasOne
     {
         return $this->hasOne(EndedInternship::class);
