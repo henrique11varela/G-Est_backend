@@ -32,6 +32,11 @@ class Internship extends Model
         return $this->belongsTo(Student::class);
     }
 
+    public function studentCollection(): BelongsTo
+    {
+        return $this->belongsTo(StudentCollection::class);
+    }
+
     public function companies(): BelongsToMany
     {
         return $this->belongsToMany(Company::class);

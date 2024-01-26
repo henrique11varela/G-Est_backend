@@ -15,21 +15,22 @@ class InternshipController extends Controller
     {
         try {
 
-            $internshipsQuery = Internship::with("startedInternship", "endedInternship", "student", "companies")->select("*");
+            $internshipsQuery = Internship::with("startedInternship.companyAddress", "startedInternship.companyPerson", "endedInternship", "student", "studentCollection", "companies.companyAddresses")->select("*");
             // if (request()->has("id")) {
             //     $internshipsQuery->where("id", "=", request()->id);
             // }
             if (request()->has("student_id") && request()->student_id != "") {
-                $internshipsQuery->where("student_id", "like", "%" . request()->student_id . "%");
+                $internshipsQuery->where("student_id", "=", request()->student_id);
             }
             if (request()->has("student_collection_id") && request()->student_collection_id != "") {
-                $internshipsQuery->where("student_collection_id", "like", "%" . request()->student_collection_id . "%");
+                $internshipsQuery->where("student_collection_id", "=", request()->student_collection_id);
             }
             if (request()->has("observations") && request()->observations != "") {
                 $internshipsQuery->where("observations", "like", "%" . request()->observations . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $internships = $internshipsQuery->paginate($quantity);
+            // dd($internships);
             return response()->json($internships, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -64,7 +65,7 @@ class InternshipController extends Controller
     public function show(Internship $internship)
     {
         try {
-            $internship = $internship->load("startedInternship", "endedInternship", "student", "companies");
+            $internship = $internship->load("startedInternship", "endedInternship", "studentCollection", "student", "companies.companyAddresses");
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
