@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('contact_name');
             $table->string('contact_telephone');
             $table->string('contact_email');
-            $table->string('number_students');
+            $table->integer('number_students');
             $table->string('student_profile');
             $table->string('student_tasks');
             $table->foreignId('company_id')->constrained();
             $table->boolean('is_partner');
-            $table->boolean('is_valid')->default(false);
+            //$table->boolean('is_valid')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

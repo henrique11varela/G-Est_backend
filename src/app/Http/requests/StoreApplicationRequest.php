@@ -34,7 +34,7 @@ class StoreApplicationRequest extends FormRequest
             'student_tasks' => 'required',
             'company_id' => 'required',
             'is_partner' => 'required',
-            'is_valid' => 'required',
+            //'is_valid' => 'required',
         ];
     }
 }

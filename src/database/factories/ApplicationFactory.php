@@ -30,7 +30,7 @@ class ApplicationFactory extends Factory
             'student_tasks' => $this->faker->name,
             'company_id' => $this->faker->numberBetween(1,10),
             'is_partner'=> $this->faker->numberBetween(0,1),
-            'is_valid'=> $this->faker->numberBetween(0,1),
+            //'is_valid'=> $this->faker->numberBetween(0,1),
         ];
     }
 }

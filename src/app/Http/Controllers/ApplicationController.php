@@ -17,7 +17,7 @@ class ApplicationController extends Controller
     {
         try {
 
-            $applicationsQuery = Application::select("*");
+            $applicationsQuery = Application::with("courses","company")->select("*");
             // if (request()->has("id")) {
             //     $applicationsQuery->where("id", "like", request()->id);
             // }
@@ -43,7 +43,7 @@ class ApplicationController extends Controller
                 $applicationsQuery->where("contact_email", "like", "%" . request()->contact_email . "%");
             }
             if (request()->has("number_students") && request()->number_students != "") {
-                $applicationsQuery->where("number_students", "like", "%" . request()->number_students . "%");
+                $applicationsQuery->where("number_students", "=", request()->number_students);
             }
             if (request()->has("student_profile") && request()->student_profile != "") {
                 $applicationsQuery->where("student_profile", "like", "%" . request()->student_profile . "%");
@@ -57,9 +57,9 @@ class ApplicationController extends Controller
             if (request()->has("is_partner") && request()->is_partner != "") {
                 $applicationsQuery->where("is_partner", "like", "%" . request()->is_partner . "%");
             }
-            if (request()->has("is_valid") && request()->is_valid != "") {
+            /*if (request()->has("is_valid") && request()->is_valid != "") {
                 $applicationsQuery->where("is_valid", "like", "%" . request()->is_valid . "%");
-            }
+            }*/
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $applications = $applicationsQuery->paginate($quantity);
             return response()->json($applications, 200);
@@ -89,8 +89,9 @@ class ApplicationController extends Controller
             $application->student_tasks = $request->student_tasks;
             $application->company_id = $request->company_id;
             $application->is_partner = $request->is_partner;
-            $application->is_valid = $request->is_valid;
+            //$application->is_valid = $request->is_valid;
             $application->save();
+            $application -> courses() -> sync($request->courses);
             return response()->json($application, 201);
         } catch (Exception $exception) {
             return response()->json([
@@ -105,6 +106,7 @@ class ApplicationController extends Controller
     public function show(Application $application)
     {
         try {
+            $application=$application->load('courses','company');
             return response()->json($application, 200);
         } catch (Exception $exception) {
             return response()->json([
@@ -131,8 +133,9 @@ class ApplicationController extends Controller
             $application->student_tasks = $request->student_tasks;
             $application->company_id = $request->company_id;
             $application->is_partner = $request->is_partner;
-            $application->is_valid = $request->is_valid;
+            //$application->is_valid = $request->is_valid;
             $application->save();
+            $application -> courses() -> sync($request->courses);
             return response()->json($application, 200);
         } catch (Exception $exception) {
             return response()->json([
