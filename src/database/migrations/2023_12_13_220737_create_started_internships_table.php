@@ -15,7 +15,8 @@ return new class extends Migration
             $table->foreignId('internship_id')->constrained();
             $table->primary('internship_id');
             $table->boolean('meal_allowance');
-            $table->timestamp('start_date');
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->foreignId('company_address_id')->constrained();
             $table->foreignId('company_person_id')->constrained();
             $table->timestamps();

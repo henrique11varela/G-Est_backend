@@ -15,6 +15,8 @@ class StartedInternship extends Model
 
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
+    protected $primaryKey = 'internship_id';
+
     public function internship(): BelongsTo
     {
         return $this->belongsTo(Internship::class);

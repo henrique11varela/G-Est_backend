@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained();
             $table->foreignId('internship_id')->constrained();
-            $table->enum('status', ['Aceite', 'Em Colocação', 'Não Aceite'])->nullable();
+            $table->enum('status', ['Aceite', 'Em Colocação', 'Não Aceite', 'Opção']);
             $table->timestamps();
             $table->softDeletes();
         });

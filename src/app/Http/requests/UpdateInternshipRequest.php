@@ -26,7 +26,7 @@ class UpdateInternshipRequest extends FormRequest
         return [
             'student_id' => 'required',
             'student_collection_id' => 'required',
-            'observations' => 'required',
+            // 'observations' => 'required',
             'companies' => 'required'
         ];
     }
