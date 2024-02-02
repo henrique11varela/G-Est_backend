@@ -15,7 +15,7 @@ class CourseController extends Controller
     {
         try {
 
-            $coursesQuery = Course::select("*");
+            $coursesQuery = Course::with("area")->select("*");
             // if (request()->has("id")) {
             //     $coursesQuery->where("id", "=", request()->id);
             // }
@@ -62,6 +62,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         try {
+            $course->load("area");
             return response()->json($course, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
