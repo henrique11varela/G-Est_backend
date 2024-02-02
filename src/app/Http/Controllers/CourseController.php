@@ -29,7 +29,7 @@ class CourseController extends Controller
                 $coursesQuery->where("area_id", "like", "%" . request()->area_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $courses = $coursesQuery->paginate($quantity);
+            $courses = $coursesQuery->get();
             return response()->json($courses, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
