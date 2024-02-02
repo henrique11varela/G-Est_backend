@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained();
             $table->foreignId('student_collection_id')->constrained();
-            $table->string('observations');
+            $table->string('observations')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
