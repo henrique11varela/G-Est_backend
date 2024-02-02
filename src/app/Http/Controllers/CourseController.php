@@ -15,7 +15,7 @@ class CourseController extends Controller
     {
         try {
 
-            $coursesQuery = Course::select("*");
+            $coursesQuery = Course::with("area")->select("*");
             // if (request()->has("id")) {
             //     $coursesQuery->where("id", "=", request()->id);
             // }
@@ -29,7 +29,7 @@ class CourseController extends Controller
                 $coursesQuery->where("area_id", "like", "%" . request()->area_id . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $courses = $coursesQuery->paginate($quantity);
+            $courses = $coursesQuery->get();
             return response()->json($courses, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -48,6 +48,7 @@ class CourseController extends Controller
             $course->name = $request->name;
             $course->area_id = $request->area_id;
             $course->type = $request->type;
+            $course->hourly_load = $request->hourly_load;
             $course->save();
             return response()->json($course, 200);
         } catch (\Exception $e) {
@@ -61,6 +62,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         try {
+            $course->load("area");
             return response()->json($course, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -76,6 +78,8 @@ class CourseController extends Controller
             $course->name = $request->name;
             $course->area_id = $request->area_id;
             $course->type = $request->type;
+            $course->hourly_load = $request->hourly_load;
+            $course->save();
             return response()->json($course, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);

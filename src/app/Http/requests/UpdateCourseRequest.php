@@ -27,6 +27,7 @@ class UpdateCourseRequest extends FormRequest
             'name' => 'required',
             'type' => 'required',
             'area_id' => 'required',
+            'hourly_load' => 'required'
         ];
     }
 
