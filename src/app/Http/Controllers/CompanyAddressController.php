@@ -6,7 +6,7 @@ use App\Http\Requests\StoreCompanyAddressRequest;
 use App\Http\Requests\UpdateCompanyAddressRequest;
 use App\Models\CompanyAddress;
 
-class CompanyController extends Controller
+class CompanyAddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,11 @@ class CompanyController extends Controller
     {
         try {
             $companyAddress = new CompanyAddress();
-            $companyAddress->name = $request->name;
+            $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
             $companyAddress->company_id = $request->company_id;
 
+            $companyAddress->postal_code = $request->postal_code;
             $companyAddress->save();
             return response()->json($companyAddress, 200);
         } catch (\Exception $e) {
@@ -55,11 +56,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CompanyAddress $company)
+    public function show(CompanyAddress $companyAddress)
     {
-        $company->load('companyPeople');
         try {
-            return response()->json($company, 200);
+            return response()->json($companyAddress, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
         }
@@ -71,9 +71,10 @@ class CompanyController extends Controller
     public function update(UpdateCompanyAddressRequest $request, CompanyAddress $companyAddress)
     {
         try {
-            $companyAddress->name = $request->name;
+            $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
-            $companyAddress->company_id = $request->company_id;
+            $companyAddress->address = $request->address;
+            $companyAddress->postal_code = $request->postal_code;
             $companyAddress->update();
             return response()->json($companyAddress, 200);
         } catch (\Exception $e) {
