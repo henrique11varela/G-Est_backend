@@ -14,10 +14,10 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         DB::table('courses')->insert([
-            //Aprendizagem
+            //APZ
             [
                 'name' => 'Técnico/a de Soldadura (CA)',
-                'type' => 'CA',
+                'type' => 'APZ',
                 'area_id' => 1,
                 'hourly_load' => 3500,
                 'created_at' => now(),
@@ -25,7 +25,7 @@ class CourseSeeder extends Seeder
             ],
             [
                 'name' => 'Técnico/a de Manutenção Industrial (CA)',
-                'type' => 'CA',
+                'type' => 'APZ',
                 'area_id' => 1,
                 'hourly_load' => 3500,
                 'created_at' => now(),
@@ -33,7 +33,7 @@ class CourseSeeder extends Seeder
             ],
             [
                 'name' => 'Técnico/a de Maquinação e Programação CNC (CA)',
-                'type' => 'CA',
+                'type' => 'APZ',
                 'area_id' => 1,
                 'hourly_load' => 3500,
                 'created_at' => now(),
@@ -41,7 +41,7 @@ class CourseSeeder extends Seeder
             ],
             [
                 'name' => 'Programador/a de Informática (CA)',
-                'type' => 'CA',
+                'type' => 'APZ',
                 'area_id' => 1,
                 'hourly_load' => 3500,
                 'created_at' => now(),
