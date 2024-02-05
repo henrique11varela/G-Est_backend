@@ -27,6 +27,7 @@ class UpdateCompanyRequest extends FormRequest
             "name" => ["required"],
             "niss" => ["required"],
             "nipc" => ["required"],
+            "cae" => ["required"],
         ];
     }
 
