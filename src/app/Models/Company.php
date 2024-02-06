@@ -37,7 +37,7 @@ class Company extends Model
 
     public function contactPeople()
     {
-        return $this->companyPeople()->where('is_contact', '=', 1);
+        return $this->companyPeople()->where('is_contact', '=', 1)->orderBy('id', 'desc');
     }
 
     public function tutorPeople()

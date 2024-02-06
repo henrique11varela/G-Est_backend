@@ -25,8 +25,6 @@ class StoreCompanyRequest extends FormRequest
     {
         return [
             "name" => ["required"],
-            "niss" => ["required"],
-            "nipc" => ["required"],
         ];
     }
 }

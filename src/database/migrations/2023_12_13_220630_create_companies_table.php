@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('niss');
-            $table->string('nipc');
+            $table->string('niss')->nullable();
+            $table->string('nipc')->nullable();
+            $table->string('cae')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
