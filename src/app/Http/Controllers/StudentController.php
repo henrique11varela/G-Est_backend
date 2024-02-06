@@ -56,6 +56,8 @@ class StudentController extends Controller
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
             $student->address = $request->address;
+            $student->postal_code = $request->postal_code;
+            $student->locality = $request->locality;
             $student->soft_skills = $request->soft_skills;
             $student->hard_skills = $request->hard_skills;
             $student->save();
@@ -93,6 +95,8 @@ class StudentController extends Controller
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
             $student->address = $request->address;
+            $student->postal_code = $request->postal_code;
+            $student->locality = $request->locality;
             $student->soft_skills = $request->soft_skills;
             $student->hard_skills = $request->hard_skills;
             $student->save();
