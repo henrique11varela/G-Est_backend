@@ -26,7 +26,7 @@ class AreaController extends Controller
                 $areasQuery->where("name", "like", "%" . request()->name . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $areas = $areasQuery->paginate($quantity);
+            $areas = $areasQuery->get();
             return response()->json($areas, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
