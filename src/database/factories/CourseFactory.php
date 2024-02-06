@@ -19,7 +19,7 @@ class CourseFactory extends Factory
         return [
             'name' => $this->faker->name,
             'area_id' => $this->faker->numberBetween(1,4),
-            'type' => $this->faker->randomElement(['CA', 'EFA', 'CET']),
+            'type' => $this->faker->randomElement(['APZ', 'EFA', 'CET']),
         ];
     }
 }
