@@ -6,6 +6,7 @@ use App\Models\StudentCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 
+
 class StudentCollectionsImport implements ToModel, WithUpserts
 {
     /**
@@ -15,6 +16,7 @@ class StudentCollectionsImport implements ToModel, WithUpserts
     */
     public function model(array $row)
     {
+        return null;
         return new StudentCollection([
             'name' => $row[0],
             'course_id' => $row[1],

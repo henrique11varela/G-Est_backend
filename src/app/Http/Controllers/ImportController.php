@@ -13,7 +13,7 @@ class ImportController extends Controller
     {
         try {
             if (!request()->hasFile('file')) {
-                return response()->json(["message" => "File to import does not exist"], 400);
+                return response()->json(["message" => "File to import is required"], 400);
             }
 
             Excel::import(new StudentCollectionsImport, request()->file('file'));
