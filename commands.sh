@@ -112,6 +112,10 @@ case $1 in
 		envDevFill
 		startProject
 		;;
+	# start
+	start-local)
+		php src/artisan serve
+		;;
 	# stop
 	stop)
 		stopProject
@@ -127,9 +131,22 @@ case $1 in
 				envDevFill
 				setupProject
 				;;
+			# run setup-local
+			setup-local)
+				cd src && \
+				rm -rf ./.env && \
+				cp .env.dockerless .env && \
+				composer install && \
+				cd .. && \
+				echo "local app setup"
+				;;
 			# run migrate
 			migrate)
 				migrateProject
+				;;
+			# run migrate
+			migrate-local)
+				php src/artisan migrate:fresh --seed
 				;;
 			# run ____
 			*)
