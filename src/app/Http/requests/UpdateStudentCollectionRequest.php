@@ -24,6 +24,7 @@ class UpdateStudentCollectionRequest extends FormRequest
         return [
             'name' => 'required',
             'course_id' => 'required',
+            'coordinator_id' => 'required',
         ];
     }
 }

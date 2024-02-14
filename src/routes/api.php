@@ -13,6 +13,7 @@ use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\StudentCollectionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CoordinatorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -133,6 +134,14 @@ Route::prefix('v1')->group(function () {
             Route::get('{user}', [UserController::class, 'show']);
             Route::put('{user}', [UserController::class, 'update']);
             Route::delete('{user}', [UserController::class, 'destroy']);
+        });
+
+        Route::prefix('coordinators')->group(function () {
+            Route::get('', [CoordinatorController::class, 'index']);
+            Route::post('', [CoordinatorController::class, 'store']);
+            Route::get('{coordinator}', [CoordinatorController::class, 'show']);
+            Route::put('{coordinator}', [CoordinatorController::class, 'update']);
+            Route::delete('{coordinator}', [CoordinatorController::class, 'destroy']);
         });
 
     });
