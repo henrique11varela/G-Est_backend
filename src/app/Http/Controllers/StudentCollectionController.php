@@ -56,9 +56,17 @@ class StudentCollectionController extends Controller
     public function show(StudentCollection $studentCollection)
     {
         try {
-            $studentCollection->load(['course', 'students.internships' => function (Builder $query) use ($studentCollection) {
-                $query->where('student_collection_id', $studentCollection->id);
-            }, 'students.internships.endedInternship']);
+            $studentCollection->load(
+                [
+                    'course',
+                    'students.internships' => function (Builder $query) use ($studentCollection) {
+                        $query->where('student_collection_id', $studentCollection->id);
+                    },
+                    'students.internships.companies',
+                    'students.internships.startedInternship',
+                    'students.internships.endedInternship'
+                ]
+            );
             return response()->json($studentCollection, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);

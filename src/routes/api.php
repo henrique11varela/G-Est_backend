@@ -5,6 +5,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyPersonController;
+use App\Http\Controllers\CompanyAddressController;
 use App\Http\Controllers\CourseController;
 // use App\Http\Controllers\CourseTypeController;
 use App\Http\Controllers\EndedInternshipController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\StudentCollectionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CoordinatorController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -63,7 +65,13 @@ Route::prefix('v1')->group(function () {
             Route::put('{company}', [CompanyController::class, 'update']);
             Route::delete('{company}', [CompanyController::class, 'destroy']);
         });
-
+        Route::prefix('companyaddresses')->group(function () {
+            Route::get('', [CompanyAddressController::class, 'index']);
+            Route::post('', [CompanyAddressController::class, 'store']);
+            Route::get('{companyAddress}', [CompanyAddressController::class, 'show']);
+            Route::put('{companyAddress}', [CompanyAddressController::class, 'update']);
+            Route::delete('{companyAddress}', [CompanyAddressController::class, 'destroy']);
+        });
         Route::prefix('companypeople')->group(function () {
             Route::get('', [CompanyPersonController::class, 'index']);
             Route::post('', [CompanyPersonController::class, 'store']);
@@ -142,6 +150,10 @@ Route::prefix('v1')->group(function () {
             Route::get('{coordinator}', [CoordinatorController::class, 'show']);
             Route::put('{coordinator}', [CoordinatorController::class, 'update']);
             Route::delete('{coordinator}', [CoordinatorController::class, 'destroy']);
+        });
+      
+        Route::prefix('import')->group(function () {
+            Route::post('studentcollections', [ImportController::class, 'studentCollections']);
         });
 
     });

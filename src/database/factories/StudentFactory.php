@@ -21,7 +21,9 @@ class StudentFactory extends Factory
             'personal_email'=> $this->faker->email,
             'atec_email' => $this->faker->email,
             'phone_number' => $this->faker->phoneNumber,
-            'address' => $this->faker->address,
+            'address' => $this->faker->streetAddress,
+            'postal_code' => $this->faker->postcode,
+            'locality' => $this->faker->city,
             'soft_skills' => $this->faker->randomElement(['Muito Fraco', 'Fraco', 'Razoável', 'Bom', 'Muito Bom']),
             'hard_skills' => $this->faker->randomElement(['Muito Fraco', 'Fraco', 'Razoável', 'Bom', 'Muito Bom']),
         ];

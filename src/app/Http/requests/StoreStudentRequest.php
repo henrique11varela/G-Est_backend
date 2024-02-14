@@ -27,6 +27,8 @@ class StoreStudentRequest extends FormRequest
             'atec_email' => ['required', 'email'],
             'phone_number' => ['required'],
             'address' => ['required'],
+            'postal_code' => ['required'],
+            'locality' => ['required'],
             'soft_skills' => ['required'],
             'hard_skills' => ['required'],
         ];

@@ -47,6 +47,7 @@ class StartedInternshipController extends Controller
             $startedInternship = new StartedInternship();
             $startedInternship->internship_id = $request->internship_id;
             $startedInternship->start_date = $request->start_date;
+            $startedInternship->end_date = $request->end_date;
             if ($request->has('meal_allowance')&& $request->meal_allowance != "") {
                 $startedInternship->meal_allowance = $request->meal_allowance;
             }

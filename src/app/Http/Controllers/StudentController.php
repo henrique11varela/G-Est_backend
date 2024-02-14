@@ -21,11 +21,11 @@ class StudentController extends Controller
             if (request()->has("name") && request()->name != "") {
                 $studentsQuery->where("name","like","%". request()->name ."%");
             }
-            if (request()->has("personal_email") && request()->__personal_email__ != "") {
+            if (request()->has("personal_email") && request()->personal_email != "") {
                 $studentsQuery->where("personal_email","like","%". request()->personal_email ."%");
             }
             if (request()->has("atec_email") && request()->atec_email != "") {
-                $studentsQuery->where("atec_email","like","%". request()->atec_email ."%");
+                $studentsQuery->orWhere("atec_email","like","%". request()->atec_email ."%");
             }
             if (request()->has("phone_number") && request()->phone_number != "") {
                 $studentsQuery->where("phone_number","like","%". request()->phone_number ."%");
@@ -56,6 +56,8 @@ class StudentController extends Controller
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
             $student->address = $request->address;
+            $student->postal_code = $request->postal_code;
+            $student->locality = $request->locality;
             $student->soft_skills = $request->soft_skills;
             $student->hard_skills = $request->hard_skills;
             $student->save();
@@ -93,6 +95,8 @@ class StudentController extends Controller
             $student->atec_email = $request->atec_email;
             $student->phone_number = $request->phone_number;
             $student->address = $request->address;
+            $student->postal_code = $request->postal_code;
+            $student->locality = $request->locality;
             $student->soft_skills = $request->soft_skills;
             $student->hard_skills = $request->hard_skills;
             $student->save();

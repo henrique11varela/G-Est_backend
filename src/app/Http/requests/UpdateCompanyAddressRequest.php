@@ -24,7 +24,8 @@ class UpdateCompanyAddressRequest extends FormRequest
         return [
             'company_id' => 'required',
             'address' => 'required',
-            'name' => 'required',
+            'description' => 'required',
+            'postal_code' => 'required',
         ];
     }
 }

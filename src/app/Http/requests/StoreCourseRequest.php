@@ -26,7 +26,8 @@ class StoreCourseRequest extends FormRequest
         return [
             'name' => 'required',
             'type' => 'required',
-            'area_id' => 'required'
+            'area_id' => 'required',
+            'hourly_load' => 'required'
         ];
     }
 
