@@ -14,6 +14,7 @@ use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\StudentCollectionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -140,6 +141,10 @@ Route::prefix('v1')->group(function () {
             Route::get('{user}', [UserController::class, 'show']);
             Route::put('{user}', [UserController::class, 'update']);
             Route::delete('{user}', [UserController::class, 'destroy']);
+        });
+
+        Route::prefix('import')->group(function () {
+            Route::post('studentcollections', [ImportController::class, 'studentCollections']);
         });
 
     });
