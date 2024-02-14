@@ -70,6 +70,10 @@ class CompanyAddressController extends Controller
      */
     public function update(UpdateCompanyAddressRequest $request, CompanyAddress $companyAddress)
     {
+
+        CompanyAddress::where('company_id', '=', $request->company_id)->update([
+            'hq' => false
+        ]);
         try {
             $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
