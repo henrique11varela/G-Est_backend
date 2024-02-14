@@ -19,6 +19,7 @@ class StudentCollectionFactory extends Factory
         return [
             'name' => $this->faker->name,
             'course_id' => $this->faker->numberBetween(1,12),
+            'coordinator_id' => $this->faker->numberBetween(1,10),
         ];
     }
 }
