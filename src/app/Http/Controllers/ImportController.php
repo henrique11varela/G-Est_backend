@@ -24,4 +24,23 @@ class ImportController extends Controller
             return response()->json(["message" => "failed:" . $e], 500);
         }
     }
+
+    /**
+    * @param array $requiredHeadings
+    *
+    * @return array|null
+    */
+    public function validateHeadings(array $requiredHeadings) {
+        try {
+            $errors = [];
+
+            $importedHeadings = (new HeadingRowImport)->toArray(request()->file('file'));
+
+
+            return $errors;
+
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 }
