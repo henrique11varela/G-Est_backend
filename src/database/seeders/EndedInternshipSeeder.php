@@ -12,8 +12,8 @@ class EndedInternshipSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=1; $i <= 2; $i++) {
-            \App\Models\EndedInternship::factory(1)->create(['internship_id' => $i]);
-        }
+        // for ($i=1; $i <= 2; $i++) {
+        //     \App\Models\EndedInternship::factory(1)->create(['internship_id' => $i]);
+        // }
     }
 }

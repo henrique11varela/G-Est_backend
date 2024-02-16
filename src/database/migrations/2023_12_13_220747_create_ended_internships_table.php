@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('ended_internships', function (Blueprint $table) {
             $table->foreignId('internship_id')->constrained();
             $table->primary('internship_id');
-            $table->enum('reason', ['Completo', 'Desistência', 'Expulsão', 'Troca']);
-            $table->timestamp('end_date');
-            $table->boolean('is_working_there');
+            $table->enum('reason', ['Aprovado', 'Reprovado', 'Desistente']);
+            $table->enum('situacao_prof', ['Empregado/a', 'Desempregado/a', 'Em formação (Ensino Superior ou outra)', 'Aguardar ingresso no Ensino Superior ou outra formação', 'Em processo de contratação', 'Aguardar Estágio Profissional', 'Outra', 'S/ Informação', 'Em formação - CET ATEC']);
+            $table->enum('como_obteve_emprego', ['Integração na empresa de FPCT', 'Através da ATEC', 'Criou o próprio emprego', 'Resposta a anúncio', 'Conhecimentos pessoais', 'Outra', 'Trabalhava na empresa durante a FPCT']);
             $table->timestamps();
             $table->softDeletes();
             //*****OTHERSTUFF*****

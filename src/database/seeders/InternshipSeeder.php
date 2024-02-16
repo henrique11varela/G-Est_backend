@@ -12,7 +12,7 @@ class InternshipSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Internship::factory(10)->create();
+        // \App\Models\Internship::factory(10)->create();
 
     }
 }

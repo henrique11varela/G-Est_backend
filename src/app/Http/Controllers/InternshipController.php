@@ -69,6 +69,14 @@ class InternshipController extends Controller
                 }
                 $startedInternship->save();
             }
+            if ($request->has('ended_internship') && $request->ended_internship != null) {
+                $endedInternship = new EndedInternship();
+                $endedInternship->internship_id = $internship->id;
+                $endedInternship->reason = $request->ended_internship['reason'];
+                $endedInternship->situacao_prof = $request->ended_internship['situacao_prof'];
+                $endedInternship->como_obteve_emprego = $request->ended_internship['como_obteve_emprego'];
+                $endedInternship->save();
+            }
             return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
@@ -125,6 +133,18 @@ class InternshipController extends Controller
                         $startedInternship->company_person_id = $request->started_internship['company_person_id'];
                     }
                     $startedInternship->save();
+                }
+
+                if ($request->has('ended_internship') && $request->ended_internship != null) {
+                    $endedInternship = EndedInternship::where("internship_id", "=", $internship->id)->first();
+                    if (!$endedInternship) {
+                        $endedInternship = new EndedInternship();
+                    }
+                    $endedInternship->internship_id = $internship->id;
+                    $endedInternship->reason = $request->ended_internship['reason'];
+                    $endedInternship->situacao_prof = $request->ended_internship['situacao_prof'];
+                    $endedInternship->como_obteve_emprego = $request->ended_internship['como_obteve_emprego'];
+                    $endedInternship->save();
                 }
 
                 return response()->json($internship, 200);

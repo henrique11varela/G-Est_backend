@@ -67,7 +67,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $company->load('companyPeople', 'companyAddresses');
+        $company->load('companyPeople', 'contactPeople', 'tutorPeople', 'companyAddresses');
         try {
             return response()->json($company, 200);
         } catch (\Exception $e) {
