@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('personal_email')->nullable();
-            $table->string('atec_email')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->string('address')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->string('locality')->nullable();
+            $table->string('atec_email')->unique();
+            $table->string('personal_email');
+            $table->string('phone_number');
+            $table->string('address');
+            $table->string('postal_code');
+            $table->string('locality');
             $table->enum('soft_skills', ['Muito Fraco', 'Fraco', 'Razoável', 'Bom', 'Muito Bom'])->nullable();
             $table->enum('hard_skills', ['Muito Fraco', 'Fraco', 'Razoável', 'Bom', 'Muito Bom'])->nullable();
             $table->timestamps();

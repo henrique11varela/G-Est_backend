@@ -20,7 +20,7 @@ class StudentCollection extends Model
         return $this->belongsToMany(Student::class, 'student_student_collection', 'student_collection_id', 'student_id');
     }
 
-    public function Course(): BelongsTo
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }

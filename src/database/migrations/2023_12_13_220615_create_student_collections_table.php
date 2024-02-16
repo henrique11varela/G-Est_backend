@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_collections', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->foreignId('course_id')->constrained();
             $table->foreignId('coordinator_id')->constrained()->nullable();
             $table->timestamps();
