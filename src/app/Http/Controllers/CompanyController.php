@@ -54,7 +54,7 @@ class CompanyController extends Controller
             $company->name = $request->name;
             $company->niss = $request->niss;
             $company->nipc = $request->nipc;
-
+            $company->cae = $request->cae;
             $company->save();
             return response()->json($company, 200);
         } catch (\Exception $e) {
@@ -92,6 +92,7 @@ class CompanyController extends Controller
             $company->name = $request->name;
             $company->niss = $request->niss;
             $company->nipc = $request->nipc;
+            $company->cae = $request->cae;
             $company->update();
             return response()->json($company, 200);
         } catch (\Exception $e) {
