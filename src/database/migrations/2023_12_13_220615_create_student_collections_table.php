@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->foreignId('course_id')->constrained();
-            $table->foreignId('coordinator_id')->constrained()->nullable();
+            $table->foreignId('coordinator_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();
         });
