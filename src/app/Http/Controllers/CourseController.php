@@ -48,7 +48,6 @@ class CourseController extends Controller
             $course->name = $request->name;
             $course->area_id = $request->area_id;
             $course->type = $request->type;
-            $course->hourly_load = $request->hourly_load;
             $course->save();
             return response()->json($course, 200);
         } catch (\Exception $e) {
@@ -78,7 +77,6 @@ class CourseController extends Controller
             $course->name = $request->name;
             $course->area_id = $request->area_id;
             $course->type = $request->type;
-            $course->hourly_load = $request->hourly_load;
             $course->save();
             return response()->json($course, 200);
         } catch (\Exception $e) {
