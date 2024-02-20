@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->enum('type', ['APZ', 'EFA', 'CET']);
             $table->foreignId('area_id')->constrained();
-            $table->integer('hourly_load');
             $table->timestamps();
             $table->softDeletes();
         });
