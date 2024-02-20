@@ -11,17 +11,42 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class StudentCollectionsImport implements ToCollection, WithHeadingRow
 {
-    public static $studentCollectionsHeadings = ['turma', 'nome_formando', 'email_institucional'];
+    private static $headings = [
+        'courseName' => 'curso',
+        'studentCollectionName' => 'turma',
+        'studentName' => 'nome_formando',
+        'studentStatus' => 'situacao_na_turma',
+        'address' => 'morada',
+        'postalCode' => 'codigo_postal',
+        'locality' => 'localidade_postal',
+        'personalEmail' => 'email',
+        'atecEmail' => 'email_institucional',
+        'phoneNumber' => 'telemovel',
+    ];
+
+    public static function validateHeadings($importedHeadings) {
+        try {
+            $errors = [];
+            foreach (self::$headings as $heading) {
+                if (!in_array($heading, $importedHeadings)) {
+                    array_push($errors, $heading.' column is required');
+                }
+            }
+            return $errors;
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 
     public function collection(Collection $rows)
     {
         foreach ($rows as $row)
         {
-            $course = Course::where('name', $row['curso'])->first();
+            $course = Course::where('name', $row[self::$headings['courseName']])->first();
             if (!$course) continue;
 
             $studentCollection = StudentCollection::updateOrCreate(
-                ['name' => $row['turma']],
+                ['name' => $row[self::$headings['studentCollectionName']]],
                 ['course_id' => $course->id]
             );
 
@@ -29,15 +54,15 @@ class StudentCollectionsImport implements ToCollection, WithHeadingRow
 
             $student = Student::updateOrCreate(
                 [
-                    'atec_email' => $row['email_institucional']
+                    'atec_email' => $row[self::$headings['atecEmail']]
                 ],
                 [
-                    'name' => $row['nome_formando'],
-                    'personal_email' => $row['email'],
-                    'phone_number' => $row['telemovel'],
-                    'address' => $row['morada'],
-                    'postal_code' => $row['codigo_postal'],
-                    'locality' => $row['localidade_postal'],
+                    'name' => $row[self::$headings['studentName']],
+                    'address' => $row[self::$headings['address']],
+                    'postal_code' => $row[self::$headings['postalCode']],
+                    'locality' => $row[self::$headings['locality']],
+                    'personal_email' => $row[self::$headings['personalEmail']],
+                    'phone_number' => $row[self::$headings['phoneNumber']],
                 ]
             );
 

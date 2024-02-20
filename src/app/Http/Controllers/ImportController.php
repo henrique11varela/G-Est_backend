@@ -6,6 +6,7 @@ use App\Imports\StudentCollectionsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Models\StudentCollection;
+use Maatwebsite\Excel\HeadingRowImport;
 
 class ImportController extends Controller
 {
@@ -16,31 +17,21 @@ class ImportController extends Controller
                 return response()->json(["message" => "File to import is required"], 400);
             }
 
-            Excel::import(new StudentCollectionsImport, request()->file('file'));
+            $importedHeadings = (new HeadingRowImport)->toArray(request()->file('file'));
+            $firstSheetHeadingArray = $importedHeadings[0][0];
+            $errors = StudentCollectionsImport::validateHeadings($firstSheetHeadingArray);
+            if ($errors === null) {
+                return response()->json(["message" => "Server error processing import request"], 500);
+            }
+            if (count($errors) > 0) {
+                return response()->json(['errors' => $errors], 400);
+            }
 
-            return response()->json(StudentCollection::all(), 200);
+            Excel::import(new StudentCollectionsImport, request()->file('file'));
+            return response()->json(["message" => "Import successful"], 200);
 
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
-        }
-    }
-
-    /**
-    * @param array $requiredHeadings
-    *
-    * @return array|null
-    */
-    public function validateHeadings(array $requiredHeadings) {
-        try {
-            $errors = [];
-
-            $importedHeadings = (new HeadingRowImport)->toArray(request()->file('file'));
-
-
-            return $errors;
-
-        } catch (\Exception $e) {
-            return null;
         }
     }
 }
