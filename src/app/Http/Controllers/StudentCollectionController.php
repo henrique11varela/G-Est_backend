@@ -38,6 +38,7 @@ class StudentCollectionController extends Controller
      */
     public function store(StoreStudentCollectionRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $studentCollection = new StudentCollection();
             $studentCollection->name = $request->name;
@@ -78,6 +79,7 @@ class StudentCollectionController extends Controller
      */
     public function update(UpdateStudentCollectionRequest $request, StudentCollection $studentCollection)
     {
+        $this->authorize('update', $request);
         try {
             $studentCollection->name = $request->name;
             $studentCollection->course_id = $request->course_id;
@@ -96,6 +98,7 @@ class StudentCollectionController extends Controller
      */
     public function destroy(StudentCollection $studentCollection)
     {
+        $this->authorize('destroy', $studentCollection);
         try {
             $studentCollection->delete();
             return response()->json(['message' => 'Student Collection deleted'], 200);

@@ -11,6 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', request());
         try {
             $usersQuery = User::select("*");
             // if (request()->has("id")) {
@@ -36,6 +37,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $user = new User();
             $user->name = $request->name;
@@ -55,6 +57,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
         try {
             return response()->json($user, 200);
         } catch (\Exception $exception) {
@@ -69,6 +72,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        $this->authorize('update', $request);
         try {
             $user->name = $request->name;
             $user->email = $request->email;
@@ -89,6 +93,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('update', $user);
         try {
             $user->delete();
             return response()->json([

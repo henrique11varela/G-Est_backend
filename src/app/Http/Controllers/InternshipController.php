@@ -44,6 +44,7 @@ class InternshipController extends Controller
      */
     public function store(StoreInternshipRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $internship = new Internship();
             $internship->student_id = $request->student_id;
@@ -101,6 +102,7 @@ class InternshipController extends Controller
      */
     public function update(UpdateInternshipRequest $request, Internship $internship)
     {
+        $this->authorize('update', $request);
         try {
             $endedInternship = EndedInternship::where("internship_id", "=", $internship->id)->first();
             if (!$endedInternship) {
@@ -159,6 +161,7 @@ class InternshipController extends Controller
      */
     public function destroy(Internship $internship)
     {
+        $this->authorize('delete', $internship);
         try {
             $internship->delete();
             return response()->json(array('success' => 'Delete success'), 200);

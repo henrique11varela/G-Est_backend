@@ -75,6 +75,7 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $application = new Application();
             $application->company_name = $request->company_name;
@@ -120,6 +121,7 @@ class ApplicationController extends Controller
      */
     public function update(UpdateApplicationRequest $request, Application $application)
     {
+        $this->authorize('update', $request);
         try {
             $application->company_name = $request->company_name;
             $application->activity_sector = $request->activity_sector;
@@ -149,6 +151,7 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
+        $this->authorize('delete', $application);
         try {
             $application->delete();
             return response()->json([

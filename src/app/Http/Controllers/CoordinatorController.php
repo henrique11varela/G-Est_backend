@@ -41,6 +41,7 @@ class CoordinatorController extends Controller
      */
     public function store(StoreCoordinatorRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $coordinator = new Coordinator();
             $coordinator->name = $request->name;
@@ -75,6 +76,7 @@ class CoordinatorController extends Controller
      */
     public function update(UpdateCoordinatorRequest $request, Coordinator $coordinator)
     {
+        $this->authorize('update', $request);
         try {
             $coordinator->name = $request->name;
             $coordinator->email_atec = $request->email_atec;
@@ -93,6 +95,7 @@ class CoordinatorController extends Controller
      */
     public function destroy(Coordinator $coordinator)
     {
+        $this->authorize('delete', $coordinator);
         try {
             $coordinator->delete();
             return response()->json([

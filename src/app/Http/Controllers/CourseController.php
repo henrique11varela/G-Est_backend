@@ -41,6 +41,7 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        $this->authorize('update', $request);
         try {
 
             $course = new Course();
@@ -73,6 +74,7 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
+        $this->authorize('update', $request);
         try {
             $course->name = $request->name;
             $course->area_id = $request->area_id;
@@ -89,6 +91,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        $this->authorize('delete', $course);
         try {
             $course->delete();
             return response()->json(array('success' => 'Delete success'), 200);

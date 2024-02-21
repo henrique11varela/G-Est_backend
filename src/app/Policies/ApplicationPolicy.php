@@ -29,7 +29,7 @@ class ApplicationPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class ApplicationPolicy
      */
     public function update(User $user, Application $application): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class ApplicationPolicy
      */
     public function delete(User $user, Application $application): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class ApplicationPolicy
      */
     public function restore(User $user, Application $application): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class ApplicationPolicy
      */
     public function forceDelete(User $user, Application $application): bool
     {
-        //
+        return $user->role == 'admin';
     }
 }
