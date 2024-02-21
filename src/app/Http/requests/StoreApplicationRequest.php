@@ -23,17 +23,17 @@ class StoreApplicationRequest extends FormRequest
     {
         return [
             'company_name' => 'required',
+            'number_students' => 'required',
             'activity_sector' => 'required',
-            'locality' => 'required',
-            'website' => 'required',
+            'is_partner' => 'required',
             'contact_name' => 'required',
             'contact_telephone' => 'required',
             'contact_email' => 'required',
-            'number_students' => 'required',
-            'student_profile' => 'required',
+            'website' => 'required',
+            'locality' => 'required',
             'student_tasks' => 'required',
-            'company_id' => 'required',
-            'is_partner' => 'required',
+            //'company_id' => 'required',
+
             //'is_valid' => 'required',
         ];
     }
