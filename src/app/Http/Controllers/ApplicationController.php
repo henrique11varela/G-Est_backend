@@ -78,17 +78,17 @@ class ApplicationController extends Controller
         try {
             $application = new Application();
             $application->company_name = $request->company_name;
+            $application->number_students = $request->number_students;
             $application->activity_sector = $request->activity_sector;
-            $application->locality = $request->locality;
-            $application->website = $request->website;
+            $application->is_partner = $request->is_partner;
             $application->contact_name = $request->contact_name;
             $application->contact_telephone = $request->contact_telephone;
             $application->contact_email = $request->contact_email;
-            $application->number_students = $request->number_students;
-            $application->student_profile = $request->student_profile;
+            $application->website = $request->website;
+            $application->locality = $request->locality;
             $application->student_tasks = $request->student_tasks;
-            $application->company_id = $request->company_id;
-            $application->is_partner = $request->is_partner;
+            //$application->student_profile = $request->student_profile;
+            //$application->company_id = $request->company_id;
             //$application->is_valid = $request->is_valid;
             $application->save();
             $application -> courses() -> sync($request->courses);
@@ -122,18 +122,15 @@ class ApplicationController extends Controller
     {
         try {
             $application->company_name = $request->company_name;
+            $application->number_students = $request->number_students;
             $application->activity_sector = $request->activity_sector;
-            $application->locality = $request->locality;
-            $application->website = $request->website;
+            $application->is_partner = $request->is_partner;
             $application->contact_name = $request->contact_name;
             $application->contact_telephone = $request->contact_telephone;
             $application->contact_email = $request->contact_email;
-            $application->number_students = $request->number_students;
-            $application->student_profile = $request->student_profile;
+            $application->website = $request->website;
+            $application->locality = $request->locality;
             $application->student_tasks = $request->student_tasks;
-            $application->company_id = $request->company_id;
-            $application->is_partner = $request->is_partner;
-            //$application->is_valid = $request->is_valid;
             $application->save();
             $application -> courses() -> sync($request->courses);
             return response()->json($application, 200);

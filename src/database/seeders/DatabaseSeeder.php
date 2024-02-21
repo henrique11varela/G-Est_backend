@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             StudentCollectionSeeder::class,
             CompanySeeder::class,
             CompanyAddressSeeder::class,
-            ApplicationSeeder::class,
+            //ApplicationSeeder::class,
             CompanyPersonSeeder::class,
             InternshipSeeder::class,
             StartedInternshipSeeder::class,
