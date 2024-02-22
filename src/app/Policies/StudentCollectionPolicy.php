@@ -29,7 +29,7 @@ class StudentCollectionPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class StudentCollectionPolicy
      */
     public function update(User $user, StudentCollection $studentCollection): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class StudentCollectionPolicy
      */
     public function delete(User $user, StudentCollection $studentCollection): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class StudentCollectionPolicy
      */
     public function restore(User $user, StudentCollection $studentCollection): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class StudentCollectionPolicy
      */
     public function forceDelete(User $user, StudentCollection $studentCollection): bool
     {
-        //
+        return $user->role == 'admin';
     }
 }

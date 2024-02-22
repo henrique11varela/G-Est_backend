@@ -38,6 +38,7 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $area = new Area();
             $area->area_code = $request->area_code;
@@ -66,6 +67,7 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
+        $this->authorize('update', $request);
         try {
             $area->area_code = $request->area_code;
             $area->name = $request->name;
@@ -81,6 +83,7 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
+        $this->authorize('delete', $area);
         try {
             $area->delete();
             return response()->json(['message' => 'Area deleted successfully'], 200);

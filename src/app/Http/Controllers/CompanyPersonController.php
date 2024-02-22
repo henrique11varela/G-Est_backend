@@ -52,6 +52,7 @@ class CompanyPersonController extends Controller
      */
     public function store(StoreCompanyPersonRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $companyPerson = new CompanyPerson();
             $companyPerson->name = $request->name;
@@ -89,6 +90,7 @@ class CompanyPersonController extends Controller
      */
     public function update(UpdateCompanyPersonRequest $request, CompanyPerson $companyPerson)
     {
+        $this->authorize('update', $request);
         try {
             $companyPerson->name = $request->name;
             $companyPerson->phone_number = $request->phone_number;
@@ -110,6 +112,7 @@ class CompanyPersonController extends Controller
      */
     public function destroy(CompanyPerson $companyPerson)
     {
+        $this->authorize('delete', $companyPerson);
         try {
             $companyPerson->delete();
             return response()->json([

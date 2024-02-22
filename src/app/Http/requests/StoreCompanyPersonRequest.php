@@ -24,7 +24,7 @@ class StoreCompanyPersonRequest extends FormRequest
         return [
             'name' => ['required'],
             'phone_number' => ['required'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:company_people'],
             'company_id' => ['required'],
             'is_tutor' => ['required', 'boolean'],
             'is_contact' => ['required', 'boolean'],

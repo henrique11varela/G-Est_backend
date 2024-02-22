@@ -20,7 +20,7 @@ class StudentCollection extends Model
         return $this->belongsToMany(Student::class, 'student_student_collection', 'student_collection_id', 'student_id');
     }
 
-    public function Course(): BelongsTo
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
@@ -28,6 +28,11 @@ class StudentCollection extends Model
     public function internships(): hasMany
     {
         return $this->hasMany(Internship::class);
+    }
+
+    public function coordinator(): BelongsTo
+    {
+        return $this->belongsTo(Coordinator::class);
     }
 
     protected $guarded = ['id','created_at', 'updated_at', 'deleted_at'];

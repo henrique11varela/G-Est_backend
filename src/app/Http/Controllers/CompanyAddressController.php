@@ -39,6 +39,7 @@ class CompanyAddressController extends Controller
      */
     public function store(StoreCompanyAddressRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $companyAddress = new CompanyAddress();
             $companyAddress->description = $request->description;
@@ -75,8 +76,7 @@ class CompanyAddressController extends Controller
      */
     public function update(UpdateCompanyAddressRequest $request, CompanyAddress $companyAddress)
     {
-
-
+        $this->authorize('update', $request);
         try {
             $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
@@ -100,6 +100,7 @@ class CompanyAddressController extends Controller
      */
     public function destroy(CompanyAddress $companyAddress)
     {
+        $this->authorize('delete', $companyAddress);
         try {
             $companyAddress->delete();
             return response()->json(array('success' => 'Delete success'), 200);

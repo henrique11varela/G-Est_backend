@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateCompanyRequest extends FormRequest
+class StoreCoordinatorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +22,9 @@ class UpdateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", 'unique:companies'],
-            "niss" => ["required", 'digits:11'],
-            "nipc" => ["required"],
-            "cae" => ["required"],
+            'name' => 'required|string',
+            'email_atec' => 'required|email',
+            'phone_number' => 'required|string'
         ];
     }
-
 }

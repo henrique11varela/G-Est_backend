@@ -29,7 +29,8 @@ class EndedInternshipPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
+
     }
 
     /**
@@ -37,7 +38,7 @@ class EndedInternshipPolicy
      */
     public function update(User $user, EndedInternship $endedInternship): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +46,7 @@ class EndedInternshipPolicy
      */
     public function delete(User $user, EndedInternship $endedInternship): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -53,7 +54,7 @@ class EndedInternshipPolicy
      */
     public function restore(User $user, EndedInternship $endedInternship): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -61,6 +62,6 @@ class EndedInternshipPolicy
      */
     public function forceDelete(User $user, EndedInternship $endedInternship): bool
     {
-        //
+        return $user->role == 'admin';
     }
 }
