@@ -39,13 +39,18 @@ class CompanyAddressController extends Controller
      */
     public function store(StoreCompanyAddressRequest $request)
     {
-        $this->authorize('delete', $request);
+        $this->authorize('create', $request);
         try {
             $companyAddress = new CompanyAddress();
             $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
             $companyAddress->company_id = $request->company_id;
             $companyAddress->hq = $request->hq;
+            if ($request->hq) {
+                CompanyAddress::where('company_id', '=', $request->company_id)->update([
+                    'hq' => false
+                ]);
+            }
             $companyAddress->postal_code = $request->postal_code;
             $companyAddress->save();
             return response()->json($companyAddress, 200);
@@ -78,6 +83,11 @@ class CompanyAddressController extends Controller
             $companyAddress->address = $request->address;
             $companyAddress->postal_code = $request->postal_code;
             $companyAddress->hq = $request->hq;
+            if ($request->hq) {
+                CompanyAddress::where('company_id', '=', $request->company_id)->update([
+                    'hq' => false
+                ]);
+            }
             $companyAddress->update();
             return response()->json($companyAddress, 200);
         } catch (\Exception $e) {
