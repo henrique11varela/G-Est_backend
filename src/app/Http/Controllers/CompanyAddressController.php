@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCompanyAddressRequest;
 use App\Http\Requests\UpdateCompanyAddressRequest;
+use App\Models\Company;
 use App\Models\CompanyAddress;
 
 class CompanyAddressController extends Controller
@@ -39,12 +40,13 @@ class CompanyAddressController extends Controller
      */
     public function store(StoreCompanyAddressRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', CompanyAddress::class);
         try {
             $companyAddress = new CompanyAddress();
             $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
             $companyAddress->company_id = $request->company_id;
+            $companyAddress->locality = $request->locality;
             $companyAddress->hq = $request->hq;
             if ($request->hq) {
                 CompanyAddress::where('company_id', '=', $request->company_id)->update([
@@ -83,6 +85,7 @@ class CompanyAddressController extends Controller
             $companyAddress->address = $request->address;
             $companyAddress->postal_code = $request->postal_code;
             $companyAddress->hq = $request->hq;
+            $companyAddress->locality = $request->locality;
             if ($request->hq) {
                 CompanyAddress::where('company_id', '=', $request->company_id)->update([
                     'hq' => false

@@ -41,7 +41,7 @@ class CoordinatorController extends Controller
      */
     public function store(StoreCoordinatorRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', Coordinator::class);
         try {
             $coordinator = new Coordinator();
             $coordinator->name = $request->name;

@@ -17,9 +17,9 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Student $student): bool
+    public function view(User $user, User $user2): bool
     {
-        return $user->role == 'admin';
+        return $user->role == 'admin' || $user2->id == $user->id;
     }
 
     /**
@@ -33,15 +33,15 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Student $student): bool
+    public function update(User $user, User $user2): bool
     {
-        return $user->role == 'admin';
+        return $user->role == 'admin' || $user2->id == $user->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Student $student): bool
+    public function delete(User $user, User $user2): bool
     {
         return $user->role == 'admin';
     }
@@ -49,7 +49,7 @@ class UserPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Student $student): bool
+    public function restore(User $user, User $user2): bool
     {
         return $user->role == 'admin';
     }
@@ -57,7 +57,7 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Student $student): bool
+    public function forceDelete(User $user, User $user2): bool
     {
         return $user->role == 'admin';
     }

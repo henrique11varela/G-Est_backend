@@ -41,7 +41,7 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        $this->authorize('update', $request);
+        $this->authorize('create', Course::class);
         try {
 
             $course = new Course();

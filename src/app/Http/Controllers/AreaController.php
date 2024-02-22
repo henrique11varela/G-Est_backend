@@ -38,7 +38,7 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', Area::class);
         try {
             $area = new Area();
             $area->area_code = $request->area_code;
@@ -67,7 +67,7 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $area);
         try {
             $area->area_code = $request->area_code;
             $area->name = $request->name;
