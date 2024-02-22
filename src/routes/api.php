@@ -16,6 +16,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -151,9 +152,13 @@ Route::prefix('v1')->group(function () {
             Route::put('{coordinator}', [CoordinatorController::class, 'update']);
             Route::delete('{coordinator}', [CoordinatorController::class, 'destroy']);
         });
-      
+
         Route::prefix('import')->group(function () {
             Route::post('studentcollections', [ImportController::class, 'studentCollections']);
+        });
+
+        Route::prefix('export')->group(function () {
+            Route::get('studentcollection/{studentCollection}', [ExportController::class, 'studentCollection']);
         });
 
     });
