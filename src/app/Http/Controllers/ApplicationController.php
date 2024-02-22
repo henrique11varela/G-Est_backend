@@ -24,14 +24,14 @@ class ApplicationController extends Controller
             if (request()->has("company_name") && request()->company_name != "") {
                 $applicationsQuery->where("company_name", "like", "%" . request()->company_name . "%");
             }
+            if (request()->has("number_students") && request()->number_students != "") {
+                $applicationsQuery->where("number_students", "=", request()->number_students);
+            }
             if (request()->has("activity_sector") && request()->activity_sector != "") {
                 $applicationsQuery->where("activity_sector", "like", "%" . request()->activity_sector . "%");
             }
-            if (request()->has("locality") && request()->locality != "") {
-                $applicationsQuery->where("locality", "like", "%" . request()->locality . "%");
-            }
-            if (request()->has("website") && request()->website != "") {
-                $applicationsQuery->where("website", "like", "%" . request()->website . "%");
+            if (request()->has("is_partner") && request()->is_partner != "") {
+                $applicationsQuery->where("is_partner", "like", "%" . request()->is_partner . "%");
             }
             if (request()->has("contact_name") && request()->contact_name != "") {
                 $applicationsQuery->where("contact_name", "like", "%" . request()->contact_name . "%");
@@ -42,24 +42,15 @@ class ApplicationController extends Controller
             if (request()->has("contact_email") && request()->contact_email != "") {
                 $applicationsQuery->where("contact_email", "like", "%" . request()->contact_email . "%");
             }
-            if (request()->has("number_students") && request()->number_students != "") {
-                $applicationsQuery->where("number_students", "=", request()->number_students);
+            if (request()->has("website") && request()->website != "") {
+                $applicationsQuery->where("website", "like", "%" . request()->website . "%");
             }
-            if (request()->has("student_profile") && request()->student_profile != "") {
-                $applicationsQuery->where("student_profile", "like", "%" . request()->student_profile . "%");
+            if (request()->has("locality") && request()->locality != "") {
+                $applicationsQuery->where("locality", "like", "%" . request()->locality . "%");
             }
             if (request()->has("student_tasks") && request()->student_tasks != "") {
                 $applicationsQuery->where("student_tasks", "like", "%" . request()->student_tasks . "%");
             }
-            if (request()->has("company_id") && request()->company_id != "") {
-                $applicationsQuery->where("company_id", "like", "%" . request()->company_id . "%");
-            }
-            if (request()->has("is_partner") && request()->is_partner != "") {
-                $applicationsQuery->where("is_partner", "like", "%" . request()->is_partner . "%");
-            }
-            /*if (request()->has("is_valid") && request()->is_valid != "") {
-                $applicationsQuery->where("is_valid", "like", "%" . request()->is_valid . "%");
-            }*/
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $applications = $applicationsQuery->paginate($quantity);
             return response()->json($applications, 200);

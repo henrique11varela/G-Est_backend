@@ -23,7 +23,10 @@ class StudentCollectionController extends Controller
                 $studentCollectionsQuery->where("name", "like", "%" . request()->name . "%");
             }
             if (request()->has("course_id") && request()->course_id != "") {
-                $studentCollectionsQuery->where("course_id", "like", "%" . request()->course_id . "%");
+                $studentCollectionsQuery->where("course_id", "=", request()->course_id);
+            }
+            if (request()->has("coordinator_id") && request()->coordinator_id != "") {
+                $studentCollectionsQuery->where("coordinator_id", "=", request()->coordinator_id);
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $studentCollections = $studentCollectionsQuery->with(['course'])->paginate($quantity);

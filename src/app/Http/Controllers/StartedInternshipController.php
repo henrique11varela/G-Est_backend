@@ -18,11 +18,17 @@ class StartedInternshipController extends Controller
             // if (request()->has("id")) {
             //     $internshipsQuery->where("id", "=", request()->id);
             // }
+            if (request()->has("meal_allowance") && request()->meal_allowance != "") {
+                $startedInternshipsQuery->where("meal_allowance", "=", request()->meal_allowance);
+            }
+            if (request()->has("hourly_load") && request()->hourly_load != "") {
+                $startedInternshipsQuery->where("hourly_load", "=", request()->hourly_load);
+            }
             if (request()->has("start_date") && request()->start_date != "") {
                 $startedInternshipsQuery->where("start_date", "like", "%" . request()->start_date . "%");
             }
-            if (request()->has("meal_allowance") && request()->meal_allowance != "") {
-                $startedInternshipsQuery->where("meal_allowance", "=", request()->meal_allowance);
+            if (request()->has("end_date") && request()->end_date != "") {
+                $startedInternshipsQuery->where("end_date", "like", "%" . request()->end_date . "%");
             }
             if (request()->has("company_address_id") && request()->company_address_id != "") {
                 $startedInternshipsQuery->where("company_address_id", "=", request()->company_address_id);

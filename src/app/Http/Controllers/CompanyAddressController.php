@@ -25,6 +25,12 @@ class CompanyAddressController extends Controller
             if (request()->has("address") && request()->address != "") {
                 $companyAddressesQuery->where("address", "like", "%" . request()->address . "%");
             }
+            if (request()->has("postal_code") && request()->postal_code != "") {
+                $companyAddressesQuery->where("postal_code", "like", "%" . request()->postal_code . "%");
+            }
+            if (request()->has("hq") && request()->hq != "") {
+                $companyAddressesQuery->where("hq", "=", request()->hq);
+            }
 
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $companyAddresses = $companyAddressesQuery->paginate($quantity);

@@ -28,6 +28,9 @@ class CompanyController extends Controller
             if (request()->has("nipc") && request()->nipc != "") {
                 $companiesQuery->where("nipc", "like", "%" . request()->nipc . "%");
             }
+            if (request()->has("cae") && request()->cae != "") {
+                $companiesQuery->where("cae", "like", "%" . request()->cae . "%");
+            }
 
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $companies = $companiesQuery->paginate($quantity);
