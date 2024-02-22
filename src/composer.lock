@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd4872b22b5625c027fc603f79579a78",
+    "content-hash": "d7ea641bb7396562c7567384d1e70f91",
     "packages": [
         {
             "name": "brick/math",
@@ -3700,6 +3700,61 @@
                 }
             ],
             "time": "2023-11-08T05:53:05+00:00"
+        },
+        {
+            "name": "square-bit/laravel-pt-localization",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/square-bit/laravel-pt-localization.git",
+                "reference": "3b56dac464ab31acc3a477889b3d4a657ee065e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/square-bit/laravel-pt-localization/zipball/3b56dac464ab31acc3a477889b3d4a657ee065e6",
+                "reference": "3b56dac464ab31acc3a477889b3d4a657ee065e6",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0|^9.0|^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Squarebit\\Laravelptlocalization\\LocalizationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Squarebit\\Laravelptlocalization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Squarebit",
+                    "email": "info@square-bit.com",
+                    "homepage": "https://square-bit.com/"
+                }
+            ],
+            "description": "Portuguese Localization package for Laravel",
+            "homepage": "https://github.com/square-bit/laravel-pt-localization",
+            "keywords": [
+                "laravel",
+                "localization",
+                "portuguese",
+                "translations"
+            ],
+            "support": {
+                "issues": "https://github.com/square-bit/laravel-pt-localization/issues",
+                "source": "https://github.com/square-bit/laravel-pt-localization/tree/v1.3"
+            },
+            "time": "2023-08-22T14:22:59+00:00"
         },
         {
             "name": "symfony/console",
@@ -8639,5 +8694,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
