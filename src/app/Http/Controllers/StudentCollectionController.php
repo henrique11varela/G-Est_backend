@@ -38,7 +38,7 @@ class StudentCollectionController extends Controller
      */
     public function store(StoreStudentCollectionRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', StudentCollection::class);
         try {
             $studentCollection = new StudentCollection();
             $studentCollection->name = $request->name;
@@ -79,7 +79,7 @@ class StudentCollectionController extends Controller
      */
     public function update(UpdateStudentCollectionRequest $request, StudentCollection $studentCollection)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $studentCollection);
         try {
             $studentCollection->name = $request->name;
             $studentCollection->course_id = $request->course_id;

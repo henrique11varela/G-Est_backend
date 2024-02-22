@@ -26,6 +26,7 @@ class UpdateCompanyAddressRequest extends FormRequest
             'address' => 'required',
             'description' => 'required',
             'postal_code' => 'required',
+            'locality' => 'required',
         ];
     }
 }

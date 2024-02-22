@@ -43,7 +43,7 @@ class StartedInternshipController extends Controller
      */
     public function store(StoreStartedInternshipRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', StartedInternship::class);
         try {
             $startedInternship = new StartedInternship();
             $startedInternship->internship_id = $request->internship_id;
@@ -83,7 +83,7 @@ class StartedInternshipController extends Controller
      */
     public function update(UpdateStartedInternshipRequest $request, StartedInternship $startedInternship)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $startedInternship);
         try {
             // $startedInternship->internship_id = $request->internship_id;
             $startedInternship->start_date = $request->start_date;

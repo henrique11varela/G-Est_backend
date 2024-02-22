@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $this->authorize('viewAny', request());
+        $this->authorize('viewAny', User::class);
         try {
             $usersQuery = User::select("*");
             // if (request()->has("id")) {
@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', User::class);
         try {
             $user = new User();
             $user->name = $request->name;
@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $user);
         try {
             $user->name = $request->name;
             $user->email = $request->email;
@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('update', $user);
+        $this->authorize('destroy', $user);
         try {
             $user->delete();
             return response()->json([

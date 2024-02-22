@@ -49,7 +49,7 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        $this->authorize('create', $request);
+        $this->authorize('create', Company::class);
         try {
             $company = new Company();
             $company->name = $request->name;
@@ -89,7 +89,7 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $company);
         try {
             $company->name = $request->name;
             $company->niss = $request->niss;
