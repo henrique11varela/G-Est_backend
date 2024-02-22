@@ -29,7 +29,7 @@ class CoordinatorPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class CoordinatorPolicy
      */
     public function update(User $user, Coordinator $coordinator): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class CoordinatorPolicy
      */
     public function delete(User $user, Coordinator $coordinator): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class CoordinatorPolicy
      */
     public function restore(User $user, Coordinator $coordinator): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class CoordinatorPolicy
      */
     public function forceDelete(User $user, Coordinator $coordinator): bool
     {
-        //
+        return $user->role == 'admin';
     }
 }

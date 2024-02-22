@@ -29,7 +29,7 @@ class AreaPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class AreaPolicy
      */
     public function update(User $user, Area $area): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class AreaPolicy
      */
     public function delete(User $user, Area $area): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class AreaPolicy
      */
     public function forceDelete(User $user, Area $area): bool
     {
-        //
+        return $user->role == 'admin';
     }
 }

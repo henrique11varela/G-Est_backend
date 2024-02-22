@@ -29,7 +29,7 @@ class CompanyPersonPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class CompanyPersonPolicy
      */
     public function update(User $user, CompanyPerson $companyPerson): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class CompanyPersonPolicy
      */
     public function delete(User $user, CompanyPerson $companyPerson): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class CompanyPersonPolicy
      */
     public function forceDelete(User $user, CompanyPerson $companyPerson): bool
     {
-        //
+        return $user->role == 'admin';
     }
 }

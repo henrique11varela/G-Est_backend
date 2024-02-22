@@ -49,6 +49,7 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
+        $this->authorize('create', $request);
         try {
             $student = new Student();
             $student->name = $request->name;
@@ -89,6 +90,7 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
+        $this->authorize('update', $request);
         try {
             $student->name = $request->name;
             $student->personal_email = $request->personal_email;
@@ -113,6 +115,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        $this->authorize('destroy', $student);
         try {
             $student->delete();
             return response()->json([
