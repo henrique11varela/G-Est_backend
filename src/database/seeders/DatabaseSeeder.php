@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
             CompanyAddressSeeder::class,
             ApplicationSeeder::class,
             CompanyPersonSeeder::class,
-            InternshipSeeder::class,
-            StartedInternshipSeeder::class,
-            EndedInternshipSeeder::class,
+            // InternshipSeeder::class,
+            // StartedInternshipSeeder::class,
+            // EndedInternshipSeeder::class,
         ]);
     }
 }

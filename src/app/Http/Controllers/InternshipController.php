@@ -61,6 +61,7 @@ class InternshipController extends Controller
                 $startedInternship->start_date = $request->started_internship['start_date'];
                 $startedInternship->end_date = $request->started_internship['end_date'];
                 $startedInternship->meal_allowance = $request->started_internship['meal_allowance'];
+                $startedInternship->hourly_load = $request->started_internship['hourly_load'];
                 if (isset($request->started_internship['company_address_id']) && $request->started_internship['company_address_id'] != "") {
                     $startedInternship->company_address_id = $request->started_internship['company_address_id'];
                 }
@@ -103,52 +104,51 @@ class InternshipController extends Controller
     {
         try {
             $endedInternship = EndedInternship::where("internship_id", "=", $internship->id)->first();
-            if (!$endedInternship) {
-
-                $internship->student_id = $request->student_id;
-                $internship->student_collection_id = $request->student_collection_id;
-                $internship->observations = $request->observations;
-                $companiesArray = [];
-                foreach ($request->companies as $company) {
-                    $companiesArray[$company['id']] = ['status' => $company['status']];
-                }
-                $internship->save();
-                $internship->companies()->sync($companiesArray);
-
-                if ($request->has('started_internship') && $request->started_internship != null) {
-                    $startedInternship = StartedInternship::where("internship_id", "=", $internship->id)->first();
-
-                    if (!$startedInternship) {
-                        $startedInternship = new StartedInternship();
-                    }
-
-                    $startedInternship->internship_id = $internship->id;
-                    $startedInternship->start_date = $request->started_internship['start_date'];
-                    $startedInternship->end_date = $request->started_internship['end_date'];
-                    $startedInternship->meal_allowance = $request->started_internship['meal_allowance'];
-                    if (isset($request->started_internship['company_address_id']) && $request->started_internship['company_address_id'] != "") {
-                        $startedInternship->company_address_id = $request->started_internship['company_address_id'];
-                    }
-                    if (isset($request->started_internship['company_person_id']) && $request->started_internship['company_person_id'] != "") {
-                        $startedInternship->company_person_id = $request->started_internship['company_person_id'];
-                    }
-                    $startedInternship->save();
-                }
-
-                if ($request->has('ended_internship') && $request->ended_internship != null) {
-                    $endedInternship = EndedInternship::where("internship_id", "=", $internship->id)->first();
-                    if (!$endedInternship) {
-                        $endedInternship = new EndedInternship();
-                    }
-                    $endedInternship->internship_id = $internship->id;
-                    $endedInternship->reason = $request->ended_internship['reason'];
-                    $endedInternship->situacao_prof = $request->ended_internship['situacao_prof'];
-                    $endedInternship->como_obteve_emprego = $request->ended_internship['como_obteve_emprego'];
-                    $endedInternship->save();
-                }
-
-                return response()->json($internship, 200);
+            $internship->student_id = $request->student_id;
+            $internship->student_collection_id = $request->student_collection_id;
+            $internship->observations = $request->observations;
+            $companiesArray = [];
+            foreach ($request->companies as $company) {
+                $companiesArray[$company['id']] = ['status' => $company['status']];
             }
+            $internship->save();
+            $internship->companies()->sync($companiesArray);
+
+            if ($request->has('started_internship') && $request->started_internship != null) {
+                $startedInternship = StartedInternship::where("internship_id", "=", $internship->id)->first();
+
+                if (!$startedInternship) {
+                    $startedInternship = new StartedInternship();
+                }
+
+                $startedInternship->internship_id = $internship->id;
+                $startedInternship->start_date = $request->started_internship['start_date'];
+                $startedInternship->end_date = $request->started_internship['end_date'];
+                $startedInternship->meal_allowance = $request->started_internship['meal_allowance'];
+                $startedInternship->hourly_load = $request->started_internship['hourly_load'];
+                if (isset($request->started_internship['company_address_id']) && $request->started_internship['company_address_id'] != "") {
+                    $startedInternship->company_address_id = $request->started_internship['company_address_id'];
+                }
+                if (isset($request->started_internship['company_person_id']) && $request->started_internship['company_person_id'] != "") {
+                    $startedInternship->company_person_id = $request->started_internship['company_person_id'];
+                }
+                $startedInternship->save();
+            }
+
+            if ($request->has('ended_internship') && $request->ended_internship != null) {
+                // dd($request->ended_internship);
+                $endedInternship = EndedInternship::where("internship_id", "=", $internship->id)->first();
+                if (!$endedInternship) {
+                    $endedInternship = new EndedInternship();
+                }
+                $endedInternship->internship_id = $internship->id;
+                $endedInternship->reason = $request->ended_internship['reason'];
+                $endedInternship->situacao_prof = $request->ended_internship['situacao_prof'];
+                $endedInternship->como_obteve_emprego = $request->ended_internship['como_obteve_emprego'];
+                $endedInternship->save();
+            }
+            // $internship = $internship->load("startedInternship.companyAddress", "startedInternship.companyPerson", "endedInternship", "student", "studentCollection", "companies.companyAddresses", "companies.tutorPeople");
+            return response()->json($internship, 200);
         } catch (\Exception $e) {
             return response()->json(["message" => "failed:" . $e], 500);
         }
