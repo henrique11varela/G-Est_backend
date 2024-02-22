@@ -21,17 +21,29 @@ class StudentController extends Controller
             if (request()->has("name") && request()->name != "") {
                 $studentsQuery->where("name","like","%". request()->name ."%");
             }
-            if (request()->has("personal_email") && request()->personal_email != "") {
-                $studentsQuery->where("personal_email","like","%". request()->personal_email ."%");
-            }
             if (request()->has("atec_email") && request()->atec_email != "") {
                 $studentsQuery->orWhere("atec_email","like","%". request()->atec_email ."%");
+            }
+            if (request()->has("personal_email") && request()->personal_email != "") {
+                $studentsQuery->where("personal_email","like","%". request()->personal_email ."%");
             }
             if (request()->has("phone_number") && request()->phone_number != "") {
                 $studentsQuery->where("phone_number","like","%". request()->phone_number ."%");
             }
             if (request()->has("address") && request()->address != "") {
                 $studentsQuery->where("address","like","%". request()->address ."%");
+            }
+            if (request()->has("postal_code") && request()->postal_code != "") {
+                $studentsQuery->where("postal_code","like","%". request()->postal_code ."%");
+            }
+            if (request()->has("locality") && request()->locality != "") {
+                $studentsQuery->where("locality","like","%". request()->locality ."%");
+            }
+            if (request()->has("soft_skills") && request()->soft_skills != "") {
+                $studentsQuery->where("soft_skills","like","%". request()->soft_skills ."%");
+            }
+            if (request()->has("hard_skills") && request()->hard_skills != "") {
+                $studentsQuery->where("hard_skills","like","%". request()->hard_skills ."%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $students = $studentsQuery->with(['internships', 'studentCollections'])->paginate($quantity);

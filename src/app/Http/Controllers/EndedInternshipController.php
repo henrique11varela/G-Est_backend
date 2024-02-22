@@ -21,12 +21,13 @@ class EndedInternshipController extends Controller
             if (request()->has("reason") && request()->reason != "") {
                 $endedInternshipsQuery->where("reason", "like", "%" . request()->reason . "%");
             }
-            if (request()->has("end_date") && request()->end_date != "") {
-                $endedInternshipsQuery->where("end_date", "like", "%" . request()->end_date . "%");
+            if (request()->has("situacao_prof") && request()->situacao_prof != "") {
+                $endedInternshipsQuery->where("situacao_prof", "like", "%" . request()->situacao_prof . "%");
             }
-            if (request()->has("is_working_there") && request()->is_working_there != "") {
-                $endedInternshipsQuery->where("is_working_there", "=", request()->is_working_there);
+            if (request()->has("como_obteve_emprego") && request()->como_obteve_emprego != "") {
+                $endedInternshipsQuery->where("como_obteve_emprego", "like", "%" . request()->como_obteve_emprego . "%");
             }
+
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
             $endedInternships = $endedInternshipsQuery->paginate($quantity);
             return response()->json($endedInternships, 200);
