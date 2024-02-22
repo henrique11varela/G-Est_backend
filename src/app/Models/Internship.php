@@ -41,4 +41,9 @@ class Internship extends Model
     {
         return $this->belongsToMany(Company::class)->withPivot('status');
     }
+
+    public function companyAddress(): belongsTo
+    {
+        return $this->belongsTo(CompanyAddress::class);
+    }
 }
