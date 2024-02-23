@@ -20,6 +20,13 @@ class StudentCollectionExport implements FromArray, WithHeadings, WithStyles, Sh
 
     public function __construct(StudentCollection $studentCollection)
     {
+        $studentCollection->load(
+            [
+                'students.internships' => function (Builder $query) use ($studentCollection) {
+                    $query->where('student_collection_id', $studentCollection->id)->orderBy('id', 'desc');
+                }
+            ]
+        );
         $this->studentCollection = $studentCollection;
     }
 
@@ -147,11 +154,11 @@ class StudentCollectionExport implements FromArray, WithHeadings, WithStyles, Sh
                 //NIPC
                 $startedInternship?->company?->nipc,
                 //Morada do Estágio (quando diferente da sede)
-                $hq?->hq == 1 ? null :  $startedInternship?->companyAddress->address,
+                $hq?->hq == 1 ? null :  $startedInternship?->companyAddress?->address,
                 //Código Postal(2)
-                $hq?->hq == 1 ? null :  $startedInternship?->companyAddress->postal_code,
+                $hq?->hq == 1 ? null :  $startedInternship?->companyAddress?->postal_code,
                 //Localidade(2)
-                /*$hq?->hq == 1 ? null :  $startedInternship?->companyAddress->locality,*/ null,
+                /*$hq?->hq == 1 ? null :  $startedInternship?->companyAddress?->locality,*/ null,
                 //Envio de documentação a:
                 null,
                 //Morada de envio:

@@ -64,7 +64,7 @@ class StudentCollectionController extends Controller
                 [
                     'course',
                     'students.internships' => function (Builder $query) use ($studentCollection) {
-                        $query->where('student_collection_id', $studentCollection->id);
+                        $query->where('student_collection_id', $studentCollection->id)->orderBy('id', 'desc');
                     },
                     'students.internships.companies',
                     'students.internships.startedInternship',
