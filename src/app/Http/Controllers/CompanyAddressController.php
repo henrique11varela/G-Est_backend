@@ -84,7 +84,7 @@ class CompanyAddressController extends Controller
      */
     public function update(UpdateCompanyAddressRequest $request, CompanyAddress $companyAddress)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $companyAddress);
         try {
             $companyAddress->description = $request->description;
             $companyAddress->address = $request->address;
