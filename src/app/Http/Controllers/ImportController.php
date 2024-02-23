@@ -14,7 +14,7 @@ class ImportController extends Controller
     {
         try {
             if (!request()->hasFile('file')) {
-                return response()->json(["message" => "File to import is required"], 400);
+                return response()->json(["message" => "File to import is required"], 422);
             }
 
             $importedHeadings = (new HeadingRowImport)->toArray(request()->file('file'));
@@ -24,7 +24,7 @@ class ImportController extends Controller
                 return response()->json(["message" => "Server error processing import request"], 500);
             }
             if (count($errors) > 0) {
-                return response()->json(['errors' => $errors], 400);
+                return response()->json(['errors' => $errors], 422);
             }
 
             Excel::import(new StudentCollectionsImport, request()->file('file'));
