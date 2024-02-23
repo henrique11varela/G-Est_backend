@@ -29,7 +29,7 @@ class StudentCollectionController extends Controller
                 $studentCollectionsQuery->where("coordinator_id", "=", request()->coordinator_id);
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $studentCollections = $studentCollectionsQuery->with(['course'])->paginate($quantity);
+            $studentCollections = $studentCollectionsQuery->with(['course', 'coordinator'])->paginate($quantity);
             return response()->json($studentCollections, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
@@ -46,6 +46,7 @@ class StudentCollectionController extends Controller
             $studentCollection = new StudentCollection();
             $studentCollection->name = $request->name;
             $studentCollection->course_id = $request->course_id;
+            $studentCollection->coordinator_id = $request->coordinator_id;
             $studentCollection->save();
             $studentCollection->students()->sync($request->students);
             return response()->json($studentCollection, 200);
@@ -62,6 +63,7 @@ class StudentCollectionController extends Controller
         try {
             $studentCollection->load(
                 [
+                    'coordinator',
                     'course',
                     'students.internships' => function (Builder $query) use ($studentCollection) {
                         $query->where('student_collection_id', $studentCollection->id)->orderBy('id', 'desc');
@@ -86,6 +88,7 @@ class StudentCollectionController extends Controller
         try {
             $studentCollection->name = $request->name;
             $studentCollection->course_id = $request->course_id;
+            $studentCollection->coordinator_id = $request->coordinator_id;
             $studentCollection->save();
             if($request->has('students')) {
                 $studentCollection->students()->sync($request->students);
