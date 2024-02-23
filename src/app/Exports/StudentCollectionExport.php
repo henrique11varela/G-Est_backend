@@ -23,7 +23,7 @@ class StudentCollectionExport implements FromArray, WithHeadings, WithStyles, Sh
         $studentCollection->load(
             [
                 'students.internships' => function (Builder $query) use ($studentCollection) {
-                    $query->where('student_collection_id', $studentCollection->id)->orderBy('id', 'desc');
+                    $query->where('student_collection_id', $studentCollection->id);
                 }
             ]
         );
