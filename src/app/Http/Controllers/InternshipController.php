@@ -62,6 +62,7 @@ class InternshipController extends Controller
                 $startedInternship->start_date = $request->started_internship['start_date'];
                 $startedInternship->end_date = $request->started_internship['end_date'];
                 $startedInternship->meal_allowance = $request->started_internship['meal_allowance'];
+                $startedInternship->hq_shipping_address = $request->started_internship['hq_shipping_address'];
                 $startedInternship->hourly_load = $request->started_internship['hourly_load'];
                 if (isset($request->started_internship['company_address_id']) && $request->started_internship['company_address_id'] != "") {
                     $startedInternship->company_address_id = $request->started_internship['company_address_id'];
@@ -127,6 +128,7 @@ class InternshipController extends Controller
                 $startedInternship->start_date = $request->started_internship['start_date'];
                 $startedInternship->end_date = $request->started_internship['end_date'];
                 $startedInternship->meal_allowance = $request->started_internship['meal_allowance'];
+                $startedInternship->hq_shipping_address = $request->started_internship['hq_shipping_address'];
                 $startedInternship->hourly_load = $request->started_internship['hourly_load'];
                 if (isset($request->started_internship['company_address_id']) && $request->started_internship['company_address_id'] != "") {
                     $startedInternship->company_address_id = $request->started_internship['company_address_id'];

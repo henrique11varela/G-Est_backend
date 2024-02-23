@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('internship_id')->constrained();
             $table->primary('internship_id');
             $table->boolean('meal_allowance');
+            $table->boolean('hq_shipping_address');
             $table->integer('hourly_load');
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
