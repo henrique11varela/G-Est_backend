@@ -45,7 +45,7 @@ class LoginController extends Controller
     function checkRole(Request $request)
     {
         try {
-            return response()->json(['role' => $request->user()->role], 200);
+            return response()->json($request->user(), 200);
         } catch (\Exception $e) {
             return response()->json(array('message' => $e->getMessage()), $e->status || 500);
         }
