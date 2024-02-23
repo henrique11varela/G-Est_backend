@@ -21,6 +21,7 @@ class CompanyAddressFactory extends Factory
             'description' => $this->faker->text,
             'postal_code' => $this->faker->postcode,
             'address' => $this->faker->address,
+            'locality' => $this->faker->firstName,
             'hq'=> 0,
         ];
     }
