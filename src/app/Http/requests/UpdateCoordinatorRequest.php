@@ -22,9 +22,9 @@ class UpdateCoordinatorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string',
-            'email_atec' => 'required|email',
-            'phone_number' => 'string'
+            'name' => ['required', 'string'],
+            'email_atec' => ['required', 'email', 'unique:coordinators,email_atec,'.$this->id],
+            'phone_number' => ['required', 'string']
         ];
     }
 }

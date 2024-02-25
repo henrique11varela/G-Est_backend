@@ -22,9 +22,9 @@ class UpdateStudentCollectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'course_id' => 'required',
-            'coordinator_id' => 'required',
+            'name' => ['required', 'unique:student_collections,name,'.$this->id],
+            'course_id' => ['required'],
+            'coordinator_id' => ['required'],
         ];
     }
 }
