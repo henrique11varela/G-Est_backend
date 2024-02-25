@@ -22,9 +22,9 @@ class StoreCoordinatorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'email_atec' => 'required|email',
-            'phone_number' => 'required|string'
+            'name' => ['required', 'string'],
+            'email_atec' => ['required', 'email', 'unique:coordinators,email_atec'],
+            'phone_number' => ['required', 'string']
         ];
     }
 }

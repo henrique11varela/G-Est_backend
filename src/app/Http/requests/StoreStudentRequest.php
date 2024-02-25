@@ -24,13 +24,11 @@ class StoreStudentRequest extends FormRequest
         return [
             'name' => ['required'],
             'personal_email' => ['required', 'email'],
-            'atec_email' => ['required', 'email'],
+            'atec_email' => ['required', 'email', 'unique:students,atec_email'],
             'phone_number' => ['required'],
             'address' => ['required'],
             'postal_code' => ['required'],
-            'locality' => ['required'],
-            'soft_skills' => ['required'],
-            'hard_skills' => ['required'],
+            'locality' => ['required']
         ];
     }
 }
