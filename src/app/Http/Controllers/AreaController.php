@@ -23,10 +23,10 @@ class AreaController extends Controller
                 $areasQuery->where("area_code", "like", "%" . request()->area_code . "%");
             }
             if (request()->has("name") && request()->name != "") {
-                $areasQuery->where("name", "like", "%" . request()->name . "%");
+                $areasQuery->orWhere("name", "like", "%" . request()->name . "%");
             }
             $quantity = isset(request()->quantity) ? request()->quantity : 15;
-            $areas = $areasQuery->get();
+            $areas = $areasQuery->paginate($quantity);
             return response()->json($areas, 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'failed:' . $e], 500);
