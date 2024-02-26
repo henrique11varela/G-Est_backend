@@ -16,11 +16,17 @@ class LoginController extends Controller
     {
         try {
             $user = User::Where("email", $request->email)->first();
+            $anyError = false;
             if (!$user) {
-                throw ValidationException::withMessages(["email" => "email invalid"]);
+                $anyError = true;
             }
             if (!Hash::check($request->password, $user->password)) {
-                throw ValidationException::withMessages(["password" => "password invalid"]);
+                $anyError = true;
+            }
+            if ($anyError) {
+                $error = "login error";
+                $cookie = Cookie::forget('bearer_token');
+                return response()->json(['error' => $error], 401)->cookie($cookie);
             }
             $user->tokens()->delete();
             $token = $user->createToken($request->password)->plainTextToken;
