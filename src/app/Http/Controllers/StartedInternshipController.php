@@ -114,7 +114,7 @@ class StartedInternshipController extends Controller
      */
     public function destroy(StartedInternship $startedInternship)
     {
-        $this->authorize('destroy', $startedInternship);
+        $this->authorize('delete', $startedInternship);
         try {
             $startedInternship->delete();
             return response()->json(array('success' => 'Delete success'), 200);
