@@ -76,7 +76,7 @@ class CoordinatorController extends Controller
      */
     public function update(UpdateCoordinatorRequest $request, Coordinator $coordinator)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $coordinator);
         try {
             $coordinator->name = $request->name;
             $coordinator->email_atec = $request->email_atec;

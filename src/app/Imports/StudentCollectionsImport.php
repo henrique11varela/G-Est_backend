@@ -29,7 +29,7 @@ class StudentCollectionsImport implements ToCollection, WithHeadingRow
             $errors = [];
             foreach (self::$headings as $heading) {
                 if (!in_array($heading, $importedHeadings)) {
-                    array_push($errors, $heading.' column is required');
+                    array_push($errors, 'Coluna '.$heading.' é obrigatória');
                 }
             }
             return $errors;

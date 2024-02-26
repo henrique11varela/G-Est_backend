@@ -14,7 +14,7 @@ class ImportController extends Controller
     {
         try {
             if (!request()->hasFile('file')) {
-                return response()->json(["message" => "File to import is required"], 422);
+                return response()->json(["errors" => ["Escolha um ficheiro para importar"]], 422);
             }
 
             $importedHeadings = (new HeadingRowImport)->toArray(request()->file('file'));

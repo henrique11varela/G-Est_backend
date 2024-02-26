@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('destroy', $user);
+        $this->authorize('delete', $user);
         try {
             $user->delete();
             return response()->json([

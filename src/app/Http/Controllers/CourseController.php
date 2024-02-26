@@ -74,7 +74,7 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', $course);
         try {
             $course->name = $request->name;
             $course->area_id = $request->area_id;

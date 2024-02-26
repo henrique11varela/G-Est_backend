@@ -104,7 +104,7 @@ class StudentCollectionController extends Controller
      */
     public function destroy(StudentCollection $studentCollection)
     {
-        $this->authorize('destroy', $studentCollection);
+        $this->authorize('delete', $studentCollection);
         try {
             $studentCollection->delete();
             return response()->json(['message' => 'Student Collection deleted'], 200);
