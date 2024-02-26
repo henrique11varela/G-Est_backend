@@ -42,6 +42,7 @@ class UserController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->role = $request->role;
             $user->password = Hash::make($request->password);
             $user->save();
             return response()->json($user, 201);
@@ -74,8 +75,11 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         try {
-            $user->name = $request->name;
-            $user->email = $request->email;
+            if ($request->user()->role == 'admin') {
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->role = $request->role;
+            }
             if ($request->password != '') {
                 $user->password = Hash::make($request->password);
             }
