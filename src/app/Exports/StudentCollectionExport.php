@@ -117,7 +117,7 @@ class StudentCollectionExport implements FromArray, WithHeadings, WithStyles, Sh
                 //Data Final do Estágio
                 $startedInternship?->end_date,
                 //Duração
-                /*$startedIntership?->hourly_load,*/ null,
+                $startedInternship?->hourly_load,
                 //Designação Empresa
                 $company?->name,
                 //Tutor do Formando na Empresa
@@ -146,7 +146,7 @@ class StudentCollectionExport implements FromArray, WithHeadings, WithStyles, Sh
                 //Código Postal
                 $hq?->postal_code,
                 //Localidade
-                /*$hq?->locality*/ null,
+                $hq?->locality,
                 //CAE
                 $startedInternship?->company?->cae,
                 //NISS
@@ -158,11 +158,11 @@ class StudentCollectionExport implements FromArray, WithHeadings, WithStyles, Sh
                 //Código Postal(2)
                 $hq?->hq == 1 ? null :  $startedInternship?->companyAddress?->postal_code,
                 //Localidade(2)
-                /*$hq?->hq == 1 ? null :  $startedInternship?->companyAddress?->locality,*/ null,
+                $hq?->hq == 1 ? null :  $startedInternship?->companyAddress?->locality,
                 //Envio de documentação a:
                 null,
                 //Morada de envio:
-                /*morada de envio sede ou estágio? falta implementar inquirir*/ null,
+                isset($startedInternship) ? ($startedInternship->hq_shipping_address == 1 ? 'Sede' : 'Estágio') : null,
                 //Nome e Apelido
                 null,
                 //Email live edu
