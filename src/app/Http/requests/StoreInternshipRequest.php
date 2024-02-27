@@ -30,6 +30,8 @@ class StoreInternshipRequest extends FormRequest
             'started_internship.meal_allowance' => 'required_unless:started_internship,null',
             'started_internship.hq_shipping_address' => 'required_unless:started_internship,null',
             'started_internship.hourly_load' => 'required_unless:started_internship,null',
+            'started_internship.start_date' => 'required_unless:started_internship,null',
+            'started_internship.end_date' => 'required_unless:started_internship,null',
         ];
     }
 
