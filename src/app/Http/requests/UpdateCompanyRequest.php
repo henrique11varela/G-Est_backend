@@ -24,7 +24,7 @@ class UpdateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", 'unique:companies'],
+            "name" => ["required", 'unique:companies,name,'. $this->id],
             "niss" => ["required", 'digits:11'],
             "nipc" => ["required"],
             "cae" => ["required"],
