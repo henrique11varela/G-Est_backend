@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('company_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('address');
             $table->string('postal_code');
             $table->boolean('hq');

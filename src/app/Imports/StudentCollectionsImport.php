@@ -45,12 +45,23 @@ class StudentCollectionsImport implements ToCollection, WithHeadingRow
             $course = Course::where('name', $row[self::$headings['courseName']])->first();
             if (!$course) continue;
 
+            if (!isset($row[self::$headings['studentCollectionName']])) continue;
+
             $studentCollection = StudentCollection::updateOrCreate(
                 ['name' => $row[self::$headings['studentCollectionName']]],
                 ['course_id' => $course->id]
             );
 
-            if ($row['situacao_na_turma'] !== 'em formação') continue;
+            if (
+                !isset($row[self::$headings['studentName']]) ||
+                !isset($row[self::$headings['address']]) ||
+                !isset($row[self::$headings['postalCode']]) ||
+                !isset($row[self::$headings['locality']]) ||
+                !isset($row[self::$headings['personalEmail']]) ||
+                !isset($row[self::$headings['atecEmail']]) ||
+                !isset($row[self::$headings['phoneNumber']]) ||
+                $row['situacao_na_turma'] !== 'em formação'
+            ) continue;
 
             $student = Student::updateOrCreate(
                 [

@@ -89,14 +89,6 @@ Route::prefix('v1')->group(function () {
             Route::delete('{course}', [CourseController::class, 'destroy']);
         });
 
-        // Route::prefix('coursetypes')->group(function () {
-        //     Route::get('', [CourseTypeController::class, 'index']);
-        //     Route::post('', [CourseTypeController::class, 'store']);
-        //     Route::get('{courseType}', [CourseTypeController::class, 'show']);
-        //     Route::put('{courseType}', [CourseTypeController::class, 'update']);
-        //     Route::delete('{courseType}', [CourseTypeController::class, 'destroy']);
-        // });
-
         Route::prefix('endedinternships')->group(function () {
             Route::get('', [EndedInternshipController::class, 'index']);
             Route::post('', [EndedInternshipController::class, 'store']);
@@ -155,6 +147,7 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('import')->group(function () {
             Route::post('studentcollections', [ImportController::class, 'studentCollections']);
+            Route::post('companies', [ImportController::class, 'companies']);
         });
 
         Route::prefix('export')->group(function () {
