@@ -165,6 +165,14 @@ class InternshipController extends Controller
     {
         $this->authorize('delete', $internship);
         try {
+            $startedInternship = StartedInternship::where("internship_id", "=", $internship->id)->first();
+            if ($startedInternship) {
+                $startedInternship->delete();
+            }
+            $endedInternship = EndedInternship::where("internship_id", "=", $internship->id)->first();
+            if ($endedInternship) {
+                $endedInternship->delete();
+            }
             $internship->delete();
             return response()->json(array('success' => 'Delete success'), 200);
         } catch (\Exception $e) {
