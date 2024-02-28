@@ -26,6 +26,7 @@ class StoreCompanyAddressRequest extends FormRequest
             'address' => 'required',
             'postal_code' => 'required',
             'locality' => 'required',
+            'description' => 'required',
             'hq' => 'required',
         ];
     }
