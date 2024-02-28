@@ -13,8 +13,8 @@ class StudentCollectionSeeder extends Seeder
      */
     public function run(): void
     {
-        $students = Student::All();
-        \App\Models\StudentCollection::factory(10)->hasAttached($students)->create();
+        // $students = Student::All();
+        // \App\Models\StudentCollection::factory(10)->hasAttached($students)->create();
 
     }
 }
