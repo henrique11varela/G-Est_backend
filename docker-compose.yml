@@ -13,14 +13,15 @@ services:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
       - php
-      - redis
+      # - redis
       - mysql
-      - mailhog
+      # - mailhog
+      - phpmyadmin
     networks:
       - laravel
 
@@ -56,13 +57,13 @@ services:
     networks:
       - laravel
 
-  redis:
-    image: redis:alpine
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    networks:
-      - laravel
+  # redis:
+  #   image: redis:alpine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - laravel
 
   composer:
     build:
@@ -79,7 +80,7 @@ services:
     networks:
       - laravel
 
-  npm:
+  npmbackend:
     image: node:current-alpine
     volumes:
       - ./src:/var/www/html
@@ -107,10 +108,24 @@ services:
     networks:
       - laravel
 
-  mailhog:
-    image: mailhog/mailhog:latest
+  # mailhog:
+  #   image: mailhog/mailhog:latest
+  #   ports:
+  #     - "1025:1025"
+  #     - "8025:8025"
+  #   networks:
+  #     - laravel
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    depends_on:
+      - mysql
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: secret
     networks:
       - laravel
